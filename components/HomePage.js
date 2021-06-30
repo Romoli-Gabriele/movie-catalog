@@ -18,8 +18,10 @@ app.component('homepage', {
                 <h5 class="card-title">{{ movie.name }}</h5>
                 <h5 class="card-title">{{ movie.title }}</h5>
                 <p class="card-text"> 
-                    <i v-for="c in calcStar(movie.vote_average)" class="fas fa-star"></i>
-                    <i v-show="mezza" class="fas fa-star-half-alt"></i>
+                    <i v-for="c in calcStar(movie.vote_average)" class="fas fa-star text-warning"></i>
+                    <i v-show="mezza" class="fas fa-star-half-alt text-warning"></i>
+                    <i v-for="k in calWstar(movie.vote_average)" class="far fa-star text-warning"    >
+                  
                 </p>
             </div>
         </div>
@@ -46,6 +48,15 @@ app.component('homepage', {
                 
             }
             return Math.round(x)
+        },
+        calWstar(x){
+            let y = this.calcStar(x);
+            y = 5 - y;
+            if (this.mezza) {
+                y--;
+            }
+            return y;
+
         }
     },
     
