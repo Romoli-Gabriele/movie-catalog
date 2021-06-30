@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <!--  css -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <!-- Import Vue.js -->
     <script src="https://unpkg.com/vue@3.0.0-beta.12/dist/vue.global.js"></script>
     <title>Movie Catalog</title>
@@ -19,7 +19,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light ">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
-                    <img src="./images/logo.jpg" alt="" width="70" height="70">
+                    <img src="../images/logo.jpg" alt="" width="70" height="70">
                   </a>
               <h1 class="title  " href="#">Movie Catalog</h1>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,10 +28,10 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link no-border bg-light">Film</a>
+                    <a class="nav-link no-border bg-light " href="../index.html">Film</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link no-border bg-light" href="./Pages/Series.html" >Serie</a>
+                    <a class="nav-link no-border bg-light" href="" >Serie</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -55,17 +55,17 @@
               </div>
             </div>
           </nav>
-        <br>
     
-        <homepage :tipo="true"></homepage>
+        <br>
+        <homepage :tipo="false"></homepage>
 
 
     </div>
    
 
     <!-- Import app -->
-    <script src="main.js"></script>
-    <script src="./components/HomePage.js"></script>
+    <script src="../main.js"></script>
+    <script src="../components/HomePage.js"></script>
     <!-- mount app -->
     <script>
         const mountedApp = app.mount('#app');
