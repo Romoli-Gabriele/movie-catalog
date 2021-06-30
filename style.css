@@ -9,3 +9,10 @@ body{
 .home-div{
     margin: 1cm;
 }
+.no-border{
+    border: white;
+}
+.title{
+
+    font-family: 'Yellowtail', cursive; margin-right: 9mm;
+}

@@ -1,5 +1,12 @@
-app.component('film-homepage', {
+app.component('homepage', {
+    props:{
+        tipo:{
+            type: Boolean,
+            required: true,
+        }
+    }   
 
+,
     template:
         /*html*/
         `
@@ -8,8 +15,8 @@ app.component('film-homepage', {
         <div class="card">
             <img :src="'https://image.tmdb.org/t/p/w500/'+movie.poster_path" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">{{movie.name}}</h5>
-                <p class="card-text">movie.</p>
+                <h5 class="card-title">{{movie.title}}</h5>
+                <p class="card-text">{{movie.vote_average}}<i class="fas fa-star"></i></p>
             </div>
         </div>
         </div>
@@ -23,13 +30,22 @@ app.component('film-homepage', {
 
     },
     mounted() {
-        fetch('https://api.themoviedb.org/3/trending/tv/week?api_key=6f9286d54de4891ea7a5c91779e09786')
+        if(this.tipo){
+            fetch('https://api.themoviedb.org/3/trending/movie/week?api_key=6f9286d54de4891ea7a5c91779e09786')
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                //debugger
-                this.movieList = data.results
+                this.movieList = data.results;
             });
+        }else{
+            fetch('https://api.themoviedb.org/3/trending/tv/week?api_key=6f9286d54de4891ea7a5c91779e09786')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                this.movieList = data.results;
+            });
+        }
+        
 
     },
 

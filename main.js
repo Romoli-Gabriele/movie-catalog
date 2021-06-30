@@ -1,7 +1,7 @@
 const app = Vue.createApp({
     data() {
         return {
-            film: []
+            tipo: true//true = film      false = serie
         }
     }
 })
