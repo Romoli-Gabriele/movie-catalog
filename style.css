@@ -1,7 +1,11 @@
-.barra-navigazione{
-    background-color: rgb(70, 70, 70);
-    border: white;
-}
+
 body{
     background-color: gray;
+}
+.home-img{
+    height: 3cm;
+    width: 2cm;
+}
+.home-div{
+    margin: 1cm;
 }
