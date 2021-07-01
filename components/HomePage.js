@@ -23,9 +23,16 @@ app.component('homepage', {
                 <p class="card-text"> 
                     <i v-for="c in calcStar(movie.vote_average)" class="fas fa-star text-warning"></i>
                     <i v-show="mezza" class="fas fa-star-half-alt text-warning"></i>
-                    <i v-for="k in calWstar(movie.vote_average)" class="far fa-star text-warning"    >
-                  
+                    <i v-for="k in calWstar(movie.vote_average)" class="far fa-star text-warning" ></i>
+                    <p class="ali-r">
+                    
+                    <i v-for="e in calcPop(movie.popularity)" class="fas fa-heart text-danger"></i>
+                    <i v-show="mezzo" class="fas fa-heart-broken text-danger"></i>
+                    <i v-for="g in calcWpop(movie.popularity)" class="far fa-heart text-danger"></i>
+                   
+                  </p>
                 </p>
+
             </div>
         </div>
         </div>
@@ -35,7 +42,8 @@ app.component('homepage', {
     data() {
         return {
             movieList: [],
-            mezza: false
+            mezza: false,
+            mezzo: false
             
 
             
@@ -60,6 +68,26 @@ app.component('homepage', {
             }
             return y;
 
+        },
+        calcPop(x){
+            x = x/1000;
+            if (x - Math.round(x) >= 0.4  || x - Math.round(x) <= -0.4) {
+                this.mezzo = true;
+                
+            } 
+            if(Math.round(x)>5){
+                return 5
+            }
+            return Math.round(x)
+        },
+        calcWpop(x){
+            let y = this.calcPop(x);
+
+            y = 5 - y;
+            if(this.mezzo){
+                y--;
+            }
+            return y;
         }
     },
     
