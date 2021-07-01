@@ -9,6 +9,9 @@ body{
 .home-div{
     margin: 1cm;
 }
+.home-link{
+    font-family: 'Shadows Into Light', cursive;
+}
 .no-border{
     border: white;
 }
