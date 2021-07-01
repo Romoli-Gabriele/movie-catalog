@@ -33,7 +33,9 @@ app.component('homepage', {
                 </p>
                 <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                    <p>{{movie.overview}}</p>
+                    <p v-show="desc">{{this.description(movie.overview, true)}}   ...</p>
+                    <p v-show="desc == false">{{this.description(movie.overview, false)}}</p>
+                    <button class="no-border" @click="show()">Show {{this.moreOrLess}}</button>
                 </li>
                 </ul>
             </div>
@@ -46,8 +48,10 @@ app.component('homepage', {
         return {
             movieList: [],
             mezza: false,
-            mezzo: false
-
+            mezzo: false,
+            desc:  true,
+            moreOrLess: "more",
+            
 
 
         }
@@ -91,7 +95,25 @@ app.component('homepage', {
                 y--;
             }
             return y;
+        },
+        description(s, m){
+            if(m){
+                var r = s.slice(0, 70);
+            }
+            return r
+        },
+
+        show(){
+            if(this.desc){
+                this.desc = false;
+                this.moreOrLess = "less";
+            }else{
+                this.desc = true;
+                this.moreOrLess = "more";
+            }
         }
+
+        
     },
 
 
@@ -117,7 +139,9 @@ app.component('homepage', {
 
 
     },
-
+    computed:{
+        
+    }
 
 
 
