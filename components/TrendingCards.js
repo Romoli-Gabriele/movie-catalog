@@ -13,46 +13,43 @@ app.component('trending-card', {
         /*html*/
         `
     <div v-for="movie in movieList">
-        <div  class="card ">
+        <div  class="card bg-dark">
             <img :src="'https://image.tmdb.org/t/p/w500/'+image(calcIndex(movie))" @click="this.imgSwitch(calcIndex(movie))" class="card-img-top" alt="...">
             
             <div class="card-body">
-                <h5 class="card-title">{{ movie.name }}</h5>
-                <h5 class="card-title">{{ movie.title }}</h5>
+                <h5 class="card-title text-danger">{{ movie.name }}</h5>
+                <h5 class="card-title text-danger">{{ movie.title }}</h5>
                 <p class="card-text">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><b>Review: </b> 
+                <ul class="list-group list-group-flush bg-dark">
+                    <li class="list-group-item bg-dark text-light"><b>Review: </b> 
                         <reviews :value="calcStar(movie.vote_average)" :valE="calcWstar(movie.vote_average)" :full="'fa-star'" :half="'fa-star-half-alt'" :empty="'fa-star'" :color="'text-warning'" :valH="this.mezza"></reviews>
                     </li>
-                    <li class="list-group-item"><b>Popularity: </b>
+                    <li class="list-group-item bg-dark text-light"><b>Popularity: </b>
                         <reviews :value="calcPop(movie.popularity)" :valE="calcWpop(movie.popularity)" :full="'fa-heart'" :half="'fa-heart-broken'" :empty="'fa-heart'" :color="'text-danger'" :valH="this.mezzo"></reviews>
                     </li>
 
-                    <li class="list-group-item">
+                    <li class="list-group-item bg-dark text-light">
                         <b>Description: </b>
                         <br>
                         <p v-show="this.showList[this.calcIndex(movie)] == false">{{this.description(movie.overview, true)}}   ...</p>
                         <p v-show="this.showList[this.calcIndex(movie)]">{{movie.overview}}</p>
-                        <button class="no-border" @click="this.show(this.calcIndex(movie))">Show {{this.moreOrLess(this.calcIndex(movie))}}</button>
+                        <button class="no-border bg-dark text-light" @click="this.show(this.calcIndex(movie))">Show {{this.moreOrLess(this.calcIndex(movie))}}</button>
                         
                     </li>
-                    <li v-show="this.collImg[this.calcIndex(movie)]" class="list-group-item">
+                    <li v-show="this.collImg[this.calcIndex(movie)]" class="text-light list-group-item bg-dark">
                         <b>Release date: </b>{{this.convertDate(this.calcIndex(movie))}}
                         <b>Original language: </b> {{movie.original_language}}
                     </li>
-                    <li v-show="this.collImg[this.calcIndex(movie)]" class="list-group-item">
+                    <li v-show="this.collImg[this.calcIndex(movie)]" class="list-group-item bg-dark text-light">
                         <ul >
                             <b>Genres: </b>
-                            <li v-for="p in movie.genre_ids">{{this.convertGenres(p)}}</li>
+                            <li class="bg-dark text-light" v-for="p in movie.genre_ids">{{this.convertGenres(p)}}</li>
                         </ul>
 
                     </li>
                 </ul>
                   
                 </p>
-                <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-
                 </li>
                 </ul>
             </div>

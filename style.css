@@ -1,6 +1,6 @@
 
 body{
-    background-color: gray;
+    background-color: black;
 }
 .home-img{
     height: 3cm;
@@ -13,10 +13,10 @@ body{
     font-family: 'Shadows Into Light', cursive;
 }
 .no-border{
-    border: white;
+    border: solid, gray, 2px;
+
 }
 .title{
-
     font-family: 'Yellowtail', cursive; margin-right: 9mm;
     font-size: 17mm;
 }
@@ -27,4 +27,7 @@ body{
 
 .ali-r{
     text-align: right;
+}
+.logo{
+    font-size: 20mm;
 }
