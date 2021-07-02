@@ -11,6 +11,7 @@ body{
 }
 .home-link{
     font-family: 'Shadows Into Light', cursive;
+    text-align: center;
 }
 .no-border{
     border: solid, gray, 2px;

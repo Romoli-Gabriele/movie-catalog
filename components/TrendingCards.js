@@ -17,8 +17,8 @@ app.component('trending-card', {
             <img :src="'https://image.tmdb.org/t/p/w500/'+image(calcIndex(movie))" @click="this.imgSwitch(calcIndex(movie))" class="card-img-top" alt="...">
             
             <div class="card-body">
-                <h5 class="card-title text-danger">{{ movie.name }}</h5>
-                <h5 class="card-title text-danger">{{ movie.title }}</h5>
+                <h5 class="card-title text-danger home-link fs-3">{{ movie.name }}</h5>
+                <h5 class="card-title text-danger home-link fs-3">{{ movie.title }}</h5>
                 <p class="card-text">
                 <ul class="list-group list-group-flush bg-dark">
                     <li class="list-group-item bg-dark text-light"><b>Review: </b> 
@@ -33,12 +33,12 @@ app.component('trending-card', {
                         <br>
                         <p v-show="this.showList[this.calcIndex(movie)] == false">{{this.description(movie.overview, true)}}   ...</p>
                         <p v-show="this.showList[this.calcIndex(movie)]">{{movie.overview}}</p>
-                        <button class="no-border bg-dark text-light" @click="this.show(this.calcIndex(movie))">Show {{this.moreOrLess(this.calcIndex(movie))}}</button>
+                        <button class="btn btn-outline-success no-border text-light" @click="this.show(this.calcIndex(movie))">Show {{this.moreOrLess(this.calcIndex(movie))}}</button>
                         
                     </li>
                     <li v-show="this.collImg[this.calcIndex(movie)]" class="text-light list-group-item bg-dark">
                         <b>Release date: </b>{{this.convertDate(this.calcIndex(movie))}}
-                        <b>Original language: </b> {{movie.original_language}}
+                        <b>Original language: </b> {{this.language(movie.original_language)}}
                     </li>
                     <li v-show="this.collImg[this.calcIndex(movie)]" class="list-group-item bg-dark text-light">
                         <ul >
@@ -64,6 +64,7 @@ app.component('trending-card', {
             collImg:  [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
             mezza: false, //mezza stella
             mezzo: false, // mezzo cuore
+            languageList: [{iso_639_1: "de", english_name: "German", name: "Deutsch"},{iso_639_1: "it", english_name: "Italian", name: "Italiano"},{iso_639_1: "ja", english_name: "Japanese", name: "日本語"}, {iso_639_1: "fr", english_name: "French", name: "Français"},{iso_639_1: "en", english_name: "English", name: "English"},{iso_639_1: "es", english_name: "Spanish", name: "Español"}],
             genresList: [{"id": 28,"name": "Action"},{"id": 12,"name": "Adventure"},{"id": 16,"name": "Animation"},{"id": 35,"name": "Comedy"},{"id": 80,"name": "Crime"},{"id": 99,"name": "Documentary"},{"id": 18,"name": "Drama"},{"id": 10751,"name": "Family"},{"id": 14,"name": "Fantasy"},{"id": 36,"name": "History"},{"id": 27,"name": "Horror"},{"id": 10402,"name": "Music"},{"id": 9648,"name": "Mystery"},{"id": 10749,"name": "Romance"},{"id": 878,"name": "Science Fiction"},{"id": 10770,"name": "TV Movie"},{"id": 53,"name": "Thriller"},{"id": 10752,"name": "War"},{"id": 37,"name": "Western"}],
             genresListS: [
                 {
@@ -130,8 +131,12 @@ app.component('trending-card', {
                     "id": 37,
                     "name": "Western"
                 }
-            ]
+            ],
+            
         }
+        
+
+        
 
     },
 
@@ -153,6 +158,15 @@ app.component('trending-card', {
            }
             
             
+        },
+        language(l){
+         
+                for( j = 0; j < 6; j++){
+                    if(this.languageList[j].iso_639_1 == l){
+                        return this.languageList[j].english_name;
+                    }
+                }
+                return l;
         },
         convertDate(i){
             let date;
