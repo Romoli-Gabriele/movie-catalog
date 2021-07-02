@@ -20,22 +20,28 @@ app.component('homepage', {
             <div class="card-body">
                 <h5 class="card-title">{{ movie.name }}</h5>
                 <h5 class="card-title">{{ movie.title }}</h5>
-                <p class="card-text"> 
-                    <i v-for="c in calcStar(movie.vote_average)" class="fas fa-star text-warning"></i>
-                    <i v-show="mezza" class="fas fa-star-half-alt text-warning"></i>
-                    <i v-for="k in calWstar(movie.vote_average)" class="far fa-star text-warning" ></i>
+                <p class="card-text">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Recensioni: 
+                        <reviews :value="calcStar(movie.vote_average)" :valE="calcWstar(movie.vote_average)" :full="'fa-star'" :half="'fa-star-half-alt'" :empty="'fa-star'" :color="'text-warning'" :valH="this.mezza"></reviews>
+                    </li>
+                    <li class="list-group-item">Popolarita':
+                        <reviews :value="calcPop(movie.popularity)" :valE="calcWpop(movie.popularity)" :full="'fa-heart'" :half="'fa-heart-broken'" :empty="'fa-heart'" :color="'text-danger'" :valH="this.mezzo"></reviews>
+                    </li>
+
+                    <li class="list-group-item">
+                        Descrizione:
+                        <br>
+                        <p>{{this.description(movie.overview, true)}}   ...</p>
+                        
+                    </li>
                     
-                    <p class="ali-r">
-                    <i v-for="e in calcPop(movie.popularity)" class="fas fa-heart text-danger"></i>
-                    <i v-show="mezzo" class="fas fa-heart-broken text-danger"></i>
-                    <i v-for="g in calcWpop(movie.popularity)" class="far fa-heart text-danger"></i>
-                  </p>
+                </ul>
+                  
                 </p>
                 <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                    <p v-show="this.showlist[this.calcIndex(movie)] == true">{{this.description(movie.overview, true)}}   ...</p>
-                    <p v-show="this.showlist[this.calcIndex(movie)] == true">{{this.description(movie.overview, false)}}</p>
-                    <button class="no-border" @click="show(this.calcIndex(movie))">Show {{this.moreOrLess(movie)}}</button>
+
                 </li>
                 </ul>
             </div>
@@ -47,12 +53,12 @@ app.component('homepage', {
     data() {
         return {
             movieList: [],
-            showList: [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,],
-            mezza: false,
-            mezzo: false,
-            
-            
-            
+            showList: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, ],
+            mezza: false, //mezza stella
+            mezzo: false, // mezzo cuore
+
+
+
 
 
         }
@@ -60,9 +66,9 @@ app.component('homepage', {
     },
 
     methods: {
-        calcIndex(m){
-            for(var j=0; j < movieList.lenght; j++){
-                if(m == this.movieList[j]){
+        calcIndex(m) {
+            for (var j = 0; j < 20; j++) {
+                if (m == this.movieList[j]) {
                     return j;
                 }
             }
@@ -76,68 +82,73 @@ app.component('homepage', {
             }
             return Math.round(x)
         },
-        calWstar(x) {
-            let y = this.calcStar(x);
-            y = 5 - y;
-            if (this.mezza) {
-                y--;
-            }
-            return y;
-
-        },
+        
         calcPop(x) {
-            x = x /1000;
+            x = x / 1000;
             if (x - Math.round(x) >= 0.4 || x - Math.round(x) <= -0.4) {
-                if(x<5){
+                if (x < 5) {
                     this.mezzo = true;
                 }
-                
-            }else{
+
+            } else {
                 this.mezzo = false
             }
 
             if (Math.round(x) > 5) {
-                
+
                 return 5
             }
-            
+
             return Math.round(x) > 0 ? Math.round(x) : 0
         },
         calcWpop(x) {
             let y = this.calcPop(x);
 
             y = 5 - y;
-            if (this.mezzo && y) {
+            if (this.mezzo && y > 0) {
                 y--;
+
             }
-            console.log(y)
+            
             return y;
         },
-        description(s, m){
-            if(m){
+        calcWstar(x){
+            
+            let y = this.calcStar(x);
+
+            y = 5 - y;
+            if (this.mezza && y > 0) {
+                y--;
+            }
+            
+            return y;
+        },
+        description(s, m) {
+            if (m) {
                 var r = s.slice(0, 70);
             }
             return r
         },
 
-        moreOrLess(j){
-            if(this.showList[j]){
+        moreOrLess(j) {
+            if (this.showList[j]) {
                 return "less"
-            }else{
+            } else {
                 return "more"
             }
 
         },
 
-        show(i){
-            if(this.showList[i]){
+        show(i) {
+            if (this.showList[i]) {
                 this.showList[i] = false;
-            }else{
+            } else {
                 this.showList[i] = true;
             }
-        }
+        },
 
-        
+
+
     },
 
 
@@ -149,8 +160,8 @@ app.component('homepage', {
                 .then(data => {
                     console.log(data);
                     this.movieList = data.results;
-                    
-                    
+
+
 
                 });
         } else {
@@ -166,7 +177,7 @@ app.component('homepage', {
 
 
     },
-    
+
 
 
 
