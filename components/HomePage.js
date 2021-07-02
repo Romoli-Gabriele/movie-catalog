@@ -86,23 +86,31 @@ app.component('homepage', {
 
         },
         calcPop(x) {
-            x = x / 1000;
+            x = x /1000;
             if (x - Math.round(x) >= 0.4 || x - Math.round(x) <= -0.4) {
-                this.mezzo = true;
-
+                if(x<5){
+                    this.mezzo = true;
+                }
+                
+            }else{
+                this.mezzo = false
             }
+
             if (Math.round(x) > 5) {
+                
                 return 5
             }
-            return Math.round(x)
+            
+            return Math.round(x) > 0 ? Math.round(x) : 0
         },
         calcWpop(x) {
             let y = this.calcPop(x);
 
             y = 5 - y;
-            if (this.mezzo) {
+            if (this.mezzo && y) {
                 y--;
             }
+            console.log(y)
             return y;
         },
         description(s, m){
@@ -151,10 +159,10 @@ app.component('homepage', {
                 .then(data => {
                     console.log(data);
                     this.movieList = data.results;
-                    
                 });
 
         }
+
 
 
     },
