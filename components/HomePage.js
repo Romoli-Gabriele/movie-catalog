@@ -33,9 +33,9 @@ app.component('homepage', {
                 </p>
                 <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                    <p v-show="desc">{{this.description(movie.overview, true)}}   ...</p>
-                    <p v-show="desc == false">{{this.description(movie.overview, false)}}</p>
-                    <button class="no-border" @click="show()">Show {{this.moreOrLess}}</button>
+                    <p v-show="this.showlist[this.calcIndex(movie)] == true">{{this.description(movie.overview, true)}}   ...</p>
+                    <p v-show="this.showlist[this.calcIndex(movie)] == true">{{this.description(movie.overview, false)}}</p>
+                    <button class="no-border" @click="show(this.calcIndex(movie))">Show {{this.moreOrLess(movie)}}</button>
                 </li>
                 </ul>
             </div>
@@ -47,10 +47,11 @@ app.component('homepage', {
     data() {
         return {
             movieList: [],
+            showList: [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,],
             mezza: false,
             mezzo: false,
-            desc:  true,
-            moreOrLess: "more",
+            
+            
             
 
 
@@ -59,6 +60,14 @@ app.component('homepage', {
     },
 
     methods: {
+        calcIndex(m){
+            for(var j=0; j < movieList.lenght; j++){
+                if(m == this.movieList[j]){
+                    return j;
+                }
+            }
+            return j;
+        },
         calcStar(x) {
             x = x / 2;
             if (x - Math.round(x) >= 0.35 || x - Math.round(x) <= -0.35) {
@@ -103,13 +112,20 @@ app.component('homepage', {
             return r
         },
 
-        show(){
-            if(this.desc){
-                this.desc = false;
-                this.moreOrLess = "less";
+        moreOrLess(j){
+            if(this.showList[j]){
+                return "less"
             }else{
-                this.desc = true;
-                this.moreOrLess = "more";
+                return "more"
+            }
+
+        },
+
+        show(i){
+            if(this.showList[i]){
+                this.showList[i] = false;
+            }else{
+                this.showList[i] = true;
             }
         }
 
@@ -125,6 +141,8 @@ app.component('homepage', {
                 .then(data => {
                     console.log(data);
                     this.movieList = data.results;
+                    
+                    
 
                 });
         } else {
@@ -133,15 +151,14 @@ app.component('homepage', {
                 .then(data => {
                     console.log(data);
                     this.movieList = data.results;
+                    
                 });
 
         }
 
 
     },
-    computed:{
-        
-    }
+    
 
 
 
