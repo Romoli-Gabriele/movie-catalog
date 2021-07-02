@@ -22,17 +22,19 @@ app.component('homepage', {
                 <h5 class="card-title">{{ movie.title }}</h5>
                 <p class="card-text">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Recensioni: 
+                    <li class="list-group-item"><b>Review: </b> 
                         <reviews :value="calcStar(movie.vote_average)" :valE="calcWstar(movie.vote_average)" :full="'fa-star'" :half="'fa-star-half-alt'" :empty="'fa-star'" :color="'text-warning'" :valH="this.mezza"></reviews>
                     </li>
-                    <li class="list-group-item">Popolarita':
+                    <li class="list-group-item"><b>Popularity: </b>
                         <reviews :value="calcPop(movie.popularity)" :valE="calcWpop(movie.popularity)" :full="'fa-heart'" :half="'fa-heart-broken'" :empty="'fa-heart'" :color="'text-danger'" :valH="this.mezzo"></reviews>
                     </li>
 
                     <li class="list-group-item">
-                        Descrizione:
+                        <b>Description: </b>
                         <br>
-                        <p>{{this.description(movie.overview, true)}}   ...</p>
+                        <p v-show="this.showList[this.calcIndex(movie)] == false">{{this.description(movie.overview, true)}}   ...</p>
+                        <p v-show="this.showList[this.calcIndex(movie)]">{{movie.overview}}</p>
+                        <button class="no-border" @click="this.show(this.calcIndex(movie))">Show {{this.moreOrLess(this.calcIndex(movie))}}</button>
                         
                     </li>
                     
@@ -53,7 +55,7 @@ app.component('homepage', {
     data() {
         return {
             movieList: [],
-            showList: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, ],
+            showList: [false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, ],
             mezza: false, //mezza stella
             mezzo: false, // mezzo cuore
 
@@ -72,6 +74,7 @@ app.component('homepage', {
                     return j;
                 }
             }
+            console.log(j);
             return j;
         },
         calcStar(x) {
