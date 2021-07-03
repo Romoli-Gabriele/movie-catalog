@@ -7,3 +7,4 @@ giorno 2: ho fatto un bel po' di roba: lista dei film divisa dalle serie, stelli
 giorno 3: cuori popolarità, descrizione
 
 giorno 4: conponente recensioni, descrizione con show more
+giorno 5: ho ritrovato i commit persi
