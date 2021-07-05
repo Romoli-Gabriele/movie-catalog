@@ -37,6 +37,7 @@ app.component('trending-card', {
                         <button type="button" class="btn btn-outline-info">
                         <a :href="this.creaLink(movie)" class="mostra-dettagli-button" target="_blank">dettagli</a>
                         </button>
+                        
                     </li>
                     <li v-show="this.collImg[this.calcIndex(movie)]" class="text-light list-group-item bg-dark">
                         <b>Release date: </b>{{this.convertDate(this.calcIndex(movie))}}
@@ -76,7 +77,12 @@ app.component('trending-card', {
 
     methods: {
         creaLink(movie){
-            return './Pages/Details.html?id='+movie.id+'&type='+movie.media_type;
+            if(movie.media_type== "movie"){
+                return './Pages/Details.html?id='+movie.id+'&type=movie';
+            }else{
+                return '../Pages/Details.html?id='+movie.id+'&type=tv';
+            }
+            
                 },
         convertGenres(p){
            if(this.movieList[0].media_type == "movie"){

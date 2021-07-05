@@ -49,8 +49,7 @@
       </nav>
         <br>
         <br>
-        <dettagli :tipo="tipo" :id="id"></dettagli>
-
+        <dettagli :type="this.type" :idf="this.idF"></dettagli>
 
     </div>
    
@@ -64,11 +63,7 @@
     <!-- mount app -->
     <script>
       var url = new URLSearchParams(location.search);
-      var tipo = url.get('media_type');
-      var id = url.get('id');
-      
-        const mountedApp = app.mount('#app');
-        
+      const mountedApp = app.mount('#app');
     </script>
 
     
