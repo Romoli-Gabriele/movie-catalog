@@ -1,12 +1,12 @@
 app.component('trending-card', {
-    
+
     props: {
-        movieList:{
+        movieList: {
             type: Array,
             required: true,
         },
-       
-        
+
+
 
     },
     template:
@@ -52,8 +52,6 @@ app.component('trending-card', {
                     </li>
                 </ul>
                 </p>
-                </li>
-                </ul>
             </div>
         </div>
     </div>
@@ -61,78 +59,207 @@ app.component('trending-card', {
     `,
     data() {
         return {
-            
-            showList: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-            collImg:  [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-            languageList: [{iso_639_1: "de", english_name: "German", name: "Deutsch"},{iso_639_1: "it", english_name: "Italian", name: "Italiano"},{iso_639_1: "ja", english_name: "Japanese", name: "日本語"}, {iso_639_1: "fr", english_name: "French", name: "Français"},{iso_639_1: "en", english_name: "English", name: "English"},{iso_639_1: "es", english_name: "Spanish", name: "Español"}],
-            genresList: [{"id": 28,"name": "Action"},{"id": 12,"name": "Adventure"},{"id": 16,"name": "Animation"},{"id": 35,"name": "Comedy"},{"id": 80,"name": "Crime"},{"id": 99,"name": "Documentary"},{"id": 18,"name": "Drama"},{"id": 10751,"name": "Family"},{"id": 14,"name": "Fantasy"},{"id": 36,"name": "History"},{"id": 27,"name": "Horror"},{"id": 10402,"name": "Music"},{"id": 9648,"name": "Mystery"},{"id": 10749,"name": "Romance"},{"id": 878,"name": "Science Fiction"},{"id": 10770,"name": "TV Movie"},{"id": 53,"name": "Thriller"},{"id": 10752,"name": "War"},{"id": 37,"name": "Western"}],
-            genresListS: [{"id": 10759,"name": "Action & Adventure"},{"id": 16,"name": "Animation"},{"id": 35,"name": "Comedy"},{"id": 80,"name": "Crime"},{"id": 99,"name": "Documentary"},{"id": 18,"name": "Drama"},{"id": 10751,"name": "Family"},{"id": 10762,"name": "Kids"},{"id": 9648,"name": "Mystery"},{"id": 10763,"name": "News"},{"id": 10764,"name": "Reality"},{"id": 10765,"name": "Sci-Fi & Fantasy"},{"id": 10766,"name": "Soap"},{"id": 10767,"name": "Talk"},{"id": 10768,"name": "War & Politics"},{"id": 37,"name": "Western"}],
-            
-        }
-        
 
-        
+            showList: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+            collImg: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+            languageList: [{
+                iso_639_1: "de",
+                english_name: "German",
+                name: "Deutsch"
+            }, {
+                iso_639_1: "it",
+                english_name: "Italian",
+                name: "Italiano"
+            }, {
+                iso_639_1: "ja",
+                english_name: "Japanese",
+                name: "日本語"
+            }, {
+                iso_639_1: "fr",
+                english_name: "French",
+                name: "Français"
+            }, {
+                iso_639_1: "en",
+                english_name: "English",
+                name: "English"
+            }, {
+                iso_639_1: "es",
+                english_name: "Spanish",
+                name: "Español"
+            }],
+            genresList: [{
+                "id": 28,
+                "name": "Action"
+            }, {
+                "id": 12,
+                "name": "Adventure"
+            }, {
+                "id": 16,
+                "name": "Animation"
+            }, {
+                "id": 35,
+                "name": "Comedy"
+            }, {
+                "id": 80,
+                "name": "Crime"
+            }, {
+                "id": 99,
+                "name": "Documentary"
+            }, {
+                "id": 18,
+                "name": "Drama"
+            }, {
+                "id": 10751,
+                "name": "Family"
+            }, {
+                "id": 14,
+                "name": "Fantasy"
+            }, {
+                "id": 36,
+                "name": "History"
+            }, {
+                "id": 27,
+                "name": "Horror"
+            }, {
+                "id": 10402,
+                "name": "Music"
+            }, {
+                "id": 9648,
+                "name": "Mystery"
+            }, {
+                "id": 10749,
+                "name": "Romance"
+            }, {
+                "id": 878,
+                "name": "Science Fiction"
+            }, {
+                "id": 10770,
+                "name": "TV Movie"
+            }, {
+                "id": 53,
+                "name": "Thriller"
+            }, {
+                "id": 10752,
+                "name": "War"
+            }, {
+                "id": 37,
+                "name": "Western"
+            }],
+            genresListS: [{
+                "id": 10759,
+                "name": "Action & Adventure"
+            }, {
+                "id": 16,
+                "name": "Animation"
+            }, {
+                "id": 35,
+                "name": "Comedy"
+            }, {
+                "id": 80,
+                "name": "Crime"
+            }, {
+                "id": 99,
+                "name": "Documentary"
+            }, {
+                "id": 18,
+                "name": "Drama"
+            }, {
+                "id": 10751,
+                "name": "Family"
+            }, {
+                "id": 10762,
+                "name": "Kids"
+            }, {
+                "id": 9648,
+                "name": "Mystery"
+            }, {
+                "id": 10763,
+                "name": "News"
+            }, {
+                "id": 10764,
+                "name": "Reality"
+            }, {
+                "id": 10765,
+                "name": "Sci-Fi & Fantasy"
+            }, {
+                "id": 10766,
+                "name": "Soap"
+            }, {
+                "id": 10767,
+                "name": "Talk"
+            }, {
+                "id": 10768,
+                "name": "War & Politics"
+            }, {
+                "id": 37,
+                "name": "Western"
+            }],
+
+        }
+
+
+
 
     },
 
     methods: {
-        creaLink(movie){
-            if(movie.media_type== "movie"){
-                return './Pages/Details.html?id='+movie.id+'&type=movie';
-            }else{
-                return '../Pages/Details.html?id='+movie.id+'&type=tv';
-            }
-            
-                },
-        convertGenres(p){
-           if(this.movieList[0].media_type == "movie"){
-            for( j = 0; j < 19; j++){
-                if(this.genresList[j].id == p){
-                    return this.genresList[j].name;
-                }
-            }
-           }else{
-            for( j = 0; j < 16; j++){
-                if(this.genresListS[j].id == p){
-                    return this.genresListS[j].name;
-                }
+        creaLink(movie) {
+            if (movie.media_type == "movie") {
+                return './Pages/Details.html?id=' + movie.id + '&type=movie';
+            } else {
+                return '../Pages/Details.html?id=' + movie.id + '&type=tv';
             }
 
-           }
-            
-            
         },
-        language(l){
-         
-                for( j = 0; j < 6; j++){
-                    if(this.languageList[j].iso_639_1 == l){
-                        return this.languageList[j].english_name;
+        convertGenres(p) {
+            if (this.movieList[0].media_type == "movie") {
+                for (j = 0; j < 19; j++) {
+                    if (this.genresList[j].id == p) {
+                        return this.genresList[j].name;
                     }
                 }
-                return l;
+            } else {
+                for (j = 0; j < 16; j++) {
+                    if (this.genresListS[j].id == p) {
+                        return this.genresListS[j].name;
+                    }
+                }
+
+            }
+
+
         },
-        convertDate(i){
+        language(l) {
+
+            for (j = 0; j < 6; j++) {
+                if (this.languageList[j].iso_639_1 == l) {
+                    return this.languageList[j].english_name;
+                }
+            }
+            return l;
+        },
+        convertDate(i) {
             let date;
-            if(this.movieList[0].media_type == "movie"){
+            if (this.movieList[0].media_type == "movie") {
                 date = this.movieList[i].release_date;
-            }else{
+            } else {
                 date = this.movieList[i].first_air_date;
             }
-            
+
             date = date.split("-").reverse().join("/");
             return date;
         },
-        imgSwitch(i){
-            if(this.collImg[i]){
+        imgSwitch(i) {
+            if (this.collImg[i]) {
                 this.collImg[i] = false;
-            }else{
+            } else {
                 this.collImg[i] = true;
             }
         },
-        image(i){
-            if(this.collImg[i]){
+        image(i) {
+            if (this.collImg[i]) {
                 return this.movieList[i].backdrop_path;
-            }else{
+            } else {
                 return this.movieList[i].poster_path;
             }
 
@@ -146,7 +273,7 @@ app.component('trending-card', {
             console.log(j);
             return j;
         },
-        
+
         description(s, m) {
             if (m) {
                 var r = s.slice(0, 70);
@@ -177,7 +304,7 @@ app.component('trending-card', {
 
 
 
-    
+
 
 
 

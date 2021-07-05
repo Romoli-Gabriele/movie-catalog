@@ -14,9 +14,50 @@ app.component('dettagli', {
     template:
         /*html*/
         `
-        <div  class="card bg-dark">
-           <h1 class="text-light">{{this.idf}}</h1>
-           <h1 class="text-light">{{this.type}}</h1>
+        <div  class="card bg-dark mb-3">
+            <img :src="'https://image.tmdb.org/t/p/w500/'+movie.backdrop_path">
+            <div class="card-body">
+            <h5 class="card-title text-danger home-link fs-3">{{ movie.name }}</h5>
+            <h5 class="card-title text-danger home-link fs-3">{{ movie.title }}</h5>
+            <p class="card-text">
+            <ul class="list-group list-group-flush bg-dark">
+            <li class="list-group-item bg-dark text-light"><b>Review: </b> 
+            <reviews :value="movie.vote_average" :full="'fa-star'" :half="'fa-star-half-alt'" :empty="'fa-star'" :color="'text-warning'" :type="true"></reviews>
+            <br>
+            <b>Number of reviews:</b> {{this.movie.vote_count}}
+            </li>
+        <li class="list-group-item bg-dark text-light"><b>Popularity: </b>
+            <reviews :value="movie.popularity" :full="'fa-heart'" :half="'fa-heart-broken'" :empty="'fa-heart'" :color="'text-danger'" :type="false"></reviews>
+        </li>
+        <li class="list-group-item bg-dark text-light">
+                        <b>Description: </b>
+                        <br>
+                        <p>{{movie.overview}}</p>
+                    </li>
+                <li class="text-light list-group-item bg-dark">
+                    
+                    <b>Release date: </b> {{this.convertDate()}}
+                    <br>
+                    <b>Original language: </b> {{this.language(movie.original_language)}}
+                    <br>
+                    <b>Created by:</b> {{this.movie.created_by.name}}
+                    <br>
+                    <b>Type:</b> {{this.movie.type}}
+                    <br>
+                    <b>Status:</b> {{this.movie.status}}
+                    
+                </li>
+                <li class="list-group-item bg-dark text-light">
+                    <ul >
+                        <b>Genres: </b>
+                        <li class="bg-dark text-light" v-for="p in movie.genres">{{p.name}}</li>
+                    </ul>
+
+                </li>
+            </ul>
+            </p>
+        </div>
+            
            
         </div>
         `,
@@ -24,6 +65,7 @@ app.component('dettagli', {
 
         return {
             movie: null,
+            movieList: [],
             mezza: false, //mezza stella
             mezzo: false, // mezzo cuore
             languageList: [{
@@ -51,132 +93,38 @@ app.component('dettagli', {
                 english_name: "Spanish",
                 name: "Español"
             }],
-            genresList: [{
-                "id": 28,
-                "name": "Action"
-            }, {
-                "id": 12,
-                "name": "Adventure"
-            }, {
-                "id": 16,
-                "name": "Animation"
-            }, {
-                "id": 35,
-                "name": "Comedy"
-            }, {
-                "id": 80,
-                "name": "Crime"
-            }, {
-                "id": 99,
-                "name": "Documentary"
-            }, {
-                "id": 18,
-                "name": "Drama"
-            }, {
-                "id": 10751,
-                "name": "Family"
-            }, {
-                "id": 14,
-                "name": "Fantasy"
-            }, {
-                "id": 36,
-                "name": "History"
-            }, {
-                "id": 27,
-                "name": "Horror"
-            }, {
-                "id": 10402,
-                "name": "Music"
-            }, {
-                "id": 9648,
-                "name": "Mystery"
-            }, {
-                "id": 10749,
-                "name": "Romance"
-            }, {
-                "id": 878,
-                "name": "Science Fiction"
-            }, {
-                "id": 10770,
-                "name": "TV Movie"
-            }, {
-                "id": 53,
-                "name": "Thriller"
-            }, {
-                "id": 10752,
-                "name": "War"
-            }, {
-                "id": 37,
-                "name": "Western"
-            }],
-            genresListS: [{
-                "id": 10759,
-                "name": "Action & Adventure"
-            }, {
-                "id": 16,
-                "name": "Animation"
-            }, {
-                "id": 35,
-                "name": "Comedy"
-            }, {
-                "id": 80,
-                "name": "Crime"
-            }, {
-                "id": 99,
-                "name": "Documentary"
-            }, {
-                "id": 18,
-                "name": "Drama"
-            }, {
-                "id": 10751,
-                "name": "Family"
-            }, {
-                "id": 10762,
-                "name": "Kids"
-            }, {
-                "id": 9648,
-                "name": "Mystery"
-            }, {
-                "id": 10763,
-                "name": "News"
-            }, {
-                "id": 10764,
-                "name": "Reality"
-            }, {
-                "id": 10765,
-                "name": "Sci-Fi & Fantasy"
-            }, {
-                "id": 10766,
-                "name": "Soap"
-            }, {
-                "id": 10767,
-                "name": "Talk"
-            }, {
-                "id": 10768,
-                "name": "War & Politics"
-            }, {
-                "id": 37,
-                "name": "Western"
-            }],
         }
     },
     methods: {
-        wait() {
-            
-            fetch('https://api.themoviedb.org/3/'+this.movie+'/' + this.idf + '?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US')
-                .then(response => response.json())
-                .then(data => {
-                    this.movie = data.results;
-                });
-        }
 
+        language(l) {
 
+            for (j = 0; j < 6; j++) {
+                if (this.languageList[j].iso_639_1 == l) {
+                    return this.languageList[j].english_name;
+                }
+            }
+            return l;
+        },
+        convertDate() {
+            let date;
+            if (this.movie.media_type == "movie") {
+                date = this.movie.release_date;
+            } else {
+                date = this.movie.first_air_date;
+            }
+
+            date = date.split("-").reverse().join("/");
+            return date;
+        },
     },
 
     mounted() {
-        this.wait();
-
-
+        fetch('https://api.themoviedb.org/3/'+this.type+'/' +this.idf+ '?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US')
+        .then(response => response.json())
+        .then(data => {
+            this.movie = data;
+        });
 
     }
 
