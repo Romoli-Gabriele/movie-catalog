@@ -35,6 +35,15 @@ body{
     font-size: 20mm;
 }
 
+.mostra-dettagli-button{
+    text-decoration: none;
+    color: #fff;
+}
+
+.mostra-dettagli-button:hover{
+    color: #fff;
+}
+
 ::-webkit-scrollbar{
     width: 6px;
     height: 6px;

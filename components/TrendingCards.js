@@ -33,8 +33,10 @@ app.component('trending-card', {
                         <br>
                         <p v-show="this.showList[this.calcIndex(movie)] == false">{{this.description(movie.overview, true)}}   ...</p>
                         <p v-show="this.showList[this.calcIndex(movie)]">{{movie.overview}}</p>
-                        <button class="btn btn-outline-success no-border text-light" @click="this.show(this.calcIndex(movie))">Show {{this.moreOrLess(this.calcIndex(movie))}}</button>
-                        
+                        <button class="btn btn-outline-success no-border text-light me-4" style="display: inline" @click="this.show(this.calcIndex(movie))">Show {{this.moreOrLess(this.calcIndex(movie))}}</button>
+                        <button type="button" class="btn btn-outline-info">
+                        <a :href="this.creaLink(movie)" class="mostra-dettagli-button" target="_blank">dettagli</a>
+                        </button>
                     </li>
                     <li v-show="this.collImg[this.calcIndex(movie)]" class="text-light list-group-item bg-dark">
                         <b>Release date: </b>{{this.convertDate(this.calcIndex(movie))}}
@@ -51,7 +53,6 @@ app.component('trending-card', {
                 </p>
                 </li>
                 </ul>
-                <a :href="this.creaLink(movie)">mostra dettagli</a>
             </div>
         </div>
     </div>
@@ -74,6 +75,9 @@ app.component('trending-card', {
     },
 
     methods: {
+        creaLink(movie){
+            return './Pages/Details.html?id='+movie.id+'&type='+movie.media_type;
+                },
         convertGenres(p){
            if(this.movieList[0].media_type == "movie"){
             for( j = 0; j < 19; j++){

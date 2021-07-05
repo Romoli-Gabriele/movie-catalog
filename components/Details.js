@@ -2,7 +2,7 @@ app.component('details', {
 
     props: {
         tipo: {
-            type: Boolean,
+            type: String,
             required: true,
         },
         id: {
@@ -68,7 +68,7 @@ app.component('details', {
         },    
        
         mounted(){
-            if (this.tipo) {
+            if (this.tipo == "movie") {
                 fetch('https://api.themoviedb.org/3/movie/'+this.id+'?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US')
                     .then(response => response.json())
                     .then(data => {
@@ -83,9 +83,9 @@ app.component('details', {
                     .then(data => {
                         this.movie = data.results;
                     });
-        }
+            }
     
-
+        }
         
 
     
