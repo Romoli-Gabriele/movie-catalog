@@ -48,7 +48,8 @@ app.component('trending-card', {
 
                     </li>
                 </ul>
-                  
+                <a :href="this.creaLink(movie)">mostra dettagli</a>
+                    
                 </p>
                 </li>
                 </ul>
@@ -74,6 +75,9 @@ app.component('trending-card', {
     },
 
     methods: {
+        creaLink(movie){
+            return './Pages/Details.html?id='+movie.id+'&type='+movie.media_type;
+                },
         convertGenres(p){
            if(this.movieList[0].media_type == "movie"){
             for( j = 0; j < 19; j++){
