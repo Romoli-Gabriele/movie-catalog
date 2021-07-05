@@ -1,6 +1,9 @@
 
 body{
     background-color: black;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
 .home-img{
     height: 3cm;
@@ -15,7 +18,6 @@ body{
 }
 .no-border{
     border: solid, gray, 2px;
-
 }
 .title{
     font-family: 'Yellowtail', cursive; margin-right: 9mm;
