@@ -1,16 +1,13 @@
 const app = Vue.createApp({
     data() {
+        var url = new URLSearchParams(location.search);
         return {
-            
-            tipo: false,         //true = film      false = serie
-            type: "",
-            idF: "",
+
+            tipo: false, //true = film      false = serie
+            type: url.get('type'),
+            idF: url.get('id'),
         }
     },
-    mounted(){
-        var url = new URLSearchParams(location.search);
-        this.idF = url.get('id');
-        this.type = url.get('type');
-    },
+
 
 })
