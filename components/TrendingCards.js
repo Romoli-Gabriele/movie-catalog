@@ -48,10 +48,10 @@ app.component('trending-card', {
 
                     </li>
                 </ul>
-                  
                 </p>
                 </li>
                 </ul>
+                <a :href="this.creaLink(movie)">mostra dettagli</a>
             </div>
         </div>
     </div>
