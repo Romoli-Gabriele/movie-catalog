@@ -12,7 +12,7 @@ app.component('trending-card', {
     template:
         /*html*/
         `
-    <div v-for="movie in movieList" class="pe-0">
+    <div v-for="movie in movieList" class="py-0">
         <div  class="card bg-dark mb-3">
             <img :src="'https://image.tmdb.org/t/p/w500/'+image(calcIndex(movie))" @click="this.imgSwitch(calcIndex(movie))" class="card-img-top" alt="...">
             

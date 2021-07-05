@@ -34,3 +34,20 @@ body{
 .logo{
     font-size: 20mm;
 }
+
+::-webkit-scrollbar{
+    width: 6px;
+    height: 6px;
+    }
+    ::-webkit-scrollbar-thumb{
+    background: #DC3545;
+    border-radius: 13px;
+    }
+    ::-webkit-scrollbar-thumb:hover{
+    background: #DC3545;
+    }
+    ::-webkit-scrollbar-track{
+    background: #000000;
+    border-radius: 10px;
+    box-shadow: inset 7px 10px 12px 0px #000;
+    }
