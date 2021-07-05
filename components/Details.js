@@ -15,10 +15,11 @@ app.component('dettagli', {
         /*html*/
         `
         <div  class="card bg-dark mb-3">
-            <img :src="'https://image.tmdb.org/t/p/w500/'+movie.backdrop_path">
+            <img :src="'https://image.tmdb.org/t/p/w500/'+movie.poster_path">
             <div class="card-body">
             <h5 class="card-title text-danger home-link fs-3">{{ movie.name }}</h5>
             <h5 class="card-title text-danger home-link fs-3">{{ movie.title }}</h5>
+            <p class="card-title text-light home-link fs-4">{{movie.tagline}}</p>
             <p class="card-text">
             <ul class="list-group list-group-flush bg-dark">
             <li class="list-group-item bg-dark text-light"><b>Review: </b> 
@@ -35,16 +36,15 @@ app.component('dettagli', {
                         <p>{{movie.overview}}</p>
                     </li>
                 <li class="text-light list-group-item bg-dark">
-                    
-                    <b>Release date: </b> {{this.convertDate()}}
-                    <br>
-                    <b>Original language: </b> {{this.language(movie.original_language)}}
-                    <br>
-                    <b>Created by:</b> {{this.movie.created_by.name}}
-                    <br>
-                    <b>Type:</b> {{this.movie.type}}
-                    <br>
-                    <b>Status:</b> {{this.movie.status}}
+                <b>Status:</b> {{this.movie.status}}
+                <br>
+                <b>Release date: </b> {{this.convertDate()}}
+                <br>
+                <b>Original language: </b> {{this.language(movie.original_language)}}
+                <br>
+                <br>
+                <br>
+                <button type="button" class="btn btn-outline-warning "><a :href="movie.homepage" class="mostra-dettagli-button" target="_blank">Watch Now!</a></button>
                     
                 </li>
                 <li class="list-group-item bg-dark text-light">
@@ -108,12 +108,12 @@ app.component('dettagli', {
         },
         convertDate() {
             let date;
-            if (this.movie.media_type == "movie") {
+
+            if (this.type == "movie") {
                 date = this.movie.release_date;
             } else {
                 date = this.movie.first_air_date;
             }
-
             date = date.split("-").reverse().join("/");
             return date;
         },
