@@ -1,12 +1,12 @@
-app.component('details', {
+app.component('dettagli', {
 
     props: {
         tipo: {
-            type: String,
+            type: Boolean,
             required: true,
         },
         id: {
-            type: String,
+            type: Number,
             required: true,
         }
 
@@ -15,12 +15,7 @@ app.component('details', {
         /*html*/
         `
         <div  class="card bg-dark">
-            <img :src="'https://image.tmdb.org/t/p/w500/'+this.movie.backdrop_path" class="card-img-top" alt="...">
-            
-            <div class="card-body">
-                <h5 class="card-title text-danger home-link fs-3">{{ this.movie.name }}</h5>
-                <h5 class="card-title text-danger home-link fs-3">{{ this.id }}</h5>
-            </div>
+           <h1 class="text-light">{{this.id}}</h1>
         </div>
         `,
         data(){
@@ -35,7 +30,7 @@ app.component('details', {
         },    
        
         mounted(){
-            if (this.tipo == "movie") {
+            if (this.tipo) {
                 fetch('https://api.themoviedb.org/3/movie/'+this.id+'?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US')
                     .then(response => response.json())
                     .then(data => {
@@ -45,7 +40,7 @@ app.component('details', {
         
                     });
                 } else {
-                fetch('https://api.themoviedb.org/3/tv/'+ this.id +'?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US')
+                fetch('https://api.themoviedb.org/3/tv/'+this.id +'?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US')
                     .then(response => response.json())
                     .then(data => {
                         this.movie = data.results;
