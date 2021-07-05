@@ -9,7 +9,7 @@ app.component('homepage', {
     template:
         /*html*/
         `
-    <div class="row row-cols-xs-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
+    <div class="row row-cols-xs-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-4 row-cols-xxl-5">
             <trending-card :movieList="movieList" ></trending-card>
     </div>
 `,
