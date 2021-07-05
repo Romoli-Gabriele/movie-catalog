@@ -19,40 +19,7 @@ app.component('details', {
             
             <div class="card-body">
                 <h5 class="card-title text-danger home-link fs-3">{{ this.movie.name }}</h5>
-                <h5 class="card-title text-danger home-link fs-3">{{ this.movie.title }}</h5>
-                <p class="card-text">
-                <ul class="list-group list-group-flush bg-dark">
-                <li class="list-group-item bg-dark text-light"><b>Review: </b> 
-                    <reviews :value="movie.vote_average" :full="'fa-star'" :half="'fa-star-half-alt'" :empty="'fa-star'" :color="'text-warning'" :type="true"></reviews>
-                </li>
-                <li class="list-group-item bg-dark text-light"><b>Popularity: </b>
-                    <reviews :value="movie.popularity" :full="'fa-heart'" :half="'fa-heart-broken'" :empty="'fa-heart'" :color="'text-danger'" :type="false"></reviews>
-                </li>
-
-                    <li class="list-group-item bg-dark text-light">
-                        <b>Description: </b>
-                        <br>
-                        <p v-show="this.showList[this.calcIndex(movie)] == false">{{this.description(movie.overview, true)}}   ...</p>
-                        <p v-show="this.showList[this.calcIndex(movie)]">{{this.movie.overview}}</p>
-                        <button class="btn btn-outline-success no-border text-light" @click="this.show(this.calcIndex(movie))">Show {{this.moreOrLess(this.calcIndex(movie))}}</button>
-                        
-                    </li>
-                    <li v-show="this.collImg[this.calcIndex(movie)]" class="text-light list-group-item bg-dark">
-                        <b>Release date: </b>{{this.convertDate(this.calcIndex(this.xmovie))}}
-                        <b>Original language: </b> {{this.language(movie.original_language)}}
-                    </li>
-                    <li v-show="this.collImg[this.calcIndex(movie)]" class="list-group-item bg-dark text-light">
-                        <ul >
-                            <b>Genres: </b>
-                            <li class="bg-dark text-light" v-for="p in movie.genre_ids">{{this.convertGenres(p)}}</li>
-                        </ul>
-
-                    </li>
-                </ul>
-                  
-                </p>
-                </li>
-                </ul>
+                <h5 class="card-title text-danger home-link fs-3">{{ this.id }}</h5>
             </div>
         </div>
         `,
