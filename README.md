@@ -8,3 +8,4 @@ giorno 3: cuori popolarità, descrizione
 
 giorno 4: conponente recensioni, descrizione con show more
 giorno 5: ho ritrovato i commit persi
+giorno 6: 

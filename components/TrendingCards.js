@@ -22,10 +22,10 @@ app.component('trending-card', {
                 <p class="card-text">
                 <ul class="list-group list-group-flush bg-dark">
                     <li class="list-group-item bg-dark text-light"><b>Review: </b> 
-                        <reviews :value="calcStar(movie.vote_average)" :valE="calcWstar(movie.vote_average)" :full="'fa-star'" :half="'fa-star-half-alt'" :empty="'fa-star'" :color="'text-warning'" :valH="this.mezza"></reviews>
+                        <reviews :value="movie.vote_average" :full="'fa-star'" :half="'fa-star-half-alt'" :empty="'fa-star'" :color="'text-warning'" :type="true"></reviews>
                     </li>
                     <li class="list-group-item bg-dark text-light"><b>Popularity: </b>
-                        <reviews :value="calcPop(movie.popularity)" :valE="calcWpop(movie.popularity)" :full="'fa-heart'" :half="'fa-heart-broken'" :empty="'fa-heart'" :color="'text-danger'" :valH="this.mezzo"></reviews>
+                        <reviews :value="movie.popularity" :full="'fa-heart'" :half="'fa-heart-broken'" :empty="'fa-heart'" :color="'text-danger'" :type="false"></reviews>
                     </li>
 
                     <li class="list-group-item bg-dark text-light">
@@ -62,76 +62,9 @@ app.component('trending-card', {
             
             showList: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
             collImg:  [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-            mezza: false, //mezza stella
-            mezzo: false, // mezzo cuore
             languageList: [{iso_639_1: "de", english_name: "German", name: "Deutsch"},{iso_639_1: "it", english_name: "Italian", name: "Italiano"},{iso_639_1: "ja", english_name: "Japanese", name: "日本語"}, {iso_639_1: "fr", english_name: "French", name: "Français"},{iso_639_1: "en", english_name: "English", name: "English"},{iso_639_1: "es", english_name: "Spanish", name: "Español"}],
             genresList: [{"id": 28,"name": "Action"},{"id": 12,"name": "Adventure"},{"id": 16,"name": "Animation"},{"id": 35,"name": "Comedy"},{"id": 80,"name": "Crime"},{"id": 99,"name": "Documentary"},{"id": 18,"name": "Drama"},{"id": 10751,"name": "Family"},{"id": 14,"name": "Fantasy"},{"id": 36,"name": "History"},{"id": 27,"name": "Horror"},{"id": 10402,"name": "Music"},{"id": 9648,"name": "Mystery"},{"id": 10749,"name": "Romance"},{"id": 878,"name": "Science Fiction"},{"id": 10770,"name": "TV Movie"},{"id": 53,"name": "Thriller"},{"id": 10752,"name": "War"},{"id": 37,"name": "Western"}],
-            genresListS: [
-                {
-                    "id": 10759,
-                    "name": "Action & Adventure"
-                },
-                {
-                    "id": 16,
-                    "name": "Animation"
-                },
-                {
-                    "id": 35,
-                    "name": "Comedy"
-                },
-                {
-                    "id": 80,
-                    "name": "Crime"
-                },
-                {
-                    "id": 99,
-                    "name": "Documentary"
-                },
-                {
-                    "id": 18,
-                    "name": "Drama"
-                },
-                {
-                    "id": 10751,
-                    "name": "Family"
-                },
-                {
-                    "id": 10762,
-                    "name": "Kids"
-                },
-                {
-                    "id": 9648,
-                    "name": "Mystery"
-                },
-                {
-                    "id": 10763,
-                    "name": "News"
-                },
-                {
-                    "id": 10764,
-                    "name": "Reality"
-                },
-                {
-                    "id": 10765,
-                    "name": "Sci-Fi & Fantasy"
-                },
-                {
-                    "id": 10766,
-                    "name": "Soap"
-                },
-                {
-                    "id": 10767,
-                    "name": "Talk"
-                },
-                {
-                    "id": 10768,
-                    "name": "War & Politics"
-                },
-                {
-                    "id": 37,
-                    "name": "Western"
-                }
-            ],
+            genresListS: [{"id": 10759,"name": "Action & Adventure"},{"id": 16,"name": "Animation"},{"id": 35,"name": "Comedy"},{"id": 80,"name": "Crime"},{"id": 99,"name": "Documentary"},{"id": 18,"name": "Drama"},{"id": 10751,"name": "Family"},{"id": 10762,"name": "Kids"},{"id": 9648,"name": "Mystery"},{"id": 10763,"name": "News"},{"id": 10764,"name": "Reality"},{"id": 10765,"name": "Sci-Fi & Fantasy"},{"id": 10766,"name": "Soap"},{"id": 10767,"name": "Talk"},{"id": 10768,"name": "War & Politics"},{"id": 37,"name": "Western"}],
             
         }
         
@@ -203,55 +136,7 @@ app.component('trending-card', {
             console.log(j);
             return j;
         },
-        calcStar(x) {
-            x = x / 2;
-            if (x - Math.round(x) >= 0.35 || x - Math.round(x) <= -0.35) {
-                this.mezza = true;
-
-            }
-            return Math.round(x)
-        },
         
-        calcPop(x) {
-            x = x / 1000;
-            if (x - Math.round(x) >= 0.4 || x - Math.round(x) <= -0.4) {
-                if (x < 5) {
-                    this.mezzo = true;
-                }
-
-            } else {
-                this.mezzo = false
-            }
-
-            if (Math.round(x) > 5) {
-
-                return 5
-            }
-
-            return Math.round(x) > 0 ? Math.round(x) : 0
-        },
-        calcWpop(x) {
-            let y = this.calcPop(x);
-
-            y = 5 - y;
-            if (this.mezzo && y > 0) {
-                y--;
-
-            }
-            
-            return y;
-        },
-        calcWstar(x){
-            
-            let y = this.calcStar(x);
-
-            y = 5 - y;
-            if (this.mezza && y > 0) {
-                y--;
-            }
-            
-            return y;
-        },
         description(s, m) {
             if (m) {
                 var r = s.slice(0, 70);
