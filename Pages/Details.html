@@ -49,8 +49,7 @@
       </nav>
         <br>
         <br>
-        <dettagli :tipo="type" :id="id"></dettagli>
-
+        <dettagli :type="this.type" :idf="this.idF"></dettagli>
 
     </div>
    
@@ -63,7 +62,8 @@
   <script src="../components/Details.js"></script>
     <!-- mount app -->
     <script>
-        const mountedApp = app.mount('#app');
+      var url = new URLSearchParams(location.search);
+      const mountedApp = app.mount('#app');
     </script>
 
     

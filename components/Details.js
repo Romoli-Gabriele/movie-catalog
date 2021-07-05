@@ -1,23 +1,28 @@
 app.component('dettagli', {
 
     props: {
-        tipo: {
-            type: Boolean,
+        type: {
+            type: String,
             required: true,
         },
-        id: {
-            type: Number,
+        idf: {
+            type: String,
             required: true,
             value: 0,
+        },
+        title:{
+            type: String,
+            required: true,
         }
 
     },
     template:
         /*html*/
         `
-        <div class="card bg-dark">
-        <p class="text-light"> {{tipo}}</p>
-           <h1 class="text-light">{{id}}</h1>
+        <div  class="card bg-dark">
+           <h1 class="text-light">{{this.idf}}</h1>
+           <h1 class="text-light">{{this.type}}</h1>
+           <h1 class="text-light">{{ this.title }}</h1>
         </div>
         `,
         data(){
@@ -32,17 +37,14 @@ app.component('dettagli', {
         },
                
         mounted(){
-            if (this.tipo) {
-                fetch('https://api.themoviedb.org/3/movie/'+this.id+'?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US')
+            if (this.type == "movie") {
+                fetch('https://api.themoviedb.org/3/movie/'+this.idf+'?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US')
                     .then(response => response.json())
                     .then(data => {
                         this.movie = data.results;
-        
-        
-        
                     });
                 } else {
-                fetch('https://api.themoviedb.org/3/tv/'+this.id +'?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US')
+                fetch('https://api.themoviedb.org/3/tv/'+this.idf+'?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US')
                     .then(response => response.json())
                     .then(data => {
                         this.movie = data.results;
