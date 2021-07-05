@@ -15,45 +15,44 @@ app.component('dettagli', {
     template:
         /*html*/
         `
-        <p>BFHEHFE</p>
-    //     <div  class="card bg-dark mb-3">
-    //     <img :src="'https://image.tmdb.org/t/p/w500/'+movie.backdrop_path" class="card-img-top" alt="...">
+        <div  class="card bg-dark mb-3">
+        <img :src="'https://image.tmdb.org/t/p/w500/'+movie.backdrop_path" class="card-img-top" alt="...">
         
-    //     <div class="card-body">
-    //         <h5 class="card-title text-danger home-link fs-3">{{ movie.name }}</h5>
-    //         <h5 class="card-title text-danger home-link fs-3">{{ movie.title }}</h5>
-    //         <p class="card-text">
-    //         <ul class="list-group list-group-flush bg-dark">
-    //             <li class="list-group-item bg-dark text-light"><b>Review: </b> 
-    //                 <reviews :value="movie.vote_average" :full="'fa-star'" :half="'fa-star-half-alt'" :empty="'fa-star'" :color="'text-warning'" :type="true"></reviews>
-    //             </li>
-    //             <li class="list-group-item bg-dark text-light"><b>Popularity: </b>
-    //                 <reviews :value="movie.popularity" :full="'fa-heart'" :half="'fa-heart-broken'" :empty="'fa-heart'" :color="'text-danger'" :type="false"></reviews>
-    //             </li>
+        <div class="card-body">
+            <h5 class="card-title text-danger home-link fs-3">{{ movie.name }}</h5>
+            <h5 class="card-title text-danger home-link fs-3">{{ movie.title }}</h5>
+            <p class="card-text">
+            <ul class="list-group list-group-flush bg-dark">
+                <li class="list-group-item bg-dark text-light"><b>Review: </b> 
+                    <reviews :value="movie.vote_average" :full="'fa-star'" :half="'fa-star-half-alt'" :empty="'fa-star'" :color="'text-warning'" :type="true"></reviews>
+                </li>
+                <li class="list-group-item bg-dark text-light"><b>Popularity: </b>
+                    <reviews :value="movie.popularity" :full="'fa-heart'" :half="'fa-heart-broken'" :empty="'fa-heart'" :color="'text-danger'" :type="false"></reviews>
+                </li>
 
-    //             <li class="list-group-item bg-dark text-light">
-    //                 <b>Description: </b>
-    //                 <br>
-    //                 <p>{{movie.overview}}</p>
+                <li class="list-group-item bg-dark text-light">
+                    <b>Description: </b>
+                    <br>
+                    <p>{{movie.overview}}</p>
                     
-    //             </li>
-    //             <li class="text-light list-group-item bg-dark">
-    //                 <b>Release date: </b>{{this.convertDate()}}
-    //                 <b>Original language: </b> {{this.language(movie.original_language)}}
-    //             </li>
-    //             <li class="list-group-item bg-dark text-light">
-    //                 <ul >
-    //                     <b>Genres: </b>
-    //                     <li class="bg-dark text-light" v-for="p in movie.genre_ids">{{this.convertGenres(p)}}</li>
-    //                 </ul>
+                </li>
+                <li class="text-light list-group-item bg-dark">
+                    <b>Release date: </b>{{this.convertDate()}}
+                    <b>Original language: </b> {{this.language(movie.original_language)}}
+                </li>
+                <li class="list-group-item bg-dark text-light">
+                    <ul >
+                        <b>Genres: </b>
+                        <li class="bg-dark text-light" v-for="p in movie.genre_ids">{{this.convertGenres(p)}}</li>
+                    </ul>
 
-    //             </li>
-    //         </ul>
-    //         </p>
-    //         </li>
-    //         </ul>
-    //     </div>
-    // </div>
+                </li>
+            </ul>
+            </p>
+            </li>
+            </ul>
+        </div>
+    </div>
         `,
 
     data() {
@@ -196,51 +195,51 @@ app.component('dettagli', {
             }],
         }
     },
-    // methods: {
-    //     convertDate(){
-    //         let date;
-    //         if(this.movie.media_type == "movie"){
-    //             date = this.movie.release_date;
-    //         }else{
-    //             date = this.movie.first_air_date;
-    //         }
+    methods: {
+        convertDate(){
+            let date;
+            if(this.movie.media_type == "movie"){
+                date = this.movie.release_date;
+            }else{
+                date = this.movie.first_air_date;
+            }
             
-    //         date = date.split("-").reverse().join("/");
-    //         return date;
-    //     },
-    //     language(l){
+            date = date.split("-").reverse().join("/");
+            return date;
+        },
+        language(l){
          
-    //         for( j = 0; j < 6; j++){
-    //             if(this.languageList[j].iso_639_1 == l){
-    //                 return this.languageList[j].english_name;
-    //             }
-    //         }
-    //         return l;
-    // },
-    // },
+            for( j = 0; j < 6; j++){
+                if(this.languageList[j].iso_639_1 == l){
+                    return this.languageList[j].english_name;
+                }
+            }
+            return l;
+    },
+    },
 
-    // mounted(){
-    //         fetch('https://api.themoviedb.org/3/'+this.movie+'/' + this.idf + '?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US')
-    //         .then(response => response.json())
-    //         .then(data => {
-    //         this.movie = data.results;
-    //         });
-    // },
+    mounted(){
+            fetch('https://api.themoviedb.org/3/'+this.movie+'/' + this.idf + '?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US')
+            .then(response => response.json())
+            .then(data => {
+            this.movie = data;
+            });
+    },
 
-    // convertGenres(p){
-    //     if(this.movie.media_type == "movie"){
-    //      for( j = 0; j < 19; j++){
-    //          if(this.genresList[j].id == p){
-    //              return this.genresList[j].name;
-    //          }
-    //      }
-    //     }else{
-    //      for( j = 0; j < 16; j++){
-    //          if(this.genresListS[j].id == p){
-    //              return this.genresListS[j].name;
-    //          }
-    //      }
-    //     }     
-    //  },
+    convertGenres(p){
+        if(this.movie.media_type == "movie"){
+         for( j = 0; j < 19; j++){
+             if(this.genresList[j].id == p){
+                 return this.genresList[j].name;
+             }
+         }
+        }else{
+         for( j = 0; j < 16; j++){
+             if(this.genresListS[j].id == p){
+                 return this.genresListS[j].name;
+             }
+         }
+        }     
+     },
 
 })
