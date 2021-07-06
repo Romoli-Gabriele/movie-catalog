@@ -74,13 +74,13 @@ app.component('dettagli', {
   <div class="carousel-inner container">
     <div class="carousel-item active" data-bs-interval="4000">
     <div class="row">
-    <div class="col-4">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
        <carousel-card :movie="similarList[0]" :type="type"></carousel-card>
    </div>
-    <div class="col-4">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
        <carousel-card :movie="similarList[1]" :type="type"></carousel-card>
    </div>                
-   <div class="col-4">
+   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
         <carousel-card :movie="similarList[2]" :type="type"></carousel-card>
    </div>
    </div>
