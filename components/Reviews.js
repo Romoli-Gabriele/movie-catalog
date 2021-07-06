@@ -33,7 +33,7 @@ app.component('reviews', {
     `
     <div>
     <i v-for="c in this.calcF(this.value)" class="fas" :class="full + ' ' +color"></i>
-    <i v-show="this.mezza" class="fas" :class=" half+' '+color"></i>
+    <i v-show="this.mezzo" class="fas" :class=" half+' '+color"></i>
     <i v-for="o in this.calcW(this.value)" class="far" :class="empty+' '+color" ></i>
     </div>
    
