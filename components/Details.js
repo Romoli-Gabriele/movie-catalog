@@ -15,12 +15,12 @@ app.component('dettagli', {
     template:
         /*html*/
         `
-            <div class="container card bg-dark mb-3">
-            <div class="row">
-                <div class="col">
-                    <img :src="'https://image.tmdb.org/t/p/w500/'+movie.poster_path">
+            <div class="container card bg-dark mb-3 pt-3">
+            <div class="row ">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                    <img class="mx-auto d-block" :src="'https://image.tmdb.org/t/p/w500/'+movie.poster_path">
                 </div>
-                <div class="col">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
                 <div class="card-body">
                 <h5 class="card-title text-danger home-link fs-3">{{ movie.name }}</h5>
                 <h5 class="card-title text-danger home-link fs-3">{{ movie.title }}</h5>
