@@ -13,7 +13,29 @@ app.component('carousel-card', {
     template:
     /*html*/
     `
-    <div class="container card bg-dark mb-3">
+
+    <div class="card bg-dark mb-3">
+        <img :src="'https://image.tmdb.org/t/p/w300/'+movie.backdrop_path">
+    <div class="card-body">
+    <h5 class="card-title text-danger home-link fs-3">{{ movie.title }}</h5>
+    <p class="card-text text-light home-link fs-4">{{movie.tagline}}</p>    
+    <p class="card-text text-light container">
+        <b>Description: </b>
+        <br>
+        {{movie.overview}}
+        <br>
+    </p>
+
+        <button type="button" class="btn btn-outline-warning "><a :href="movie.homepage" class="mostra-dettagli-button" target="_blank">Watch Now!</a></button>
+
+        <a :href="this.creaLink(movie)" class="mostra-dettagli-button">
+        <button type="button" class="btn btn-outline-info mar-l">Details</button>   
+        </a>
+    </div>
+    </div>
+
+    <!--
+    <div class="container card bg-dark mb-3" style="width: 18rem">
             <div class="row">
                 <div class="col">
                     <img :src="'https://image.tmdb.org/t/p/w300/'+movie.poster_path">
@@ -44,6 +66,7 @@ app.component('carousel-card', {
                 </div>
             </div>
         </div>
+        -->
     `,
     methods: {
         creaLink() {
