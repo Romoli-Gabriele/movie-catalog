@@ -56,7 +56,7 @@ app.component('carousel-card', {
                     <br>
                     <button type="button" class="btn btn-outline-warning "><a :href="movie.homepage" class="mostra-dettagli-button" target="_blank">Watch Now!</a></button>
                     
-                    <button type="button" class="btn btn-outline-info mar-l">
+                    <button type="button" class="btn btn-outline-info ms-1">
                     <a :href="this.creaLink(movie)" class="mostra-dettagli-button">Details</a>
                     </button>   
                     </li>

@@ -300,12 +300,4 @@ app.component('trending-card', {
 
     },
 
-
-
-
-
-
-
-
-
 })
