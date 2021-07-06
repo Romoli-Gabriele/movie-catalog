@@ -14,7 +14,8 @@ app.component('dettagli', {
     },
     template:
         /*html*/
-        `<div class="container card bg-dark mb-3">
+        `
+            <div class="container card bg-dark mb-3">
             <div class="row">
                 <div class="col">
                     <img :src="'https://image.tmdb.org/t/p/w500/'+movie.poster_path">
@@ -52,73 +53,84 @@ app.component('dettagli', {
                         
                     </li>
                     <li class="list-group-item bg-dark text-light">
-                        <ul >
+                        <ul>
                             <b>Genres: </b>
                             <li class="bg-dark text-light" v-for="p in movie.genres">{{p.name}}</li>
                         </ul>
-    
                     </li>
                 </ul>
                 </p>
             </div>
                 </div>
             </div>
-        </div>
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-          <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="..." alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="..." alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
   </div>
-</div>
-<div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="..." alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+    <div class="row">
+    <div class="col-4">
+       <carousel-card :movie="similarList[0]" :type="type"></carousel-card>
+   </div>
+    <div class="col-4">
+       <carousel-card :movie="similarList[1]" :type="type"></carousel-card>
+   </div>                
+   <div class="col-4">
+        <carousel-card :movie="similarList[2]" :type="type"></carousel-card>
+   </div>
+   </div>
+       </div>
+    <div class="carousel-item">
+    <div class="row">
+    <div class="col-4">
+       <carousel-card :movie="similarList[3]" :type="type"></carousel-card>
+   </div>
+    <div class="col-4">
+       <carousel-card :movie="similarList[4]" :type="type"></carousel-card>
+   </div>                
+   <div class="col-4">
+        <carousel-card :movie="similarList[5]" :type="type"></carousel-card>
+   </div>
+   </div>    
+   </div>
+    <div class="carousel-item">
+    <div class="row">
+    <div class="col-4">
+       <carousel-card :movie="similarList[6]" :type="type"></carousel-card>
+   </div>
+    <div class="col-4">
+       <carousel-card :movie="similarList[7]" :type="type"></carousel-card>
+   </div>                
+   <div class="col-4">
+        <carousel-card :movie="similarList[8]" :type="type"></carousel-card>
+   </div>
+   </div>    </div>
   </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>
-          </div>
-          <div class="carousel-item">
-            
-          </div>
-          <div class="carousel-item">
-            
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
+
+            <!--Fine Carousel-->
+
+        
+        
         `,
 
     data() {
 
         return {
-            similarList:[],
+            similarList: [],
             movie: null,
             movieList: [],
             mezza: false, //mezza stella
@@ -180,11 +192,12 @@ app.component('dettagli', {
             .then(data => {
                 this.movie = data;
             });
-            fetch('https://api.themoviedb.org/3/' + this.type + '/' + this.idf + '/similar?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US&page=1')
+
+        fetch('https://api.themoviedb.org/3/' + this.type + '/' + this.idf + '/similar?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US&page=1')
             .then(response => response.json())
             .then(data => {
                 this.similarList = data.results;
             });
-            
+
     }
 })

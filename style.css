@@ -43,6 +43,9 @@ body{
 .mostra-dettagli-button:hover{
     color: #fff;
 }
+.mar-l{
+    margin-left: 10mm;
+}
 
 ::-webkit-scrollbar{
     width: 6px;
