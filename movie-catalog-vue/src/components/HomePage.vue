@@ -10,14 +10,17 @@
       row-cols-xxl-5
     "
   >
-    <trending-card :movieList="movieList"></trending-card>
+    <TrendingCards :movieList="movieList"/>
   </div>
 </template>
 <script>
-import { defineComponent } from "@vue/composition-api";
+import TrendingCards from "./TrendingCards.vue";
 
 export default {
-  name: "home-page",
+  name: "HomePage",
+  components: {
+    TrendingCards,
+  },
   props: {
     tipo: {
       type: Boolean,
