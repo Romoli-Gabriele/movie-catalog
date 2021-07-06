@@ -35,7 +35,7 @@ app.component('trending-card', {
                         <p v-show="this.showList[this.calcIndex(movie)]">{{movie.overview}}</p>
                         <button class="btn btn-outline-success no-border text-light me-4" style="display: inline" @click="this.show(this.calcIndex(movie))">Show {{this.moreOrLess(this.calcIndex(movie))}}</button>
                         <button type="button" class="btn btn-outline-info">
-                        <a :href="this.creaLink(movie)" class="mostra-dettagli-button" target="_blank">dettagli</a>
+                        <a :href="this.creaLink(movie)" class="mostra-dettagli-button" target="_blank">Details</a>
                         </button>
                         
                     </li>
