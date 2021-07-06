@@ -63,37 +63,52 @@ app.component('dettagli', {
                 </div>
             </div>
         </div>
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            
-          </div>
-          <div class="carousel-item">
-            
-          </div>
-          <div class="carousel-item">
-            
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
+
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item py-5 active">
+                    <div class="row">
+                        <div class="col-sm-6">slide 1</div>
+                        <div class="col-sm-6">slide 2</div>
+                    </div>
+                </div>
+                <div class="carousel-item py-5">
+                    <div class="row">
+                        <div class="col-sm-6">slide 3</div>
+                        <div class="col-sm-6">slide 4</div>
+                    </div>
+                </div>
+                <div class="carousel-item py-5">
+                    <div class="row">
+                        <div class="col-sm-6">slide 5</div>
+                        <div class="col-sm-6">slide 6</div>
+                    </div>
+                </div>
+                <div class="carousel-item py-5">
+                    <div class="row">
+                        <div class="col-sm-6">slide 7</div>
+                        <div class="col-sm-6">slide 8</div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+    </div>
+
+
+        
         `,
     data() {
 
         return {
-            similarList:[],
+            similarList: [],
             movie: null,
             movieList: [],
             mezza: false, //mezza stella
@@ -155,12 +170,13 @@ app.component('dettagli', {
             .then(data => {
                 this.movie = data;
             });
-            fetch('https://api.themoviedb.org/3/' + this.type + '/' + this.idf + '/similar?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US&page=1')
+
+        fetch('https://api.themoviedb.org/3/' + this.type + '/' + this.idf + '/similar?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US&page=1')
             .then(response => response.json())
             .then(data => {
                 this.similarList = data.results;
             });
-            
+
     }
 
 
