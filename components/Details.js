@@ -72,7 +72,30 @@ app.component('dettagli', {
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            
+          <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="..." alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="..." alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="..." alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
           </div>
           <div class="carousel-item">
             
@@ -81,9 +104,6 @@ app.component('dettagli', {
             
           </div>
         </div>
-<<<<<<< HEAD
-    </div>
-=======
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
@@ -93,7 +113,6 @@ app.component('dettagli', {
           <span class="visually-hidden">Next</span>
         </button>
       </div>
->>>>>>> bc2a27eec754113bed92fdca7b39bfcaecadf5fe
         `,
 
     data() {
@@ -156,15 +175,6 @@ app.component('dettagli', {
     },
 
     mounted() {
-<<<<<<< HEAD
-        fetch('https://api.themoviedb.org/3/'+this.type+'/' +this.idf+ '?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US')
-        .then(response => response.json())
-        .then(data => {
-            this.movie = data;
-        });
-
-    },
-=======
         fetch('https://api.themoviedb.org/3/' + this.type + '/' + this.idf + '?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US')
             .then(response => response.json())
             .then(data => {
@@ -177,23 +187,4 @@ app.component('dettagli', {
             });
             
     }
->>>>>>> bc2a27eec754113bed92fdca7b39bfcaecadf5fe
-
-
-    convertGenres(p){
-        if(this.movie.media_type == "movie"){
-         for( j = 0; j < 19; j++){
-             if(this.genresList[j].id == p){
-                 return this.genresList[j].name;
-             }
-         }
-        }else{
-         for( j = 0; j < 16; j++){
-             if(this.genresListS[j].id == p){
-                 return this.genresListS[j].name;
-             }
-         }
-        }     
-     },
-
 })
