@@ -14,63 +14,46 @@ app.component('carousel-card', {
     /*html*/
     `
 
-    <div class="card bg-dark mb-3">
-        <img :src="'https://image.tmdb.org/t/p/w300/'+movie.backdrop_path">
+    <div class="card bg-dark mb-5">
+        <img :src="'https://image.tmdb.org/t/p/w300/'+movie.backdrop_path" alt="movie banner">
     <div class="card-body">
     <h5 class="card-title text-danger home-link fs-3">{{ movie.title }}</h5>
     <p class="card-text text-light home-link fs-4">{{movie.tagline}}</p>    
     <p class="card-text text-light container">
-        <b>Description: </b>
-        <br>
-        {{movie.overview}}
-        <br>
+    <b>Description: </b>
+    <br>
+    <p v-show="this.collapse">{{description(movie.overview)}}   ...</p>
+    <p v-show="this.collapse == false">{{movie.overview}}</p>
     </p>
-
-        <button type="button" class="btn btn-outline-warning "><a :href="movie.homepage" class="mostra-dettagli-button" target="_blank">Watch Now!</a></button>
-
+    <button v-show="this.collapse" class="btn btn-outline-success no-border text-light me-4" style="display:inline" @click="this.show">Show more</button>
+    <button v-show="this.collapse == false" class="btn btn-outline-success no-border text-light me-4" style="display:inline" @click="this.show">Show less</button>
         <a :href="this.creaLink(movie)" class="mostra-dettagli-button">
-        <button type="button" class="btn btn-outline-info mar-l">Details</button>   
+        <button type="button" class="btn btn-outline-info">Details</button>   
         </a>
     </div>
     </div>
-
-    <!--
-    <div class="container card bg-dark mb-3" style="width: 18rem">
-            <div class="row">
-                <div class="col">
-                    <img :src="'https://image.tmdb.org/t/p/w300/'+movie.poster_path">
-                </div>
-                <div class="col">
-                <div class="card-body">
-                <h5 class="card-title text-danger home-link fs-3">{{ movie.name }}</h5>
-                <h5 class="card-title text-danger home-link fs-3">{{ movie.title }}</h5>
-                <p class="card-title text-light home-link fs-4">{{movie.tagline}}</p>
-                <p class="card-text">
-                <ul class="list-group list-group-flush bg-dark">
-            <li class="list-group-item bg-dark text-light">
-                            <b>Description: </b>
-                            <br>
-                            <p>{{movie.overview}}</p>
-                        </li>
-                    <li class="text-light list-group-item bg-dark">
-                    <br>
-                    <button type="button" class="btn btn-outline-warning "><a :href="movie.homepage" class="mostra-dettagli-button" target="_blank">Watch Now!</a></button>
-                    
-                    <button type="button" class="btn btn-outline-info ms-1">
-                    <a :href="this.creaLink(movie)" class="mostra-dettagli-button">Details</a>
-                    </button>   
-                    </li>
-                </ul>
-                </p>
-            </div>
-                </div>
-            </div>
-        </div>
-        -->
     `,
+    data(){
+        return{
+            collapse: true,
+            
+        }
+    },
     methods: {
         creaLink() {
             return './Details.html?id=' +this.movie.id+ '&type='+this.type;
+        },
+        description(s) {
+                var r = s.slice(0, 70);
+
+            return r
+        },
+        show() {
+            if (this.collapse) {
+                this.collapse = false;
+            } else {
+                this.collapse = true;
+            }
         },
     }
 })
