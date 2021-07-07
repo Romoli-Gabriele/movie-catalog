@@ -19,22 +19,22 @@
                     <li class="list-group-item bg-dark text-light">
                         <b>Description: </b>
                         <br>
-                        <p v-show="this.showList[this.calcIndex(movie)] == false">{{this.description(movie.overview, true)}}   ...</p>
-                        <p v-show="this.showList[this.calcIndex(movie)]">{{movie.overview}}</p>
-                        <button class="btn btn-outline-success no-border text-light me-4" style="display: inline" @click="this.show(this.calcIndex(movie))">Show {{this.moreOrLess(this.calcIndex(movie))}}</button>
-                        <button @click="this.Dettagli(movie)" type="button" class="btn btn-outline-info">
+                        <p v-show="showList[calcIndex(movie)] == false">{{description(movie.overview, true)}}   ...</p>
+                        <p v-show="showList[calcIndex(movie)]">{{movie.overview}}</p>
+                        <button class="btn btn-outline-success no-border text-light me-4" style="display: inline" @click="show(calcIndex(movie))">Show {{moreOrLess(calcIndex(movie))}}</button>
+                        <button @click="Dettagli(movie)" type="button" class="btn btn-outline-info">
                         Details
                         </button>
                         
                     </li>
-                    <li v-show="this.collImg[this.calcIndex(movie)]" class="text-light list-group-item bg-dark">
-                        <b>Release date: </b>{{this.convertDate(this.calcIndex(movie))}}
-                        <b>Original language: </b> {{this.language(movie.original_language)}}
+                    <li v-show="collImg[calcIndex(movie)]" class="text-light list-group-item bg-dark">
+                        <b>Release date: </b>{{convertDate(calcIndex(movie))}}
+                        <b>Original language: </b> {{language(movie.original_language)}}
                     </li>
-                    <li v-show="this.collImg[this.calcIndex(movie)]" class="list-group-item bg-dark text-light">
+                    <li v-show="collImg[calcIndex(movie)]" class="list-group-item bg-dark text-light">
                         <ul >
                             <b>Genres: </b>
-                            <li :key="p" class="bg-dark text-light" v-for="p in movie.genre_ids">{{this.convertGenres(p)}}</li>
+                            <li :key="p" class="bg-dark text-light" v-for="p in movie.genre_ids">{{convertGenres(p)}}</li>
                         </ul>
 
                     </li>

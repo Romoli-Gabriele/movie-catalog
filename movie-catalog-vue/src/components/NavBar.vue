@@ -20,16 +20,18 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="home-link nav-link no-border bg-dark text-light fs-2"
-              @click="this.switchTipo(true)"
+              <a
+                href=""
+                class="home-link nav-link no-border bg-dark text-light fs-2"
+                @click="switchTipo(true)"
                 >Film</a
               >
             </li>
             <li class="nav-item">
               <a
-                class="nav-link no-border bg-dark text-light fs-2 home-link"
                 href=""
-                @click="this.switchTipo(false)"
+                class="nav-link no-border bg-dark text-light fs-2 home-link"
+                @click="switchTipo(false)"
                 >Serie</a
               >
             </li>
@@ -63,42 +65,35 @@
   </div>
 </template>
 <script>
-import HomePage from './HomePage.vue'
+import HomePage from "./HomePage.vue";
 
 export default {
-   name: NavBar,
-   components: {
+  name: "NavBar",
+  components: {
     HomePage,
   },
-  data(){
-      return{
-          tipo: true,
-      }
+  data() {
+    return {
+      tipo: true,
+    };
   },
-  methods:{
-      switchTipo(t){
-          if(t){
-              tipo = true;
-          }else{
-              tipo = false
-          }
+  methods: {
+    switchTipo(t) {
+      if (t) {
+        this.tipo = true;
+      } else {
+        this.tipo = false;
       }
-
-
-  }
-
-
-
-
-   
-}
+    },
+  },
+};
 </script>
 <style scoped>
-.logo{
-    font-size: 20mm;
+.logo {
+  font-size: 20mm;
 }
-.home-link{
-    font-family: 'Shadows Into Light', cursive;
-    text-align: center;
+.home-link {
+  font-family: "Shadows Into Light", cursive;
+  text-align: center;
 }
 </style>

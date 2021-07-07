@@ -3,7 +3,7 @@
 <div class="mx-3 card bg-dark mb-3 py-3">
     <div class="row ">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
-            <img class="mx-auto d-block" :src="'https://image.tmdb.org/t/p/w500/'+movie.poster_path">
+              <img class="mx-auto d-block" :src="'https://image.tmdb.org/t/p/w500/'+movie.poster_path">
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
             <div class="card-body">
@@ -75,7 +75,7 @@ export default {
   },
   data() {
     return {
-      similarList: [],
+      similarList: new Array(10).fill({}),
       movie: {},
       movieList: [],
       mezza: false, //mezza stella

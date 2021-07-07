@@ -12,25 +12,25 @@
         <br />
       </p>
 
-      <p v-show="this.collapse">{{ description(movie.overview) }} ...</p>
-      <p v-show="this.collapse == false">{{ movie.overview }}</p>
+      <p v-show="collapse">{{ description(movie.overview) }} ...</p>
+      <p v-show="collapse == false">{{ movie.overview }}</p>
       <button
-        v-show="this.collapse"
+        v-show="collapse"
         class="btn btn-outline-success no-border text-light me-4"
         style="display: inline"
-        @click="this.show"
+        @click="show"
       >
         Show more
       </button>
       <button
-        v-show="this.collapse == false"
+        v-show="collapse == false"
         class="btn btn-outline-success no-border text-light me-4"
         style="display: inline"
-        @click="this.show"
+        @click="show"
       >
         Show less
       </button>
-      <a :href="this.creaLink(movie)" class="mostra-dettagli-button">
+      <a :href="creaLink(movie)" class="mostra-dettagli-button">
         <button type="button" class="btn btn-outline-info">Details</button>
       </a>
     </div>
@@ -47,7 +47,7 @@ export default {
     },
     movie: {
       type: Object,
-      required: true,
+      default: () => ({}),
     },
   },
 
@@ -60,7 +60,7 @@ export default {
     creaLink() {
       return "./Details.html?id=" + this.movie.id + "&type=" + this.type;
     },
-    description(s) {
+    description(s = "") {
       var r = s.slice(0, 70);
 
       return r;

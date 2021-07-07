@@ -1,9 +1,9 @@
 <template>
     
     <div>
-        <i :key="c" v-for="c in calcF(this.value)" class="fas" :class="full + ' ' +color"></i>
-        <i v-show="this.mezzo" class="fas" :class=" half+' '+color"></i>
-        <i :key="o" v-for="o in calcW(this.value)" class="far" :class="empty+' '+color" ></i>
+        <i :key="c" v-for="c in calcF(value)" class="fas" :class="full + ' ' +color"></i>
+        <i v-show="mezzo" class="fas" :class=" half+' '+color"></i>
+        <i :key="o" v-for="o in calcW(value)" class="far" :class="empty+' '+color" ></i>
     </div>
 
 </template>

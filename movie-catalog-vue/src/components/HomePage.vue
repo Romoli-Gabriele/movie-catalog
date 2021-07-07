@@ -14,6 +14,7 @@
     
   </div>
 </template>
+
 <script>
 import TrendingCards from "./TrendingCards.vue";
 
@@ -43,6 +44,7 @@ export default {
       )
         .then((response) => response.json())
         .then((data) => {
+          console.log(data);
           this.movieList = data.results;
         });
     } else {

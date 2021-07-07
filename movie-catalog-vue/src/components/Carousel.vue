@@ -29,40 +29,22 @@
     <div class="carousel-inner container">
       <div class="carousel-item active" data-bs-interval="4000">
         <div class="row">
-          <div class="col-4">
-            <CarouselCard :movie="similarList[0]" :type="type"></CarouselCard>
-          </div>
-          <div class="col-4">
-            <CarouselCard :movie="similarList[1]" :type="type"></CarouselCard>
-          </div>
-          <div class="col-4">
-            <CarouselCard :movie="similarList[2]" :type="type"></CarouselCard>
+          <div v-for="f in c1" :key="f.id" class="col-4">
+            <CarouselCard :movie="f" :type="type"></CarouselCard>
           </div>
         </div>
       </div>
       <div class="carousel-item" data-bs-interval="4000">
         <div class="row">
-          <div class="col-4">
-            <CarouselCard :movie="similarList[3]" :type="type"></CarouselCard>
-          </div>
-          <div class="col-4">
-            <CarouselCard :movie="similarList[4]" :type="type"></CarouselCard>
-          </div>
-          <div class="col-4">
-            <CarouselCard :movie="similarList[5]" :type="type"></CarouselCard>
+          <div v-for="y in c2" :key="y.id" class="col-4">
+            <CarouselCard :movie="y" :type="type"></CarouselCard>
           </div>
         </div>
       </div>
       <div class="carousel-item" data-bs-interval="4000">
         <div class="row">
-          <div class="col-4">
-            <CarouselCard :movie="similarList[6]" :type="type"></CarouselCard>
-          </div>
-          <div class="col-4">
-            <CarouselCard :movie="similarList[7]" :type="type"></CarouselCard>
-          </div>
-          <div class="col-4">
-            <CarouselCard :movie="similarList[8]" :type="type"></CarouselCard>
+          <div v-for="n in c3" :key="n.id" class="col-4">
+            <CarouselCard :movie="n" :type="type"></CarouselCard>
           </div>
         </div>
       </div>
@@ -72,7 +54,7 @@
 
 <script>
 import CarouselCard from "./CarouselCard.vue";
-export default{
+export default {
   name: "Carousel",
   components: {
     CarouselCard,
@@ -80,8 +62,11 @@ export default{
   props: {
     similarList: {
       type: Array,
-      required: true,
+      default: () => ([{},{},{},{},{},{},{},{},{}]),
     },
   },
+  computed:{
+
+  }
 };
 </script>
