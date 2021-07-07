@@ -21,7 +21,7 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a
-                href=""
+                
                 class="home-link nav-link no-border bg-dark text-light fs-2"
                 @click="switchTipo(true)"
                 >Film</a
@@ -29,7 +29,7 @@
             </li>
             <li class="nav-item">
               <a
-                href=""
+                
                 class="nav-link no-border bg-dark text-light fs-2 home-link"
                 @click="switchTipo(false)"
                 >Serie</a
@@ -60,7 +60,8 @@
     <br />
     <br />
     <div class="mx-4">
-      <HomePage :tipo="tipo" />
+      <HomePage v-show="mOs" :tipo="true" />
+      <HomePage v-show="mOs == false" :tipo="false" />
     </div>
   </div>
 </template>
@@ -72,18 +73,20 @@ export default {
   components: {
     HomePage,
   },
-  data() {
-    return {
-      tipo: true,
-    };
+  data(){
+    return{
+      mOs: true,
+    }
   },
   methods: {
     switchTipo(t) {
+      
       if (t) {
-        this.tipo = true;
+        this.mOs = true;
       } else {
-        this.tipo = false;
+        this.mOs = false;
       }
+      
     },
   },
 };
@@ -95,5 +98,11 @@ export default {
 .home-link {
   font-family: "Shadows Into Light", cursive;
   text-align: center;
+  cursor: pointer;
 }
+
+.home-link:hover{
+  color: #ff0000;
+}
+
 </style>

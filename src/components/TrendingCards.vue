@@ -1,5 +1,14 @@
 <template>
 <div>
+    <div class="
+      row
+      row-cols-xs-1
+      row-cols-sm-1
+      row-cols-md-1
+      row-cols-lg-2
+      row-cols-xl-4
+      row-cols-xxl-5
+    ">
     <div v-show="dOrL" :key="movie.id" v-for="movie in movieList" class="py-0">
         <div  class="card bg-dark mb-3">
             <img :src="'https://image.tmdb.org/t/p/w500/'+image(calcIndex(movie))" @click="this.imgSwitch(calcIndex(movie))" class="card-img-top" alt="...">
@@ -43,277 +52,348 @@
             </div>
         </div>
     </div>
+    </div>
     <Details v-show="dOrL == false" :type="type" :idf="id" />
 </div>
 </template>
 
 <script>
-import Reviews from './Reviews.vue';
-import Details from './Details.vue';
+import Reviews from "./Reviews.vue";
+import Details from "./Details.vue";
 
 export default {
-name: "TrendingCards",
+  name: "TrendingCards",
   components: {
     Details,
     Reviews,
   },
-        props: {
-        movieList: {
-            type: Array,
-            required: true,
-        },
+  props: {
+    movieList: {
+      type: Array,
+      required: true,
     },
+  },
 
-    data() {
-        return {
+  data() {
+    return {
+      showList: [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+      ],
+      collImg: [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+      ],
+      languageList: [
+        {
+          iso_639_1: "de",
+          english_name: "German",
+          name: "Deutsch",
+        },
+        {
+          iso_639_1: "it",
+          english_name: "Italian",
+          name: "Italiano",
+        },
+        {
+          iso_639_1: "ja",
+          english_name: "Japanese",
+          name: "日本語",
+        },
+        {
+          iso_639_1: "fr",
+          english_name: "French",
+          name: "Français",
+        },
+        {
+          iso_639_1: "en",
+          english_name: "English",
+          name: "English",
+        },
+        {
+          iso_639_1: "es",
+          english_name: "Spanish",
+          name: "Español",
+        },
+      ],
+      genresList: [
+        {
+          id: 28,
+          name: "Action",
+        },
+        {
+          id: 12,
+          name: "Adventure",
+        },
+        {
+          id: 16,
+          name: "Animation",
+        },
+        {
+          id: 35,
+          name: "Comedy",
+        },
+        {
+          id: 80,
+          name: "Crime",
+        },
+        {
+          id: 99,
+          name: "Documentary",
+        },
+        {
+          id: 18,
+          name: "Drama",
+        },
+        {
+          id: 10751,
+          name: "Family",
+        },
+        {
+          id: 14,
+          name: "Fantasy",
+        },
+        {
+          id: 36,
+          name: "History",
+        },
+        {
+          id: 27,
+          name: "Horror",
+        },
+        {
+          id: 10402,
+          name: "Music",
+        },
+        {
+          id: 9648,
+          name: "Mystery",
+        },
+        {
+          id: 10749,
+          name: "Romance",
+        },
+        {
+          id: 878,
+          name: "Science Fiction",
+        },
+        {
+          id: 10770,
+          name: "TV Movie",
+        },
+        {
+          id: 53,
+          name: "Thriller",
+        },
+        {
+          id: 10752,
+          name: "War",
+        },
+        {
+          id: 37,
+          name: "Western",
+        },
+      ],
+      genresListS: [
+        {
+          id: 10759,
+          name: "Action & Adventure",
+        },
+        {
+          id: 16,
+          name: "Animation",
+        },
+        {
+          id: 35,
+          name: "Comedy",
+        },
+        {
+          id: 80,
+          name: "Crime",
+        },
+        {
+          id: 99,
+          name: "Documentary",
+        },
+        {
+          id: 18,
+          name: "Drama",
+        },
+        {
+          id: 10751,
+          name: "Family",
+        },
+        {
+          id: 10762,
+          name: "Kids",
+        },
+        {
+          id: 9648,
+          name: "Mystery",
+        },
+        {
+          id: 10763,
+          name: "News",
+        },
+        {
+          id: 10764,
+          name: "Reality",
+        },
+        {
+          id: 10765,
+          name: "Sci-Fi & Fantasy",
+        },
+        {
+          id: 10766,
+          name: "Soap",
+        },
+        {
+          id: 10767,
+          name: "Talk",
+        },
+        {
+          id: 10768,
+          name: "War & Politics",
+        },
+        {
+          id: 37,
+          name: "Western",
+        },
+      ],
+      dOrL: true,
+      type: "",
+      id: "",
+    };
+  },
 
-            showList: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-            collImg: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-            languageList: [{
-                iso_639_1: "de",
-                english_name: "German",
-                name: "Deutsch"
-            }, {
-                iso_639_1: "it",
-                english_name: "Italian",
-                name: "Italiano"
-            }, {
-                iso_639_1: "ja",
-                english_name: "Japanese",
-                name: "日本語"
-            }, {
-                iso_639_1: "fr",
-                english_name: "French",
-                name: "Français"
-            }, {
-                iso_639_1: "en",
-                english_name: "English",
-                name: "English"
-            }, {
-                iso_639_1: "es",
-                english_name: "Spanish",
-                name: "Español"
-            }],
-            genresList: [{
-                "id": 28,
-                "name": "Action"
-            }, {
-                "id": 12,
-                "name": "Adventure"
-            }, {
-                "id": 16,
-                "name": "Animation"
-            }, {
-                "id": 35,
-                "name": "Comedy"
-            }, {
-                "id": 80,
-                "name": "Crime"
-            }, {
-                "id": 99,
-                "name": "Documentary"
-            }, {
-                "id": 18,
-                "name": "Drama"
-            }, {
-                "id": 10751,
-                "name": "Family"
-            }, {
-                "id": 14,
-                "name": "Fantasy"
-            }, {
-                "id": 36,
-                "name": "History"
-            }, {
-                "id": 27,
-                "name": "Horror"
-            }, {
-                "id": 10402,
-                "name": "Music"
-            }, {
-                "id": 9648,
-                "name": "Mystery"
-            }, {
-                "id": 10749,
-                "name": "Romance"
-            }, {
-                "id": 878,
-                "name": "Science Fiction"
-            }, {
-                "id": 10770,
-                "name": "TV Movie"
-            }, {
-                "id": 53,
-                "name": "Thriller"
-            }, {
-                "id": 10752,
-                "name": "War"
-            }, {
-                "id": 37,
-                "name": "Western"
-            }],
-            genresListS: [{
-                "id": 10759,
-                "name": "Action & Adventure"
-            }, {
-                "id": 16,
-                "name": "Animation"
-            }, {
-                "id": 35,
-                "name": "Comedy"
-            }, {
-                "id": 80,
-                "name": "Crime"
-            }, {
-                "id": 99,
-                "name": "Documentary"
-            }, {
-                "id": 18,
-                "name": "Drama"
-            }, {
-                "id": 10751,
-                "name": "Family"
-            }, {
-                "id": 10762,
-                "name": "Kids"
-            }, {
-                "id": 9648,
-                "name": "Mystery"
-            }, {
-                "id": 10763,
-                "name": "News"
-            }, {
-                "id": 10764,
-                "name": "Reality"
-            }, {
-                "id": 10765,
-                "name": "Sci-Fi & Fantasy"
-            }, {
-                "id": 10766,
-                "name": "Soap"
-            }, {
-                "id": 10767,
-                "name": "Talk"
-            }, {
-                "id": 10768,
-                "name": "War & Politics"
-            }, {
-                "id": 37,
-                "name": "Western"
-            }],
-            dOrL: true,
-            type: "",
-            id: "",
-
+  methods: {
+    Dettagli(movie) {
+      if (this.dOrL) {
+        this.dOrL = false;
+        this.type = movie.media_type;
+        this.id = movie.id;
+      } else {
+        this.dOrL = true;
+      }
+    },
+    convertGenres(p) {
+      if (this.movieList[0].media_type == "movie") {
+        for (let j = 0; j < 19; j++) {
+          if (this.genresList[j].id == p) {
+            return this.genresList[j].name;
+          }
         }
+      } else {
+        for (let j = 0; j < 16; j++) {
+          if (this.genresListS[j].id == p) {
+            return this.genresListS[j].name;
+          }
+        }
+      }
+    },
+    language(l) {
+      for (let j = 0; j < 6; j++) {
+        if (this.languageList[j].iso_639_1 == l) {
+          return this.languageList[j].english_name;
+        }
+      }
+      return l;
+    },
+    convertDate(i) {
+      let date;
+      if (this.movieList[0].media_type == "movie") {
+        date = this.movieList[i].release_date;
+      } else {
+        date = this.movieList[i].first_air_date;
+      }
 
-
-
-
+      date = date.split("-").reverse().join("/");
+      return date;
+    },
+    imgSwitch(i) {
+      if (this.collImg[i]) {
+        this.collImg[i] = false;
+      } else {
+        this.collImg[i] = true;
+      }
+    },
+    image(i) {
+      if (this.collImg[i]) {
+        return this.movieList[i].backdrop_path;
+      } else {
+        return this.movieList[i].poster_path;
+      }
+    },
+    calcIndex(m) {
+      for (var j = 0; j < 20; j++) {
+        if (m == this.movieList[j]) {
+          return j;
+        }
+      }
+      return j;
     },
 
-    methods: {
-        Dettagli(movie) {
-            if(this.dOrL){
-                this.dOrL = false;
-                this.type = movie.media_type;
-                this.id = movie.id;
-            }else{
-                this.dOrL = true;
-            }
-
-        },
-        convertGenres(p) {
-            if (this.movieList[0].media_type == "movie") {
-                for (let j = 0; j < 19; j++) {
-                    if (this.genresList[j].id == p) {
-                        return this.genresList[j].name;
-                    }
-                }
-            } else {
-                for (let j = 0; j < 16; j++) {
-                    if (this.genresListS[j].id == p) {
-                        return this.genresListS[j].name;
-                    }
-                }
-
-            }
-
-
-        },
-        language(l) {
-
-            for (let j = 0; j < 6; j++) {
-                if (this.languageList[j].iso_639_1 == l) {
-                    return this.languageList[j].english_name;
-                }
-            }
-            return l;
-        },
-        convertDate(i) {
-            let date;
-            if (this.movieList[0].media_type == "movie") {
-                date = this.movieList[i].release_date;
-            } else {
-                date = this.movieList[i].first_air_date;
-            }
-
-            date = date.split("-").reverse().join("/");
-            return date;
-        },
-        imgSwitch(i) {
-            if (this.collImg[i]) {
-                this.collImg[i] = false;
-            } else {
-                this.collImg[i] = true;
-            }
-        },
-        image(i) {
-            if (this.collImg[i]) {
-                return this.movieList[i].backdrop_path;
-            } else {
-                return this.movieList[i].poster_path;
-            }
-
-        },
-        calcIndex(m) {
-            for (var j = 0; j < 20; j++) {
-                if (m == this.movieList[j]) {
-                    return j;
-                }
-            }
-            return j;
-        },
-
-        description(s, m) {
-            if (m) {
-                var r = s.slice(0, 70);
-            }
-            return r
-        },
-
-        moreOrLess(j) {
-            if (this.showList[j]) {
-                return "less"
-            } else {
-                return "more"
-            }
-
-        },
-
-        show(i) {
-            if (this.showList[i]) {
-                this.showList[i] = false;
-            } else {
-                this.showList[i] = true;
-            }
-        },
-
+    description(s, m) {
+      if (m) {
+        var r = s.slice(0, 70);
+      }
+      return r;
     },
 
-}
+    moreOrLess(j) {
+      if (this.showList[j]) {
+        return "less";
+      } else {
+        return "more";
+      }
+    },
+
+    show(i) {
+      if (this.showList[i]) {
+        this.showList[i] = false;
+      } else {
+        this.showList[i] = true;
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>
-
 </style>

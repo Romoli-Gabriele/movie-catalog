@@ -1,17 +1,6 @@
 <template>
-  <div
-    class="
-      row
-      row-cols-xs-1
-      row-cols-sm-1
-      row-cols-md-1
-      row-cols-lg-2
-      row-cols-xl-4
-      row-cols-xxl-5
-    "
-  >
+  <div>
     <TrendingCards :movieList="movieList" />
-    
   </div>
 </template>
 
@@ -22,7 +11,6 @@ export default {
   name: "HomePage",
   components: {
     TrendingCards,
-
   },
   props: {
     tipo: {
@@ -38,6 +26,8 @@ export default {
   },
 
   mounted() {
+    // eslint-disable-next-line no-debugger
+      debugger
     if (this.tipo) {
       fetch(
         "https://api.themoviedb.org/3/trending/movie/week?api_key=6f9286d54de4891ea7a5c91779e09786"
