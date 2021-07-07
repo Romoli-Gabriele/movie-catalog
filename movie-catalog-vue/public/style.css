@@ -12,10 +12,6 @@ body{
 .home-div{
     margin: 1cm;
 }
-.home-link{
-    font-family: 'Shadows Into Light', cursive;
-    text-align: center;
-}
 .no-border{
     border: solid, gray, 2px;
 }
@@ -31,9 +27,7 @@ body{
 .ali-r{
     text-align: right;
 }
-.logo{
-    font-size: 20mm;
-}
+
 
 .mostra-dettagli-button{
     text-decoration: none;

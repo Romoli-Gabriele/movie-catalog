@@ -38,8 +38,8 @@
 </template>
 
 <script>
-export default defineComponent({
-  name: CarouselCard,
+export default {
+  name: "CarouselCard",
   props: {
     type: {
       type: String,
@@ -73,7 +73,7 @@ export default defineComponent({
       }
     },
   },
-});
+};
 </script>
 
 

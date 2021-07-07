@@ -10,7 +10,8 @@
       row-cols-xxl-5
     "
   >
-    <TrendingCards :movieList="movieList"/>
+    <TrendingCards :movieList="movieList" />
+    
   </div>
 </template>
 <script>
@@ -20,6 +21,7 @@ export default {
   name: "HomePage",
   components: {
     TrendingCards,
+
   },
   props: {
     tipo: {

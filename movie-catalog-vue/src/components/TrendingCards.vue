@@ -1,5 +1,6 @@
 <template>
-    <div v-for="movie in movieList" class="py-0">
+<div>
+    <div v-show="dOrL" :key="movie.id" v-for="movie in movieList" class="py-0">
         <div  class="card bg-dark mb-3">
             <img :src="'https://image.tmdb.org/t/p/w500/'+image(calcIndex(movie))" @click="this.imgSwitch(calcIndex(movie))" class="card-img-top" alt="...">
             
@@ -21,8 +22,8 @@
                         <p v-show="this.showList[this.calcIndex(movie)] == false">{{this.description(movie.overview, true)}}   ...</p>
                         <p v-show="this.showList[this.calcIndex(movie)]">{{movie.overview}}</p>
                         <button class="btn btn-outline-success no-border text-light me-4" style="display: inline" @click="this.show(this.calcIndex(movie))">Show {{this.moreOrLess(this.calcIndex(movie))}}</button>
-                        <button type="button" class="btn btn-outline-info">
-                        <a :href="this.creaLink(movie)" class="mostra-dettagli-button">Details</a>
+                        <button @click="this.Dettagli(movie)" type="button" class="btn btn-outline-info">
+                        Details
                         </button>
                         
                     </li>
@@ -33,7 +34,7 @@
                     <li v-show="this.collImg[this.calcIndex(movie)]" class="list-group-item bg-dark text-light">
                         <ul >
                             <b>Genres: </b>
-                            <li class="bg-dark text-light" v-for="p in movie.genre_ids">{{this.convertGenres(p)}}</li>
+                            <li :key="p" class="bg-dark text-light" v-for="p in movie.genre_ids">{{this.convertGenres(p)}}</li>
                         </ul>
 
                     </li>
@@ -42,14 +43,18 @@
             </div>
         </div>
     </div>
+    <Details v-show="dOrL == false" :type="type" :idf="id" />
+</div>
 </template>
 
 <script>
-import Reviews from 'Reviews.vue'
+import Reviews from './Reviews.vue';
+import Details from './Details.vue';
 
-export default defineComponent({
+export default {
 name: "TrendingCards",
   components: {
+    Details,
     Reviews,
   },
         props: {
@@ -196,6 +201,9 @@ name: "TrendingCards",
                 "id": 37,
                 "name": "Western"
             }],
+            dOrL: true,
+            type: "",
+            id: "",
 
         }
 
@@ -205,23 +213,25 @@ name: "TrendingCards",
     },
 
     methods: {
-        creaLink(movie) {
-            if (movie.media_type == "movie") {
-                return './Pages/Details.html?id=' + movie.id + '&type=movie';
-            } else {
-                return '../Pages/Details.html?id=' + movie.id + '&type=tv';
+        Dettagli(movie) {
+            if(this.dOrL){
+                this.dOrL = false;
+                this.type = movie.media_type;
+                this.id = movie.id;
+            }else{
+                this.dOrL = true;
             }
 
         },
         convertGenres(p) {
             if (this.movieList[0].media_type == "movie") {
-                for (j = 0; j < 19; j++) {
+                for (let j = 0; j < 19; j++) {
                     if (this.genresList[j].id == p) {
                         return this.genresList[j].name;
                     }
                 }
             } else {
-                for (j = 0; j < 16; j++) {
+                for (let j = 0; j < 16; j++) {
                     if (this.genresListS[j].id == p) {
                         return this.genresListS[j].name;
                     }
@@ -233,7 +243,7 @@ name: "TrendingCards",
         },
         language(l) {
 
-            for (j = 0; j < 6; j++) {
+            for (let j = 0; j < 6; j++) {
                 if (this.languageList[j].iso_639_1 == l) {
                     return this.languageList[j].english_name;
                 }
@@ -272,7 +282,6 @@ name: "TrendingCards",
                     return j;
                 }
             }
-            console.log(j);
             return j;
         },
 
@@ -302,7 +311,7 @@ name: "TrendingCards",
 
     },
 
-})
+}
 </script>
 
 <style scoped>

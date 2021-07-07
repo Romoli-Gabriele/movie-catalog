@@ -1,4 +1,5 @@
 <template>
+<div>
 <div class="mx-3 card bg-dark mb-3 py-3">
     <div class="row ">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
@@ -12,12 +13,12 @@
                 <p class="card-text">
                 <ul class="list-group list-group-flush bg-dark">
                     <li class="list-group-item bg-dark text-light"><b>Review: </b> 
-                        <reviews :value="movie.vote_average" :full="'fa-star'" :half="'fa-star-half-alt'" :empty="'fa-star'" :color="'text-warning'" :type="true"></reviews>
+                        <Reviews :value="movie.vote_average" :full="'fa-star'" :half="'fa-star-half-alt'" :empty="'fa-star'" :color="'text-warning'" :type="true" />
                         <br>
                         <b>Number of reviews:</b> {{this.movie.vote_count}}
                     </li>
                     <li class="list-group-item bg-dark text-light"><b>Popularity: </b>
-                        <reviews :value="movie.popularity" :full="'fa-heart'" :half="'fa-heart-broken'" :empty="'fa-heart'" :color="'text-danger'" :type="false"></reviews>
+                        <Reviews :value="movie.popularity" :full="'fa-heart'" :half="'fa-heart-broken'" :empty="'fa-heart'" :color="'text-danger'" :type="false" />
                     </li>
                     <li class="list-group-item bg-dark text-light">
                         <b>Description: </b>
@@ -46,7 +47,9 @@
             </div>
                 </div>
             </div>
-            </div>
+</div>
+<Carousel :similarList="similarList"/>
+</div>
 </template>
 
 <script>
@@ -73,7 +76,7 @@ export default {
   data() {
     return {
       similarList: [],
-      movie: null,
+      movie: {},
       movieList: [],
       mezza: false, //mezza stella
       mezzo: false, // mezzo cuore
@@ -113,7 +116,7 @@ export default {
   },
   methods: {
     language(l) {
-      for (j = 0; j < 6; j++) {
+      for (let j = 0; j < 6; j++) {
         if (this.languageList[j].iso_639_1 == l) {
           return this.languageList[j].english_name;
         }
@@ -128,6 +131,7 @@ export default {
       } else {
         date = this.movie.first_air_date;
       }
+      if (!date) return "";
       date = date.split("-").reverse().join("/");
       return date;
     },

@@ -1,16 +1,17 @@
 <template>
     
     <div>
-        <i v-for="c in this.calcF(this.value)" class="fas" :class="full + ' ' +color"></i>
+        <i :key="c" v-for="c in calcF(this.value)" class="fas" :class="full + ' ' +color"></i>
         <i v-show="this.mezzo" class="fas" :class=" half+' '+color"></i>
-        <i v-for="o in this.calcW(this.value)" class="far" :class="empty+' '+color" ></i>
+        <i :key="o" v-for="o in calcW(this.value)" class="far" :class="empty+' '+color" ></i>
     </div>
 
 </template>
 
 <script>
 
-export default defineComponent({
+export default {
+    name: "Reviews",
     
     props: {
         type:{
@@ -42,7 +43,10 @@ export default defineComponent({
     },
 
     data(){
-        mezzo: false; //mezzo cuore
+        return{
+            mezzo: false,
+        }
+        
     },
     methods:{
         calcF(x) { 
@@ -88,7 +92,7 @@ export default defineComponent({
 
     }
 
-})
+}
 </script>
 
 <style scoped>
