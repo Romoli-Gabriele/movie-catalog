@@ -6,6 +6,7 @@
     />
     <div class="card-body">
       <h5 class="card-title text-danger home-link fs-3">{{ movie.title }}</h5>
+      <h5 class="card-title text-danger home-link fs-3">{{ movie.name }}</h5>
       <p class="card-text text-light home-link fs-4">{{ movie.tagline }}</p>
       <p class="card-text text-light container">
         <b>Description: </b>
