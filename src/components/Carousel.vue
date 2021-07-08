@@ -36,15 +36,15 @@
       </div>
       <div class="carousel-item" data-bs-interval="4000">
         <div class="row">
-          <div v-for="y in 3" :key="y" class="col-4">
-            <CarouselCard :movie="similarList[y]" :type="type"></CarouselCard>
+          <div v-for="f in 3" :key="f" class="col-4">
+            <CarouselCard :movie="similarList[f + 2]" :type="type"></CarouselCard>
           </div>
         </div>
       </div>
       <div class="carousel-item" data-bs-interval="4000">
         <div class="row">
-          <div v-for="n in 3" :key="n" class="col-4">
-            <CarouselCard :movie="similarList[n]" :type="type"></CarouselCard>
+          <div v-for="f in 3" :key="f" class="col-4">
+            <CarouselCard :movie="similarList[f + 4]" :type="type"></CarouselCard>
           </div>
         </div>
       </div>
