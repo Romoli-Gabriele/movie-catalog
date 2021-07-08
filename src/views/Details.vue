@@ -67,14 +67,11 @@
             </p>
             <br />
             <br />
-            <button type="button" class="btn btn-outline-warning">
-              <a
-                :href="movie.homepage"
-                class="mostra-dettagli-button"
-                target="_blank"
-                >Watch Now!</a
-              >
-            </button>
+            <a :href="movie.homepage" target="_blank"
+              ><button type="button" class="btn btn-outline-warning text-light">
+                Watch now
+              </button>
+            </a>
           </div>
         </div>
       </div>
@@ -82,6 +79,7 @@
     <Carousel :similarList="similarList" :type="type" />
   </div>
 </template>
+
 
 <script>
 import Reviews from "../components/Reviews.vue";
