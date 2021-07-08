@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
           <i class="fas fa-film logo"></i>
@@ -20,13 +20,18 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <router-link to="/" active-class="" class="home-link nav-link no-border bg-dark text-light fs-2"
-                @click="switchTipo(true)">Film</router-link>
-
+              <router-link
+                :to="{ name: 'Home' }"
+                class="home-link nav-link no-border bg-dark text-light fs-2"
+                >Film</router-link
+              >
             </li>
             <li class="nav-item">
-              <router-link to="/" active-class="" class="home-link nav-link no-border bg-dark text-light fs-2"
-                @click="switchTipo(false)">Serie</router-link>
+              <router-link
+                class="nav-link no-border bg-dark text-light fs-2 home-link"
+                :to="{ name: 'Series' }"
+                >Serie</router-link
+              >
             </li>
             <a
               class="nav-link disabled home-link fs-2 text-warning"
@@ -38,12 +43,12 @@
           </ul>
           <form class="d-flex">
             <input
-              class="form-control me-2 bg-dark text-light"
+              class="form-control me-2"
               type="search"
-              placeholder="Search a movie"
+              placeholder="Search"
               aria-label="Search"
             />
-            <button class="btn btn-outline-success submit-button" type="submit">
+            <button class="btn btn-outline-success" type="submit">
               Search
             </button>
           </form>
@@ -52,36 +57,19 @@
     </nav>
     <br />
     <br />
-    <div class="mx-4">
-      <HomePage v-show="mOs" :tipo="true" />
-      <HomePage v-show="mOs == false" :tipo="false" />
-    </div>
   </div>
 </template>
 <script>
-import HomePage from "../views/HomePage.vue";
-
 export default {
   name: "NavBar",
   components: {
-    HomePage,
   },
-  data(){
-    return{
+  data() {
+    return {
       mOs: true,
-    }
+    };
   },
-  methods: {
-    switchTipo(t) {
-      
-      if (t) {
-        this.mOs = true;
-      } else {
-        this.mOs = false;
-      }
-      
-    },
-  },
+  methods: {},
 };
 </script>
 <style scoped>
@@ -94,27 +82,7 @@ export default {
   cursor: pointer;
 }
 
-.home-link:hover{
+.home-link:hover {
   color: #ff0000;
 }
-
-.form-control{
-  border: 1px solid #fff;
-  border-radius: 0;
-  margin-right: 0px !important;
-  border-right: none;
-}
-
-.form-control:focus{
-  border: 1px solid #ff0000;
-  outline: none;
-  box-shadow: none;
-}
-
-.submit-button{
-  border-radius: 0;
-}
-
-
-
 </style>
