@@ -1,17 +1,11 @@
 <template>
   <div>
-
-    <!-- <nav id="nav">
-        <router-link :to="{name: 'Home'}">ciao</router-link>
-        <router-link :to="{name: 'Series'}">cd</router-link>
-    </nav> -->
-        
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="nav">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-          <i class="fas fa-film logo"></i>
-        </a>
-        <router-link class="no" :to="{ name: 'Home' }"><h1 class="title fs-1 text-danger" href="#">Movie Catalog</h1></router-link>
+        <router-link class="navbar-brand" :to="{name : 'Home'}">
+          <a><i class="fas fa-film logo"></i></a>
+        </router-link>
+        <router-link class="no navbar-brand title fs-1 text-danger" :to="{ name: 'Home' }">Movie Catalog</router-link>
         <button
           class="navbar-toggler"
           type="button"
@@ -24,14 +18,13 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul class="navbar-nav me-auto">
             <li class="nav-item">
               <router-link
                 @click="SwitchTo(true)"
                 :to="{ name: 'Home' }"
                 class="home-link nav-link no-border bg-dark text-light fs-2"
-                >Film</router-link
-              >
+                >Film</router-link>
             </li>
             <li class="nav-item">
               <router-link
@@ -86,9 +79,7 @@ export default {
 };
 </script>
 <style scoped>
-.no{
-  text-decoration: none;
-}
+
 .logo {
   font-size: 20mm;
   color:#fff;

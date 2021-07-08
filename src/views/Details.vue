@@ -22,8 +22,7 @@
                     </li>
                     <li class="list-group-item bg-dark text-light"><b>Popularity: </b>
                         <Reviews :value="movie.popularity" :full="'fa-heart'" :half="'fa-heart-broken'" :empty="'fa-heart'" :color="'text-danger'" :type="false" />
-                        <p>({{
-Math.round(movie.popularity/1000 * 10) / 10}})</p>
+                        <p>({{Math.round(movie.popularity/1000 * 10) / 10}})</p>
                     </li>
                     <li class="list-group-item bg-dark text-light">
                         <b>Description: </b>
