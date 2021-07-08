@@ -15,11 +15,14 @@
                 <ul class="list-group list-group-flush bg-dark">
                     <li class="list-group-item bg-dark text-light"><b>Review: </b> 
                         <Reviews :value="movie.vote_average" :full="'fa-star'" :half="'fa-star-half-alt'" :empty="'fa-star'" :color="'text-warning'" :type="true" />
+                        <p>({{Math.round(movie.vote_average/2 * 10) / 10}})</p>
                         <br>
                         <b>Number of reviews:</b> {{this.movie.vote_count}}
                     </li>
                     <li class="list-group-item bg-dark text-light"><b>Popularity: </b>
                         <Reviews :value="movie.popularity" :full="'fa-heart'" :half="'fa-heart-broken'" :empty="'fa-heart'" :color="'text-danger'" :type="false" />
+                        <p>({{
+Math.round(movie.popularity/1000 * 10) / 10}})</p>
                     </li>
                     <li class="list-group-item bg-dark text-light">
                         <b>Description: </b>
