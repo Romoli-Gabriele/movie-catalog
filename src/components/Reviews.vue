@@ -4,6 +4,7 @@
         <i :key="c" v-for="c in calcF(value)" class="fas" :class="full + ' ' +color"></i>
         <i v-show="mezzo" class="fas" :class=" half+' '+color"></i>
         <i :key="o" v-for="o in calcW(value)" class="far" :class="empty+' '+color" ></i>
+        
     </div>
 
 </template>
@@ -54,6 +55,7 @@ export default {
                 x = x / 2;
             if (x - Math.round(x) >= 0.35 || x - Math.round(x) <= -0.35) {
                 this.mezzo = true;
+                x--;
 
             }
             return Math.round(x)

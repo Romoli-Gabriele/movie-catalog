@@ -11,7 +11,7 @@
         <a class="navbar-brand" href="#">
           <i class="fas fa-film logo"></i>
         </a>
-        <h1 class="title fs-1 text-danger" href="#">Movie Catalog</h1>
+        <router-link class="no" :to="{ name: 'Home' }"><h1 class="title fs-1 text-danger" href="#">Movie Catalog</h1></router-link>
         <button
           class="navbar-toggler"
           type="button"
@@ -86,6 +86,9 @@ export default {
 };
 </script>
 <style scoped>
+.no{
+  text-decoration: none;
+}
 .logo {
   font-size: 20mm;
   color:#fff;

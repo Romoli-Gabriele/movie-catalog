@@ -4,7 +4,7 @@
 <div class="mx-3 card bg-dark mb-3 py-3">
     <div class="row ">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
-              <img class="mx-auto d-block" :src="'https://image.tmdb.org/t/p/w500/'+movie.poster_path">
+              <img class="mx-auto d-block w-100 ps-5" :src="'https://image.tmdb.org/t/p/original/'+movie.poster_path">
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
             <div class="card-body">
@@ -16,11 +16,14 @@
                 <ul class="list-group list-group-flush bg-dark">
                     <li class="list-group-item bg-dark text-light"><b>Review: </b> 
                         <Reviews :value="movie.vote_average" :full="'fa-star'" :half="'fa-star-half-alt'" :empty="'fa-star'" :color="'text-warning'" :type="true" />
+                        <p>({{Math.round(movie.vote_average/2 * 10) / 10}})</p>
                         <br>
                         <b>Number of reviews:</b> {{this.movie.vote_count}}
                     </li>
                     <li class="list-group-item bg-dark text-light"><b>Popularity: </b>
                         <Reviews :value="movie.popularity" :full="'fa-heart'" :half="'fa-heart-broken'" :empty="'fa-heart'" :color="'text-danger'" :type="false" />
+                        <p>({{
+Math.round(movie.popularity/1000 * 10) / 10}})</p>
                     </li>
                     <li class="list-group-item bg-dark text-light">
                         <b>Description: </b>
