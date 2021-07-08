@@ -20,20 +20,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a
-                
-                class="home-link nav-link no-border bg-dark text-light fs-2"
-                @click="switchTipo(true)"
-                >Film</a
-              >
+              <router-link to="/" active-class="" class="home-link nav-link no-border bg-dark text-light fs-2"
+                @click="switchTipo(true)">Film</router-link>
+
             </li>
             <li class="nav-item">
-              <a
-                
-                class="nav-link no-border bg-dark text-light fs-2 home-link"
-                @click="switchTipo(false)"
-                >Serie</a
-              >
+              <router-link to="/" active-class="" class="home-link nav-link no-border bg-dark text-light fs-2"
+                @click="switchTipo(false)">Serie</router-link>
             </li>
             <a
               class="nav-link disabled home-link fs-2 text-warning"
@@ -66,7 +59,7 @@
   </div>
 </template>
 <script>
-import HomePage from "./HomePage.vue";
+import HomePage from "../views/HomePage.vue";
 
 export default {
   name: "NavBar",

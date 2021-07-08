@@ -59,7 +59,7 @@
 
 <script>
 import Reviews from "./Reviews.vue";
-import Details from "./Details.vue";
+import Details from "../views/Details.vue";
 
 export default {
   name: "TrendingCards",
