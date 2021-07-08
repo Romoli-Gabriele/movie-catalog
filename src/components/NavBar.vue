@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
           <i class="fas fa-film logo"></i>
@@ -58,7 +58,7 @@
               placeholder="Search a TV Series"
               aria-label="Search"
             />
-            <button class="btn btn-outline-success" type="submit">
+            <button class="btn btn-outline-success submit-button" type="submit">
               Search
             </button>
           </form>
@@ -98,6 +98,8 @@ export default {
 .home-link:hover {
   color: #ff0000;
 }
+
+
 
 .form-control {
   border: 1px solid #fff;
