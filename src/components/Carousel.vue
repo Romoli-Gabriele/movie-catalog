@@ -39,9 +39,9 @@
       ></button>
     </div>
     <div class="carousel-inner container">
-      <div class="carousel-item active" data-bs-interval="4000">
+      <div class="carousel-item active" id="testP" data-bs-interval="4000">
         <div class="row">
-          <div v-for="f in 3" :key="f" class="col-4">
+          <div v-for="f in 3" id="test2" :key="f" class="col-4">
             <CarouselCard :movie="similarList[similarList.length - f]" :type="type"></CarouselCard>
           </div>
         </div>
@@ -80,6 +80,13 @@ export default {
     type: {
       type: String,
       required: true,
+    },
+  },
+methods: {
+    test(f) {
+      if(f >= 3){
+        document.getElementById("testP").classList.remove("active");
+      }
     },
   },
 };
