@@ -30,9 +30,11 @@
       >
         Show less
       </button>
-      <a :href="creaLink(movie)" class="mostra-dettagli-button">
-        <button type="button" class="btn btn-outline-info">Details</button>
-      </a>
+      <router-link :to="{ name: 'Details', params: { id: movie.id, type: $route.params.type} }" target="_blank">
+                        <button type="button"  class="btn btn-outline-info">
+                        Details
+                        </button>
+                        </router-link>
     </div>
   </div>
 </template>
@@ -43,7 +45,7 @@ export default {
   props: {
     type: {
       type: String,
-      required: true,
+      default: "",
     },
     movie: {
       type: Object,
@@ -57,9 +59,7 @@ export default {
     };
   },
   methods: {
-    creaLink() {
-      return "./Details.html?id=" + this.movie.id + "&type=" + this.type;
-    },
+   
     description(s = "") {
       var r = s.slice(0, 70);
 
@@ -73,9 +73,54 @@ export default {
       }
     },
   },
+
+  
 };
 </script>
 
 
 <style scoped>
+
+body{
+    background-color: black;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+.home-img{
+    height: 3cm;
+    width: 2cm;
+}
+.home-div{
+    margin: 1cm;
+}
+.no-border{
+    border: solid, gray, 2px;
+}
+.title{
+    font-family: 'Yellowtail', cursive; margin-right: 9mm;
+    font-size: 17mm;
+}
+.marg{
+    margin-top: 5mm;
+    
+}
+
+.ali-r{
+    text-align: right;
+}
+
+
+.mostra-dettagli-button{
+    text-decoration: none;
+    color: #fff;
+}
+
+.mostra-dettagli-button:hover{
+    color: #fff;
+}
+.mar-l{
+    margin-left: 10mm;
+}
+
 </style>
