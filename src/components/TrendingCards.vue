@@ -8,7 +8,9 @@
       row-cols-lg-2
       row-cols-xl-4
       row-cols-xxl-5
+      mx-3
     ">
+    
     <div v-show="dOrL" :key="movie.id" v-for="movie in movieList" class="py-0">
         <div  class="card bg-dark mb-3">
             <img :src="'https://image.tmdb.org/t/p/w500/'+image(calcIndex(movie))" @click="this.imgSwitch(calcIndex(movie))" class="card-img-top" alt="...">
@@ -31,10 +33,11 @@
                         <p v-show="showList[calcIndex(movie)] == false">{{description(movie.overview, true)}}   ...</p>
                         <p v-show="showList[calcIndex(movie)]">{{movie.overview}}</p>
                         <button class="btn btn-outline-success no-border text-light me-4" style="display: inline" @click="show(calcIndex(movie))">Show {{moreOrLess(calcIndex(movie))}}</button>
-                        <button @click="Dettagli(movie)" type="button" class="btn btn-outline-info">
+                        <router-link :to="{ name: 'Details', params: { id: movie.id, type: movie.media_type} }">
+                        <button type="button" class="btn btn-outline-info">
                         Details
                         </button>
-                        
+                        </router-link>
                     </li>
                     <li v-show="collImg[calcIndex(movie)]" class="text-light list-group-item bg-dark">
                         <b>Release date: </b>{{convertDate(calcIndex(movie))}}
@@ -53,18 +56,16 @@
         </div>
     </div>
     </div>
-    <Details v-show="dOrL == false" :type="type" :idf="id" />
+    
 </div>
 </template>
 
 <script>
 import Reviews from "./Reviews.vue";
-import Details from "../views/Details.vue";
 
 export default {
   name: "TrendingCards",
   components: {
-    Details,
     Reviews,
   },
   props: {

@@ -62,20 +62,11 @@ export default {
     Reviews,
     Carousel,
   },
-  props: {
-    type: {
-      type: String,
-      required: true,
-    },
-    idf: {
-      type: String,
-      required: true,
-      value: 0,
-    },
-  },
+
   data() {
     return {
-      similarList: new Array(10).fill({}),
+
+      similarList: [],
       movie: {},
       movieList: [],
       mezza: false, //mezza stella
@@ -139,23 +130,7 @@ export default {
 
   mounted() {
     fetch(
-      "https://api.themoviedb.org/3/" +
-        this.type +
-        "/" +
-        this.idf +
-        "?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        this.movie = data;
-      });
-
-    fetch(
-      "https://api.themoviedb.org/3/" +
-        this.type +
-        "/" +
-        this.idf +
-        "/similar?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US&page=1"
+      "https://api.themoviedb.org/3/"+this.$route.params.type+"/"+this.$route.params.id+"/similar?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US&page=1"
     )
       .then((response) => response.json())
       .then((data) => {

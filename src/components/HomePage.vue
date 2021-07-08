@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import TrendingCards from "../components/TrendingCards.vue";
+import TrendingCards from "./TrendingCards.vue";
 
 export default {
   name: "HomePage",
@@ -25,9 +25,7 @@ export default {
     };
   },
 
-  created() {
-    // eslint-disable-next-line no-debugger
-      debugger
+  mounted() {
     if (this.tipo) {
       fetch(
         "https://api.themoviedb.org/3/trending/movie/week?api_key=6f9286d54de4891ea7a5c91779e09786"
