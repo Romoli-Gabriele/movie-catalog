@@ -80,7 +80,10 @@ export default {
 
 
 <style scoped>
-
+.home-link{
+    font-family: 'Shadows Into Light', cursive;
+    text-align: center;
+}
 body{
     background-color: black;
     overflow-x: hidden;

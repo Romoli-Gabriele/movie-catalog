@@ -9,6 +9,10 @@ body{
     height: 3cm;
     width: 2cm;
 }
+.home-link{
+    font-family: 'Shadows Into Light', cursive;
+    text-align: center;
+}
 .home-div{
     margin: 1cm;
 }

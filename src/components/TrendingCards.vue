@@ -397,4 +397,8 @@ export default {
 </script>
 
 <style scoped>
+.home-link{
+    font-family: 'Shadows Into Light', cursive;
+    text-align: center;
+}
 </style>
