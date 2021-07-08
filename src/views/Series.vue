@@ -1,5 +1,4 @@
 <template>
-<NavBar />
  <br />
   <HomePage :tipo="false" />
 </template>
