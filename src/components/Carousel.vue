@@ -29,22 +29,22 @@
     <div class="carousel-inner container">
       <div class="carousel-item active" data-bs-interval="4000">
         <div class="row">
-          <div v-for="f in c1" :key="f.id" class="col-4">
-            <CarouselCard :movie="f" :type="type"></CarouselCard>
+          <div v-for="f in 3" :key="f" class="col-4">
+            <CarouselCard :movie="similarList[f]" :type="type"></CarouselCard>
           </div>
         </div>
       </div>
       <div class="carousel-item" data-bs-interval="4000">
         <div class="row">
-          <div v-for="y in c2" :key="y.id" class="col-4">
-            <CarouselCard :movie="y" :type="type"></CarouselCard>
+          <div v-for="y in 3" :key="y" class="col-4">
+            <CarouselCard :movie="similarList[y]" :type="type"></CarouselCard>
           </div>
         </div>
       </div>
       <div class="carousel-item" data-bs-interval="4000">
         <div class="row">
-          <div v-for="n in c3" :key="n.id" class="col-4">
-            <CarouselCard :movie="n" :type="type"></CarouselCard>
+          <div v-for="n in 3" :key="n" class="col-4">
+            <CarouselCard :movie="similarList[n]" :type="type"></CarouselCard>
           </div>
         </div>
       </div>
@@ -62,11 +62,13 @@ export default {
   props: {
     similarList: {
       type: Array,
-      default: () => ([{},{},{},{},{},{},{},{},{}]),
+      default: new Array,
     },
+    type:{
+      type: String,
+      required: true,
+    }
   },
-  computed:{
-
-  }
+  
 };
 </script>

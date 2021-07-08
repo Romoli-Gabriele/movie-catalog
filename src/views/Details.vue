@@ -1,5 +1,6 @@
 <template>
 <div>
+
 <div class="mx-3 card bg-dark mb-3 py-3">
     <div class="row ">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
@@ -48,7 +49,7 @@
                 </div>
             </div>
 </div>
-<Carousel :similarList="similarList"/>
+<Carousel :similarList="similarList" :type="type" />
 </div>
 </template>
 
@@ -56,16 +57,17 @@
 import Reviews from "../components/Reviews.vue";
 import Carousel from "../components/Carousel.vue";
 
+
 export default {
   name: "Details",
   components: {
     Reviews,
     Carousel,
+  
   },
 
   data() {
     return {
-
       similarList: [],
       movie: {},
       movieList: [],
@@ -115,9 +117,8 @@ export default {
       return l;
     },
     convertDate() {
-      let date;
-
-      if (this.type == "movie") {
+        let date;
+      if (this.$route.params.type == "movie") {
         date = this.movie.release_date;
       } else {
         date = this.movie.first_air_date;
@@ -130,11 +131,28 @@ export default {
 
   mounted() {
     fetch(
-      "https://api.themoviedb.org/3/"+this.$route.params.type+"/"+this.$route.params.id+"/similar?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US&page=1"
+      "https://api.themoviedb.org/3/" +
+        this.$route.params.type +
+        "/" +
+        this.$route.params.id +
+        "/similar?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US&page=1"
     )
       .then((response) => response.json())
       .then((data) => {
         this.similarList = data.results;
+        // eslint-disable-next-line no-debugger
+        debugger
+      });
+      
+    fetch(
+      "https://api.themoviedb.org/3/"+this.$route.params.type+"/" +
+        this.$route.params.id +"?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        this.movie = data;
+       
+        
       });
   },
 };
