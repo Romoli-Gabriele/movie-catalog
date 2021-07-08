@@ -1,10 +1,10 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="nav">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <router-link class="navbar-brand" :to="{name : 'Home'}">
-          <a><i class="fas fa-film logo"></i></a>
-        </router-link>
+        <a class="navbar-brand" href="#">
+          <i class="fas fa-film logo"></i>
+        </a>
         <router-link class="no navbar-brand title fs-1 text-danger" :to="{ name: 'Home' }">Movie Catalog</router-link>
         <button
           class="navbar-toggler"
@@ -24,7 +24,8 @@
                 @click="SwitchTo(true)"
                 :to="{ name: 'Home' }"
                 class="home-link nav-link no-border bg-dark text-light fs-2"
-                >Film</router-link>
+                >Film</router-link
+>
             </li>
             <li class="nav-item">
               <router-link
@@ -112,6 +113,6 @@ export default {
 }
 
 .exact-active{
-  color: red !important;
+  color: #DC3545 !important;
 }
 </style>
