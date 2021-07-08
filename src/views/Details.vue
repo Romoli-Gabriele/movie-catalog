@@ -1,53 +1,86 @@
 <template>
-<div>
-
-<div class="mx-3 card bg-dark mb-3 py-3">
-    <div class="row ">
+  <div>
+    <div class="mx-3 card bg-dark mb-3 py-3">
+      <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
-              <img class="mx-auto d-block w-100 px-3" :src="'https://image.tmdb.org/t/p/original/'+movie.poster_path">
+          <img
+            class="mx-auto d-block w-100 px-3"
+            :src="'https://image.tmdb.org/t/p/original/' + movie.poster_path"
+          />
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
-            <div class="card-body">
-                <h5 class="card-title text-danger home-link fs-3">{{ movie.name }}</h5>
-                <h5 class="card-title text-danger home-link fs-3">{{ movie.title }}</h5>
-                <p class="card-title text-light home-link fs-4">{{movie.tagline}}</p>
-                <p class="card-text">
-                 <span class="badge bg-info mx-1 my-2 text-dark" :key="p.id" v-for="p in movie.genres">{{p.name}}</span>
-                <ul class="list-group list-group-flush bg-dark">
-                    <li class="list-group-item bg-dark text-light"><b>Review: </b> 
-                        <Reviews :value="movie.vote_average" :full="'fa-star'" :half="'fa-star-half-alt'" :empty="'fa-star'" :color="'text-warning'" :type="true" />
-                        <p>({{Math.round(movie.vote_average/2 * 10) / 10}})</p>
-                        <br>
-                        <b>Number of reviews:</b> {{this.movie.vote_count}}
-                    </li>
-                    <li class="list-group-item bg-dark text-light"><b>Popularity: </b>
-                        <Reviews :value="movie.popularity" :full="'fa-heart'" :half="'fa-heart-broken'" :empty="'fa-heart'" :color="'text-danger'" :type="false" />
-                        <p>({{Math.round(movie.popularity/1000 * 10) / 10}})</p>
-                    </li>
-                    <li class="list-group-item bg-dark text-light">
-                        <b>Description: </b>
-                        <br>
-                        <p>{{movie.overview}}</p>
-                    </li>
-                    <li class="text-light list-group-item bg-dark">
-                        <b>Status:</b> {{this.movie.status}}
-                        <br>
-                        <b>Release date: </b> {{this.convertDate()}}
-                        <br>
-                        <b>Original language: </b> {{this.language(movie.original_language)}}
-                        <br>
-                        <br>
-                        <br>
-                        <button type="button" class="btn btn-outline-warning "><a :href="movie.homepage" class="mostra-dettagli-button" target="_blank">Watch Now!</a></button>
-                    </li>
-                </ul>
-                </p>
-            </div>
-                </div>
-            </div>
-</div>
-<Carousel :similarList="similarList" :type="type" />
-</div>
+          <div class="card-body">
+            <h5 class="card-title text-danger home-link fs-2">
+              {{ movie.name }}
+            </h5>
+            <h5 class="card-title text-danger home-link fs-2">
+              {{ movie.title }}
+            </h5>
+            <p class="card-title text-light home-link fs-4">
+              {{ movie.tagline }}
+            </p>
+            <span
+              class="badge bg-info mx-1 my-2 text-dark"
+              :key="p.id"
+              v-for="p in movie.genres"
+              >{{ p.name }}</span
+            >
+            <p class="text-light">
+              <b>Review: </b>
+              <Reviews
+                :value="movie.vote_average"
+                :full="'fa-star'"
+                :half="'fa-star-half-alt'"
+                :empty="'fa-star'"
+                :color="'text-warning'"
+                :type="true"
+              />
+              ({{ Math.round((movie.vote_average / 2) * 10) / 10 }})
+            </p>
+            <p class="text-light">
+              <b>Number of reviews:</b> {{ this.movie.vote_count }}
+            </p>
+            <p class="text-light">
+              <b>Popularity: </b>
+              <Reviews
+                :value="movie.popularity"
+                :full="'fa-heart'"
+                :half="'fa-heart-broken'"
+                :empty="'fa-heart'"
+                :color="'text-danger'"
+                :type="false"
+              />
+              ({{ Math.round((movie.popularity / 1000) * 10) / 10 }})
+            </p>
+            <p class="text-light">
+              <b>Description: </b>
+              <br />
+              {{ movie.overview }}
+            </p>
+            <p class="text-light"><b>Status:</b> {{ this.movie.status }}</p>
+            <p class="text-light">
+              <b>Release date: </b> {{ this.convertDate() }}
+            </p>
+            <p class="text-light">
+              <b>Original language: </b>
+              {{ this.language(movie.original_language) }}
+            </p>
+            <br />
+            <br />
+            <button type="button" class="btn btn-outline-warning">
+              <a
+                :href="movie.homepage"
+                class="mostra-dettagli-button"
+                target="_blank"
+                >Watch Now!</a
+              >
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <Carousel :similarList="similarList" :type="type" />
+  </div>
 </template>
 
 <script>
