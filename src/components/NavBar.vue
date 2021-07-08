@@ -38,10 +38,20 @@
           </ul>
           <form class="d-flex">
             <input
+              v-if="mOs" :tipo="true"
               class="form-control me-2 bg-dark text-light"
               type="search"
               placeholder="Search a movie"
               aria-label="Search"
+
+            />
+            <input
+              v-else
+              class="form-control me-2 bg-dark text-light"
+              type="search"
+              placeholder="Search a TV Series"
+              aria-label="Search"
+
             />
             <button class="btn btn-outline-success submit-button" type="submit">
               Search
@@ -102,7 +112,6 @@ export default {
   border: 1px solid #fff;
   border-radius: 0;
   margin-right: 0px !important;
-  border-right: none;
 }
 
 .form-control:focus{
@@ -113,6 +122,7 @@ export default {
 
 .submit-button{
   border-radius: 0;
+  border-left: none;
 }
 
 
