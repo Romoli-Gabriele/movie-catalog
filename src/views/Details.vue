@@ -12,6 +12,7 @@
                 <h5 class="card-title text-danger home-link fs-3">{{ movie.title }}</h5>
                 <p class="card-title text-light home-link fs-4">{{movie.tagline}}</p>
                 <p class="card-text">
+                 <span class="badge bg-info mx-1 my-2 text-dark" :key="p.id" v-for="p in movie.genres">{{p.name}}</span>
                 <ul class="list-group list-group-flush bg-dark">
                     <li class="list-group-item bg-dark text-light"><b>Review: </b> 
                         <Reviews :value="movie.vote_average" :full="'fa-star'" :half="'fa-star-half-alt'" :empty="'fa-star'" :color="'text-warning'" :type="true" />
@@ -37,12 +38,6 @@
                         <br>
                         <button type="button" class="btn btn-outline-warning "><a :href="movie.homepage" class="mostra-dettagli-button" target="_blank">Watch Now!</a></button>
                     </li>
-                    <li class="list-group-item bg-dark text-light">
-                        <ul>
-                            <b>Genres: </b>
-                            <li class="bg-dark text-light" :key="p.id" v-for="p in movie.genres">{{p.name}}</li>
-                        </ul>
-                    </li>
                 </ul>
                 </p>
             </div>
@@ -57,13 +52,11 @@
 import Reviews from "../components/Reviews.vue";
 import Carousel from "../components/Carousel.vue";
 
-
 export default {
   name: "Details",
   components: {
     Reviews,
     Carousel,
-  
   },
 
   data() {
@@ -117,7 +110,7 @@ export default {
       return l;
     },
     convertDate() {
-        let date;
+      let date;
       if (this.$route.params.type == "movie") {
         date = this.movie.release_date;
       } else {
@@ -127,48 +120,47 @@ export default {
       date = date.split("-").reverse().join("/");
       return date;
     },
-    callDati(){
+    callDati() {
       fetch(
-      "https://api.themoviedb.org/3/" +
-        this.$route.params.type +
-        "/" +
-        this.$route.params.id +
-        "/similar?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US&page=1"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        this.similarList = data.results;
-        // eslint-disable-next-line no-debugger
-        debugger
-      });
-      
-    fetch(
-      "https://api.themoviedb.org/3/"+this.$route.params.type+"/" +
-        this.$route.params.id +"?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        this.movie = data;
-       
-        
-      });
+        "https://api.themoviedb.org/3/" +
+          this.$route.params.type +
+          "/" +
+          this.$route.params.id +
+          "/similar?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US&page=1"
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          this.similarList = data.results;
+          // eslint-disable-next-line no-debugger
+          debugger;
+        });
+
+      fetch(
+        "https://api.themoviedb.org/3/" +
+          this.$route.params.type +
+          "/" +
+          this.$route.params.id +
+          "?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US"
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          this.movie = data;
+        });
     },
-    
   },
-  
 
   mounted() {
     this.callDati();
   },
-  watch: { 
-     '$route.params.search': {
-        handler: function(search) {
-           console.log(search)
-           this.callDati();
-        },
-        deep: true,
-        immediate: true
-      }
-}
+  watch: {
+    "$route.params.search": {
+      handler: function (search) {
+        console.log(search);
+        this.callDati();
+      },
+      deep: true,
+      immediate: true,
+    },
+  },
 };
 </script>

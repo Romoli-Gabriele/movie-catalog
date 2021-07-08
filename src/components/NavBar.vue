@@ -1,6 +1,12 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <!-- <nav id="nav">
+        <router-link :to="{name: 'Home'}">ciao</router-link>
+        <router-link :to="{name: 'Series'}">cd</router-link>
+    </nav> -->
+        
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="nav">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
           <i class="fas fa-film logo"></i>
@@ -30,18 +36,11 @@
             <li class="nav-item">
               <router-link
                 @click="SwitchTo(false)"
-                class="nav-link no-border bg-dark text-light fs-2 home-link"
+                class="nav-link no-border bg-dark fs-2 text-light home-link"
                 :to="{ name: 'Series' }"
                 >Serie</router-link
               >
             </li>
-            <a
-              class="nav-link disabled home-link fs-2 text-warning"
-              href="#"
-              tabindex="-1"
-              aria-disabled="true"
-              >Work in Progress</a
-            >
           </ul>
           <form class="d-flex">
             <input
@@ -65,6 +64,7 @@
         </div>
       </div>
     </nav>
+
     <br />
     <br />
   </div>
@@ -88,6 +88,7 @@ export default {
 <style scoped>
 .logo {
   font-size: 20mm;
+  color:#fff;
 }
 .home-link {
   font-family: "Shadows Into Light", cursive;
@@ -96,10 +97,8 @@ export default {
 }
 
 .home-link:hover {
-  color: #ff0000;
+  color: #DC3545;
 }
-
-
 
 .form-control {
   border: 1px solid #fff;
@@ -108,7 +107,7 @@ export default {
 }
 
 .form-control:focus {
-  border: 1px solid #ff0000;
+  border: 1px solid #ffdd00;
   outline: none;
   box-shadow: none;
 }
@@ -116,5 +115,9 @@ export default {
 .submit-button {
   border-radius: 0;
   border-left: none;
+}
+
+.exact-active{
+  color: red !important;
 }
 </style>
