@@ -4,7 +4,7 @@
 <div class="mx-3 card bg-dark mb-3 py-3">
     <div class="row ">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
-              <img class="mx-auto d-block w-100 ps-5" :src="'https://image.tmdb.org/t/p/original/'+movie.poster_path">
+              <img class="mx-auto d-block w-100 px-3" :src="'https://image.tmdb.org/t/p/original/'+movie.poster_path">
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
             <div class="card-body">
@@ -133,8 +133,6 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           this.similarList = data.results;
-          // eslint-disable-next-line no-debugger
-          debugger;
         });
 
       fetch(
