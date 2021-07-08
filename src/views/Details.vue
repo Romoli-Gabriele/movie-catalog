@@ -127,10 +127,8 @@ export default {
       date = date.split("-").reverse().join("/");
       return date;
     },
-  },
-
-  mounted() {
-    fetch(
+    callDati(){
+      fetch(
       "https://api.themoviedb.org/3/" +
         this.$route.params.type +
         "/" +
@@ -154,6 +152,23 @@ export default {
        
         
       });
+    },
+    
   },
+  
+
+  mounted() {
+    this.callDati();
+  },
+  watch: { 
+     '$route.params.search': {
+        handler: function(search) {
+           console.log(search)
+           this.callDati();
+        },
+        deep: true,
+        immediate: true
+      }
+}
 };
 </script>

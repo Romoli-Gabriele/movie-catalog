@@ -13,7 +13,7 @@
     
     <div v-show="dOrL" :key="movie.id" v-for="movie in movieList" class="py-0">
         <div  class="card bg-dark mb-3">
-            <img :src="'https://image.tmdb.org/t/p/w500/'+image(calcIndex(movie))" @click="this.imgSwitch(calcIndex(movie))" class="card-img-top" alt="...">
+            <img :src="'https://image.tmdb.org/t/p/w500/'+image(calcIndex(movie))" @click="imgSwitch(calcIndex(movie))" class="card-img-top" alt="...">
             
             <div class="card-body">
                 <h5 class="card-title text-danger home-link fs-3">{{ movie.name }}</h5>

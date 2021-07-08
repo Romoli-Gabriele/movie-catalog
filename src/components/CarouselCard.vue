@@ -12,8 +12,8 @@
         <br />
       </p>
 
-      <p v-show="collapse">{{ description(movie.overview) }} ...</p>
-      <p v-show="collapse == false">{{ movie.overview }}</p>
+      <p v-show="collapse" class="text-light">{{ description(movie.overview) }} ...</p>
+      <p v-show="collapse == false" class="text-light">{{ movie.overview }}</p>
       <button
         v-show="collapse"
         class="btn btn-outline-success no-border text-light me-4"
@@ -30,7 +30,7 @@
       >
         Show less
       </button>
-      <router-link :to="{ name: 'Details', params: { id: movie.id, type: $route.params.type} }" target="_blank">
+      <router-link :to="{ name: 'Details', params: { id: movie.id, type: $route.params.type} }">
                         <button type="button"  class="btn btn-outline-info">
                         Details
                         </button>
