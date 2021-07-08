@@ -21,6 +21,7 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <router-link
+                @click="SwitchTo(true)"
                 :to="{ name: 'Home' }"
                 class="home-link nav-link no-border bg-dark text-light fs-2"
                 >Film</router-link
@@ -28,6 +29,7 @@
             </li>
             <li class="nav-item">
               <router-link
+                @click="SwitchTo(false)"
                 class="nav-link no-border bg-dark text-light fs-2 home-link"
                 :to="{ name: 'Series' }"
                 >Serie</router-link
@@ -43,12 +45,11 @@
           </ul>
           <form class="d-flex">
             <input
-              v-if="mOs" :tipo="true"
+              v-if="mOs === true"
               class="form-control me-2 bg-dark text-light"
               type="search"
-              placeholder="Search"
+              placeholder="Search a movie"
               aria-label="Search"
-
             />
             <input
               v-else
@@ -56,7 +57,6 @@
               type="search"
               placeholder="Search a TV Series"
               aria-label="Search"
-
             />
             <button class="btn btn-outline-success" type="submit">
               Search
@@ -72,14 +72,17 @@
 <script>
 export default {
   name: "NavBar",
-  components: {
-  },
+  components: {},
   data() {
     return {
       mOs: true,
     };
   },
-  methods: {},
+  methods: {
+    SwitchTo(t) {
+      this.mOs = t;
+    },
+  },
 };
 </script>
 <style scoped>
@@ -96,23 +99,20 @@ export default {
   color: #ff0000;
 }
 
-.form-control{
+.form-control {
   border: 1px solid #fff;
   border-radius: 0;
   margin-right: 0px !important;
 }
 
-.form-control:focus{
+.form-control:focus {
   border: 1px solid #ff0000;
   outline: none;
   box-shadow: none;
 }
 
-.submit-button{
+.submit-button {
   border-radius: 0;
   border-left: none;
 }
-
-
-
 </style>

@@ -1,17 +1,14 @@
 <template>
-  <NavBar />
   <HomePage :tipo="true" />
   
 </template>
 <script>
 import HomePage from "../components/HomePage.vue";
-import NavBar from "../components/NavBar.vue";
 
 export default {
   name: "Home",
   components: {
     HomePage,
-    NavBar,
   }
   }
 </script>
