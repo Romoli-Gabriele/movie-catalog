@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
           <i class="fas fa-film logo"></i>
@@ -38,12 +38,12 @@
           </ul>
           <form class="d-flex">
             <input
-              class="form-control me-2"
+              class="form-control me-2 bg-dark text-light"
               type="search"
-              placeholder="Search"
+              placeholder="Search a movie"
               aria-label="Search"
             />
-            <button class="btn btn-outline-success" type="submit">
+            <button class="btn btn-outline-success submit-button" type="submit">
               Search
             </button>
           </form>
@@ -97,5 +97,24 @@ export default {
 .home-link:hover{
   color: #ff0000;
 }
+
+.form-control{
+  border: 1px solid #fff;
+  border-radius: 0;
+  margin-right: 0px !important;
+  border-right: none;
+}
+
+.form-control:focus{
+  border: 1px solid #ff0000;
+  outline: none;
+  box-shadow: none;
+}
+
+.submit-button{
+  border-radius: 0;
+}
+
+
 
 </style>
