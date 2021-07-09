@@ -18,15 +18,16 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      movieList: [],
-      genresList: [],
-    };
-  },
+
 
   mounted() {
     if (this.tipo) {
+      /*
+      movieService
+        .getTrending("movie")
+        .then((data) => (this.movieList = data.results));
+      */
+
       fetch(
         "https://api.themoviedb.org/3/trending/movie/week?api_key=6f9286d54de4891ea7a5c91779e09786"
       )
