@@ -1,6 +1,6 @@
 <template>
  <br />
-  <trending-cards :tipo="tv" />
+  <trending-cards :tipo="type" />
 </template>
 <script>
 import TrendingCards from '../components/TrendingCards.vue';
@@ -10,6 +10,11 @@ export default {
   components: {
     TrendingCards
   },
+  data(){
+    return{
+      type: "tv",
+    }
+  }
   
 };
 </script>
