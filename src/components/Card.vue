@@ -44,14 +44,14 @@
 </template>
 
 <script>
-//import Reviews from "./Reviews.vue";
+import Reviews from "./Reviews.vue";
 import { languageService } from "../services/languageService";
 import { genreService } from "../services/genreService";
 
 export default {
   name: "Card",
   components: {
-    //Reviews,
+    Reviews,
   },
   props: {
     movie: {

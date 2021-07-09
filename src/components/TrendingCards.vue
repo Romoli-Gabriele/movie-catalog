@@ -18,29 +18,6 @@
     
   </FakeCard>
   </div>
-  <!-- <div>
-    <div
-      class="
-        row
-        row-cols-xs-1
-        row-cols-sm-1
-        row-cols-md-1
-        row-cols-lg-2
-        row-cols-xl-4
-        row-cols-xxl-5
-        mx-3
-      "
-    >
-      <div
-        v-show="dOrL"
-        :key="movie.id"
-        v-for="movie in movieList"
-        class="py-0"
-      >
-        <Card :movie="movie"></Card>
-      </div>
-    </div>
-  </div> -->
 </template>
 
 <script>

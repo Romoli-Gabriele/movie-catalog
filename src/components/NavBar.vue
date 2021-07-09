@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar class="navbar navbar-expand-lg navbar-dark bg-dark wrapper">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
           <i class="fas fa-film logo"></i>
@@ -57,7 +57,7 @@
           </form>
         </div>
       </div>
-    </b-navbar>
+    </nav>
 
     <br />
     <br />
@@ -80,11 +80,6 @@ export default {
 };
 </script>
 <style>
-
-.wrapper {
-  position: sticky;
-  top: 0;
-}
 
 .logo {
   font-size: 20mm;
