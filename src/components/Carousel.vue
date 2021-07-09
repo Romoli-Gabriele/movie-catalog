@@ -39,13 +39,6 @@
       ></button>
     </div>
     <div class="carousel-inner container">
-      <div class="carousel-item active" data-bs-interval="4000">
-        <div class="row">
-          <div v-for="f in 3" :key="f" class="col-4">
-            <CarouselCard :movie="similarList[similarList.length - f]" :type="type"></CarouselCard>
-          </div>
-        </div>
-      </div>
       <div
         v-for="k in Math.round(similarList.length / 3)"
         :key="k"
@@ -56,6 +49,16 @@
           <div v-for="f in 3" :key="f" class="col-4">
             <CarouselCard
               :movie="similarList[f + k * 2]"
+              :type="type"
+            ></CarouselCard>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item active" data-bs-interval="4000">
+        <div class="row">
+          <div v-for="l in 3" :key="l" class="col-4">
+            <CarouselCard
+              :movie="similarList[similarList.length - l]"
               :type="type"
             ></CarouselCard>
           </div>
@@ -81,6 +84,11 @@ export default {
       type: String,
       required: true,
     },
+  },
+  data() {
+    return {
+      primo: true,
+    };
   },
 };
 </script>
