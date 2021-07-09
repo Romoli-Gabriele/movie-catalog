@@ -1,5 +1,5 @@
 <template>
-  <div v-for="movie in movielist" :key="movie.id">
+  <div v-for="movie in movieList" :key="movie.id">
     <Card :movie="movie"></Card>
   </div>
   <FakeCard @load-more="loadMoreContent()"></FakeCard>
@@ -31,7 +31,7 @@
 <script>
 import Card from "./Card.vue";
 import { apiService } from "../services/apiService";
-import FakeCard from "../components/FakeCard.vue"
+import FakeCard from "../components/FakeCard.vue";
 
 export default {
   name: "TrendingCards",
@@ -55,13 +55,11 @@ export default {
   methods: {
     loadMoreContent() {
       this.page++;
-
       apiService.getMovieFetch(this.tipo, this.page).then((data) => {
-        this.movieList.concat(data.results);
+        this.movieList = [...this.movieList, ...data.results];
       });
     },
   },
-
 };
 </script>
 
