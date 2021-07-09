@@ -1,6 +1,8 @@
 <template>
-  <div class="scrolling-component" ref="scrollComponent"></div>
-
+  <div v-for="movie in movielist" :key="movie.id">
+    <Card :movie="movie"></Card>
+  </div>
+  <FakeCard @load-more="loadMoreContent()"></FakeCard>
   <!-- <div>
     <div
       class="
@@ -28,31 +30,38 @@
 
 <script>
 import Card from "./Card.vue";
+import { apiService } from "../services/apiService";
+import FakeCard from "../components/FakeCard.vue"
 
 export default {
   name: "TrendingCards",
   components: {
     Card,
+    FakeCard,
   },
-
+  props: {
+    tipo: {
+      type: String,
+      default: "movie",
+    },
+  },
   data() {
     return {
-      dOrL: true,
+      page: 0,
+      movieList: [],
     };
   },
 
   methods: {
-    /*
-    Dettagli(movie) {
-      if (this.dOrL) {
-        this.dOrL = false;
-        this.type = movie.media_type;
-        this.id = movie.id;
-      } else {
-        this.dOrL = true;
-      }
-    },*/
+    loadMoreContent() {
+      this.page++;
+
+      apiService.getMovieFetch(this.tipo, this.page).then((data) => {
+        this.movieList.concat(data.results);
+      });
+    },
   },
+
 };
 </script>
 

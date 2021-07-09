@@ -1,14 +1,19 @@
 <template>
-  <HomePage :tipo="true" />
-  
-</template>
+
+  <TrendingCards :tipo="type" />
+  </template>
 <script>
-import HomePage from "../components/HomePage.vue";
+import TrendingCards from '../components/TrendingCards.vue';
 
 export default {
   name: "Home",
   components: {
-    HomePage,
+    TrendingCards,
+  },
+  data(){
+    return{
+    type: "movie",
+    }
   }
   }
 </script>

@@ -1,5 +1,15 @@
 <template>
-     <div  class="card bg-dark mb-3">
+
+    <div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+
+     <!-- <div  class="card bg-dark mb-3">
             <img :src="'https://image.tmdb.org/t/p/w500/'+image()" @click="imgSwitch()" class="card-img-top" alt="...">
             
             <div class="card-body">
@@ -40,18 +50,18 @@
                 </ul>
                 </p>
             </div>
-        </div>
+        </div> -->
 </template>
 
 <script>
-import Reviews from "./Reviews.vue";
+//import Reviews from "./Reviews.vue";
 import { languageService } from "../services/languageService";
 import { genreService } from "../services/genreService";
 
 export default {
   name: "Card",
   components: {
-    Reviews,
+    //Reviews,
   },
   props: {
     movie: {

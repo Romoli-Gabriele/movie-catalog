@@ -1,14 +1,14 @@
 <template>
  <br />
-  <HomePage :tipo="false" />
+  <trending-cards :tipo="tv" />
 </template>
 <script>
-import HomePage from "../components/HomePage.vue";
+import TrendingCards from '../components/TrendingCards.vue';
 
 export default {
   name: "Series",
   components: {
-    HomePage,
+    TrendingCards
   },
   
 };
