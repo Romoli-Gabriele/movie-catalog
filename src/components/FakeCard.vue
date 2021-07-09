@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <button @click="$emit('loadMore')">
-            load more content
+            load more contenttttttttt
         </button>
     </div>
 </template>
