@@ -1,14 +1,14 @@
 <template>
 <div v-for="i in 4" :key="i">
   <intersect @enter="$emit('loadMore')">
-    <div class="card mx-auto my-5" style="max-width: 20rem">
+    <div class="card mx-auto my-5 bg-dark" style="max-width: 20rem">
       <div class="card-body">
-        <div class="avatar-placeholder placeholder rounded-circle"></div>
-        <div class="text-placeholder placeholder w-75"></div>
-        <div class="text-placeholder placeholder w-50"></div>
-        <div class="text-placeholder placeholder w-75"></div>
-        <div class="text-placeholder placeholder w-100"></div>
-        <div class="text-placeholder placeholder w-100"></div>
+        <div class="avatar-placeholder placeholder bg-secondary rounded-circle"></div>
+        <div class="text-placeholder placeholder bg-danger w-75"></div>
+        <div class="text-placeholder placeholder bg-danger w-50"></div>
+        <div class="text-placeholder placeholder bg-danger w-75"></div>
+        <div class="text-placeholder placeholder bg-danger w-100"></div>
+        <div class="text-placeholder placeholder bg-danger w-100"></div>
       </div>
     </div>
   </intersect>

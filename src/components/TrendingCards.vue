@@ -57,7 +57,7 @@ export default {
   props: {
     tipo: {
       type: String,
-      default: "movie",
+      required: true,
     },
   },
   data() {
