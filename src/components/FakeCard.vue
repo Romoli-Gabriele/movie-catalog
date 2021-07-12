@@ -1,6 +1,6 @@
 <template>
 <div v-for="i in 4" :key="i">
-  <intersect @enter="$emit('loadMore')">
+  <intersect @change='loadMoreEvent()' @enter="isVisible = true" @leave="isVisible = false">
     <div class="card mx-auto my-5 bg-dark" style="max-width: 20rem">
       <div class="card-body">
         <div class="avatar-placeholder placeholder bg-secondary rounded-circle"></div>
@@ -19,12 +19,21 @@
 import Intersect from "vue-intersect";
 
 export default {
+  emits: ["loadMore"],
+  
   components: { Intersect },
   data() {
     return {
-      msg: "I will change",
+      isVisible: true
     };
   },
+  methods:{
+    loadMoreEvent(){
+      if(this.isVisible){
+        this.$emit('loadMore')
+      }
+    }
+  }
 };
 </script> 
 

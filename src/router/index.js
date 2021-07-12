@@ -1,7 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
+import pageNotFound from '../views/pageNotFound.vue'
 
 const routes = [
+  {
+    path: '/:catchAll(.*)*',
+    name: "pageNotFound",
+    component: pageNotFound
+  },
   {
     path: '/',
     name: 'Home',
