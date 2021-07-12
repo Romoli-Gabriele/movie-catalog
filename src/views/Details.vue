@@ -26,7 +26,7 @@
               >{{ p.name }}</span
             >
             <p class="text-light">
-              <b>Review: </b>
+              <b>Review:</b>
               <Reviews
                 :value="movie.vote_average"
                 :full="'fa-star'"

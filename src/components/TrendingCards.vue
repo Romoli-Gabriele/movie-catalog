@@ -34,6 +34,10 @@ export default {
       type: String,
       required: true,
     },
+    language:{
+      type: String,
+      required: true,
+    }
   },
   data() {
     return {
@@ -45,7 +49,7 @@ export default {
   methods: {
     loadMoreContent() {
       this.page++;
-      apiService.getMovieFetch(this.tipo, this.page).then((data) => {
+      apiService.getMovieFetch(this.tipo, this.page, this.language).then((data) => {
         this.movieList = [...this.movieList, ...data.results];
       });
     },
