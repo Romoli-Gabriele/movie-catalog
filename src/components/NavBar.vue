@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
           <i class="fas fa-film logo"></i>
@@ -59,8 +59,12 @@
       </div>
     </nav>
 
-    <br />
-    <br />
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
   </div>
 </template>
 <script>
@@ -115,4 +119,5 @@ export default {
 .exact-active{
   color: #DC3545 !important;
 }
+
 </style>

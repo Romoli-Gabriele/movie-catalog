@@ -1,5 +1,4 @@
 <template>
-
   <TrendingCards :tipo="type" />
   </template>
 <script>
