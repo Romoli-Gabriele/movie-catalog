@@ -1,6 +1,5 @@
 <template>
-<div v-for="i in 4" :key="i">
-  <intersect @change='loadMoreEvent()' @enter="isVisible = true" @leave="isVisible = false">
+<intersect @change='loadMoreEvent()' @enter="isVisible = true" @leave="isVisible = false">
     <div class="card mx-auto my-5 bg-dark" style="max-width: 20rem">
       <div class="card-body">
         <div class="avatar-placeholder placeholder bg-secondary rounded-circle"></div>
@@ -12,6 +11,17 @@
       </div>
     </div>
   </intersect>
+<div v-for="i in 3" :key="i">
+    <div class="card mx-auto my-5 bg-dark" style="max-width: 20rem">
+      <div class="card-body">
+        <div class="avatar-placeholder placeholder bg-secondary rounded-circle"></div>
+        <div class="text-placeholder placeholder bg-danger w-75"></div>
+        <div class="text-placeholder placeholder bg-danger w-50"></div>
+        <div class="text-placeholder placeholder bg-danger w-75"></div>
+        <div class="text-placeholder placeholder bg-danger w-100"></div>
+        <div class="text-placeholder placeholder bg-danger w-100"></div>
+      </div>
+    </div>
 </div>
 </template>
 
