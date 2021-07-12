@@ -17,8 +17,8 @@
                     <li class="list-group-item bg-dark text-light">
                         <b>Description: </b>
                         <br>
-                        <p v-show="show == false">{{description(movie.overview, true)}}   ...</p>
-                        <p v-show="show">{{movie.overview}}</p>
+                        <p v-show="show == false">{{ description(movie.overview, true)}}   ...</p>
+                        <p v-show="show">{{ movie.overview}}</p>
                         <button class="btn btn-outline-success no-border text-light me-4" style="display: inline" @click="toggleShow()">Show {{moreOrLess()}}</button>
                         <router-link :to="{ name: 'Details', params: { id: movie.id, type: movie.media_type} }">
                         <button type="button" class="btn btn-outline-info">

@@ -28,10 +28,28 @@ const availableLanguages = [{
         english_name: "Spanish",
         name: "Español",
     },
+];
+
+const availableTranslations = [
+    {
+        iso_639_1: "it",
+        english_name: "Italian",
+        name: "Italiano",
+    },
+    {
+        iso_639_1: "en",
+        english_name: "English",
+        name: "English",
+    },
 ]
+
 
 export const languageService = {
     getLanguageById(isoLanguage) {
         return availableLanguages.find(l => l.iso_639_1 === isoLanguage)
+    },
+    
+    getAvailableTranslation(isoLanguage){
+        return availableTranslations.find(l => l.iso_639_1 === isoLanguage)
     }
 }

@@ -5,7 +5,11 @@
         <a class="navbar-brand" href="#">
           <i class="fas fa-film logo"></i>
         </a>
-        <router-link class="no navbar-brand title fs-1 text-danger" :to="{ name: 'Home' }">Movie Catalog</router-link>
+        <router-link
+          class="navbar-brand title fs-1 text-danger"
+          :to="{ name: 'Home' }"
+          >Movie Catalog</router-link
+        >
         <button
           class="navbar-toggler"
           type="button"
@@ -23,19 +27,36 @@
               <router-link
                 @click="SwitchTo(true)"
                 :to="{ name: 'Home' }"
-                class="home-link nav-link no-border bg-dark text-light fs-2"
+                class="home-link nav-link text-light fs-2"
                 >Film</router-link
->
+              >
             </li>
             <li class="nav-item">
               <router-link
                 @click="SwitchTo(false)"
-                class="nav-link no-border bg-dark fs-2 text-light home-link"
+                class="nav-link fs-2 text-light home-link"
                 :to="{ name: 'Series' }"
                 >Serie</router-link
               >
             </li>
           </ul>
+
+          <div class="dropdown me-4">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Seleziona lingua
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" @click="cambioLingua('en')">Inglese</a></li>
+              <li><a class="dropdown-item" @click="cambioLingua('it')">Italiano</a></li>
+            </ul>
+          </div>
+
           <form class="d-flex">
             <input
               v-if="mOs === true"
@@ -59,14 +80,12 @@
       </div>
     </nav>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-
-
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
   </div>
 </template>
 <script>
@@ -82,14 +101,18 @@ export default {
     SwitchTo(t) {
       this.mOs = t;
     },
+    cambioLingua(lingua) {
+      localStorage.setItem("language", lingua);
+      window.location.reload();
+      console.log(lingua);
+    },
   },
 };
 </script>
 <style>
-
 .logo {
   font-size: 20mm;
-  color:#fff;
+  color: #fff;
 }
 .home-link {
   font-family: "Shadows Into Light", cursive;
@@ -98,7 +121,7 @@ export default {
 }
 
 .home-link:hover {
-  color: #DC3545;
+  color: #dc3545;
 }
 
 .form-control {
@@ -118,8 +141,7 @@ export default {
   border-left: none;
 }
 
-.exact-active{
-  color: #DC3545 !important;
+.exact-active {
+  color: #dc3545 !important;
 }
-
 </style>
