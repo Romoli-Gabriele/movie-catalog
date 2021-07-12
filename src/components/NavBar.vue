@@ -36,7 +36,7 @@
                 @click="SwitchTo(false)"
                 class="nav-link fs-2 text-light home-link"
                 :to="{ name: 'Series' }"
-                >Serie</router-link
+                >Serie TV</router-link
               >
             </li>
           </ul>
