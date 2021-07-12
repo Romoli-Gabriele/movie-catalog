@@ -14,7 +14,7 @@
     <div v-for="movie in movieList" :key="movie.id">
       <Card :movie="movie"></Card>
     </div>
-    <FakeCard @load-more="loadMoreContent()" v-if="fakeCardVisible"> </FakeCard>
+    <FakeCard @load-more="loadMoreContent()"> </FakeCard>
   </div>
 </template>
 
@@ -39,7 +39,6 @@ export default {
     return {
       page: 0,
       movieList: [],
-      fakeCardVisible: false,
     };
   },
 
