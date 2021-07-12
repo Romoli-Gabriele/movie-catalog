@@ -13,7 +13,9 @@
         <br />
       </p>
 
-      <p v-show="collapse" class="text-light">{{ description(movie.overview) }} ...</p>
+      <p v-show="collapse" class="text-light">
+        {{ description(movie.overview) }} ...
+      </p>
       <p v-show="collapse == false" class="text-light">{{ movie.overview }}</p>
       <button
         v-show="collapse"
@@ -31,11 +33,14 @@
       >
         Show less
       </button>
-      <router-link :to="{ name: 'Details', params: { id: movie.id, type: $route.params.type} }">
-                        <button type="button"  class="btn btn-outline-info">
-                        Details
-                        </button>
-                        </router-link>
+      <router-link
+        :to="{
+          name: 'Details',
+          params: { id: movie.id, type: $route.params.type },
+        }"
+      >
+        <button type="button" @click="scrollUP" class="btn btn-outline-info">Details</button>
+      </router-link>
     </div>
   </div>
 </template>
@@ -60,7 +65,6 @@ export default {
     };
   },
   methods: {
-   
     description(s = "") {
       var r = s.slice(0, 70);
 
@@ -73,58 +77,57 @@ export default {
         this.collapse = true;
       }
     },
+    scrollUP(){
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   },
-
-  
 };
 </script>
 
 
 <style scoped>
-.home-link{
-    font-family: 'Shadows Into Light', cursive;
-    text-align: center;
+.home-link {
+  font-family: "Shadows Into Light", cursive;
+  text-align: center;
 }
-body{
-    background-color: black;
-    overflow-x: hidden;
-    margin: 0;
-    padding: 0;
+body {
+  background-color: black;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
-.home-img{
-    height: 3cm;
-    width: 2cm;
+.home-img {
+  height: 3cm;
+  width: 2cm;
 }
-.home-div{
-    margin: 1cm;
+.home-div {
+  margin: 1cm;
 }
-.no-border{
-    border: solid, gray, 2px;
+.no-border {
+  border: solid, gray, 2px;
 }
-.title{
-    font-family: 'Yellowtail', cursive; margin-right: 9mm;
-    font-size: 17mm;
+.title {
+  font-family: "Yellowtail", cursive;
+  margin-right: 9mm;
+  font-size: 17mm;
 }
-.marg{
-    margin-top: 5mm;
-    
-}
-
-.ali-r{
-    text-align: right;
+.marg {
+  margin-top: 5mm;
 }
 
-
-.mostra-dettagli-button{
-    text-decoration: none;
-    color: #fff;
+.ali-r {
+  text-align: right;
 }
 
-.mostra-dettagli-button:hover{
-    color: #fff;
-}
-.mar-l{
-    margin-left: 10mm;
+.mostra-dettagli-button {
+  text-decoration: none;
+  color: #fff;
 }
 
+.mostra-dettagli-button:hover {
+  color: #fff;
+}
+.mar-l {
+  margin-left: 10mm;
+}
 </style>
