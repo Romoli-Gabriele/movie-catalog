@@ -1,36 +1,79 @@
 <template>
-  <!-- <intersect
-    @change="loadMoreEvent"
-    @enter="onEnter"
-    @leave="onLeave"
-    v-if="!unmounted"
-    :key="id"
-    :threshold="[0, 0, 0, 0]"
-  > -->
-  <div class="card mx-auto my-5 bg-dark" style="max-width: 20rem" ref="loadMoreCards">
-    <div class="card-body">
-      <div
-        class="avatar-placeholder placeholder bg-secondary rounded-circle"
-      ></div>
-      <div class="text-placeholder placeholder bg-danger w-75"></div>
-      <div class="text-placeholder placeholder bg-danger w-50"></div>
-      <div class="text-placeholder placeholder bg-danger w-75"></div>
-      <div class="text-placeholder placeholder bg-danger w-100"></div>
-      <div class="text-placeholder placeholder bg-danger w-100"></div>
+
+    <div class="card mx-auto my-5 bg-dark" style="max-width: 20rem" ref="loadMoreCards">
+      <div class="card-body">
+        <div class="image-placeholder placeholder bg-secondary"></div>
+        <div class="title-placeholder placeholder w-75 bg-danger"></div>
+        <div
+          class="
+            review-popularity-description-placeholder
+            placeholder
+            w-50
+            bg-danger
+          "
+        ></div>
+        <div class="emoji-placeholder placeholder w-75 bg-danger"></div>
+        <div
+          class="
+            review-popularity-description-placeholder
+            placeholder
+            w-50
+            bg-danger
+          "
+        ></div>
+        <div class="emoji-placeholder placeholder w-75 bg-danger"></div>
+        <div
+          class="
+            review-popularity-description-placeholder
+            placeholder
+            w-50
+            bg-danger
+          "
+        ></div>
+        <div class="text-placeholder placeholder w-100 bg-danger"></div>
+        <div class="text-placeholder placeholder w-100 bg-danger"></div>
+        <div class="text-placeholder placeholder w-100 bg-danger"></div>
+          <span class="button-placeholder placeholder ms-2 me-3 bg-danger"></span>
+          <span class="button-placeholder placeholder ms-2 bg-danger"></span>
+      </div>
     </div>
-  </div>
-  <!-- </intersect> -->
+
   <div v-for="i in 3" :key="i">
     <div class="card mx-auto my-5 bg-dark" style="max-width: 20rem">
       <div class="card-body">
+        <div class="image-placeholder placeholder bg-secondary"></div>
+        <div class="title-placeholder placeholder w-75 bg-danger"></div>
         <div
-          class="avatar-placeholder placeholder bg-secondary rounded-circle"
+          class="
+            review-popularity-description-placeholder
+            placeholder
+            w-50
+            bg-danger
+          "
         ></div>
-        <div class="text-placeholder placeholder bg-danger w-75"></div>
-        <div class="text-placeholder placeholder bg-danger w-50"></div>
-        <div class="text-placeholder placeholder bg-danger w-75"></div>
-        <div class="text-placeholder placeholder bg-danger w-100"></div>
-        <div class="text-placeholder placeholder bg-danger w-100"></div>
+        <div class="emoji-placeholder placeholder w-75 bg-danger"></div>
+        <div
+          class="
+            review-popularity-description-placeholder
+            placeholder
+            w-50
+            bg-danger
+          "
+        ></div>
+        <div class="emoji-placeholder placeholder w-75 bg-danger"></div>
+        <div
+          class="
+            review-popularity-description-placeholder
+            placeholder
+            w-50
+            bg-danger
+          "
+        ></div>
+        <div class="text-placeholder placeholder w-100 bg-danger"></div>
+        <div class="text-placeholder placeholder w-100 bg-danger"></div>
+        <div class="text-placeholder placeholder w-100 bg-danger"></div>
+          <span class="button-placeholder placeholder ms-2 me-3 bg-danger"></span>
+          <span class="button-placeholder placeholder ms-2 bg-danger"></span>
       </div>
     </div>
   </div>
@@ -46,10 +89,13 @@ export default {
     const loadMoreCards = ref(null);
     const targetIsVisible = ref(false);
 
-    const { stop } = useIntersectionObserver(loadMoreCards, ([{ isIntersecting }]) => {
-      targetIsVisible.value = isIntersecting;
-      isIntersecting && emit("loadMore");
-    });
+    const { stop } = useIntersectionObserver(
+      loadMoreCards,
+      ([{ isIntersecting }]) => {
+        targetIsVisible.value = isIntersecting;
+        isIntersecting && emit("loadMore");
+      }
+    );
 
     return {
       stop,
@@ -57,61 +103,47 @@ export default {
       targetIsVisible,
     };
   },
-  mounted() {
-    // console.log("mounted");
-    // window.pippo = this.$refs.intersect;
-  },
-  unmounted() {
-    // console.log("unmounted");
-    // this.unmounted = true;
-  },
 
   components: {},
   data() {
-    return {
-      // rootElement: document.getElementById("app"),
-      // isVisible: true,
-      // firstRender: true,
-      // unmounted: false,
-    };
+    return {};
   },
-  //  methods: {
-  //     loadMoreEvent() {
-  //       // eslint-disable-next-line no-debugger
-  //       debugger;
-  //       if (this.isVisible == true || this.firstRender == true) {
-  //         this.$emit("loadMore");
-
-  //         this.firstRender = false;
-  //       }
-  //     },
-  //     onEnter() {
-  //       // eslint-disable-next-line no-debugger
-  //       debugger;
-  //       this.isVisible = true;
-  //     },
-  //     onLeave() {
-  //       // eslint-disable-next-line no-debugger
-  //       debugger;
-  //       this.isVisible = false;
-  //     },
-  //   },
 };
 </script> 
 
 
 
 <style scoped>
-.avatar-placeholder {
-  float: left;
-  width: 48px;
-  height: 48px;
-  margin-right: 12px;
+.image-placeholder {
+  width: 16rem;
+  height: 20rem;
+  margin-bottom: 10px;
+}
+
+.title-placeholder {
+  height: 15px;
+  margin-bottom: 15px;
+}
+
+.review-popularity-description-placeholder {
+  height: 10px;
   margin-bottom: 5px;
+}
+
+.emoji-placeholder {
+  height: 12px;
+  margin-bottom: 10px;
 }
 
 .text-placeholder {
   height: 8px;
+  margin-bottom: 5px;
+}
+
+.button-placeholder {
+  float: left;
+  height: 40px;
+  width: 105px !important;
   margin-bottom: 5px;
 }
 
