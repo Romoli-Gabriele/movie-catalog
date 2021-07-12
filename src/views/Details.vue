@@ -159,7 +159,7 @@ export default {
           this.$route.params.type +
           "/" +
           this.$route.params.id +
-          "/similar?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US&page=1"
+          "/similar?api_key=6f9286d54de4891ea7a5c91779e09786&language="+localStorage.getItem('language')+"&page=1"
       )
         .then((response) => response.json())
         .then((data) => {
@@ -171,7 +171,7 @@ export default {
           this.$route.params.type +
           "/" +
           this.$route.params.id +
-          "?api_key=6f9286d54de4891ea7a5c91779e09786&language=en-US"
+          "?api_key=6f9286d54de4891ea7a5c91779e09786&language="+localStorage.getItem('language')
       )
         .then((response) => response.json())
         .then((data) => {
