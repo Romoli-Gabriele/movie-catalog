@@ -1,0 +1,63 @@
+
+body{
+    background-color: black;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+.home-img{
+    height: 3cm;
+    width: 2cm;
+}
+.home-link{
+    font-family: 'Shadows Into Light', cursive;
+    text-align: center;
+}
+.home-div{
+    margin: 1cm;
+}
+.no-border{
+    border: solid, gray, 2px;
+}
+.title{
+    font-family: 'Yellowtail', cursive; margin-right: 9mm;
+    font-size: 17mm;
+}
+.marg{
+    margin-top: 5mm;
+    
+}
+
+.ali-r{
+    text-align: right;
+}
+
+
+.mostra-dettagli-button{
+    text-decoration: none;
+    color: #fff;
+}
+
+.mostra-dettagli-button:hover{
+    color: #fff;
+}
+.mar-l{
+    margin-left: 10mm;
+}
+
+::-webkit-scrollbar{
+    width: 6px;
+    height: 6px;
+    }
+    ::-webkit-scrollbar-thumb{
+    background: #DC3545;
+    border-radius: 13px;
+    }
+    ::-webkit-scrollbar-thumb:hover{
+    background: #DC3545;
+    }
+    ::-webkit-scrollbar-track{
+    background: #000000;
+    border-radius: 10px;
+    box-shadow: inset 7px 10px 12px 0px #000;
+    }

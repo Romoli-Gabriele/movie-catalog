@@ -43,9 +43,10 @@
 
           <div class="me-4">
             <select
-              class="bg-secondary"
+              class="btn btn-secondary"
               v-model="language"
               @change="handleChange($event)"
+              style="padding-right: 0px"
             >
               <option value="en">English</option>
               <option value="it">Italiano</option>
@@ -151,4 +152,5 @@ export default {
 .first-letter-capitalize::first-letter{
   text-transform: capitalize;
 }
+
 </style>
