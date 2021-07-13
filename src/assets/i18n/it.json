@@ -1,6 +1,7 @@
 {
     "review": "recensioni",
     "detail": "dettagli",
+    "show": "mostra",
     "popularity": "popolarità",
     "description": "descrizione",
     "relase-date": "data di rilascio",
@@ -12,10 +13,13 @@
     "status": "stato",
     "release-date" : "data di pubblicazione",
     "original-language" : "lingua originale",
-    "weatch-now" : "guarda ora",
+    "watch-now" : "guarda ora",
     "show-more" : "mostra di più",
     "show-less" : "mostra di meno",
-    "TV-Series" : "serie TV",
-    "select-language" : "seleziona lingua"
+    "TV-series" : "serie TV",
+    "select-language" : "seleziona lingua",
+    "page-not-found" : "pagina non trovata",
+    "the-page-you-are-looking-for-does-not-exist" : "La pagina che stai cercando non esiste",
+    "return-home" : "home"
 
 }

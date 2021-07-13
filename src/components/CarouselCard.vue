@@ -8,8 +8,8 @@
       <h5 class="card-title text-danger home-link fs-3">{{ movie.title }}</h5>
       <h5 class="card-title text-danger home-link fs-3">{{ movie.name }}</h5>
       <p class="card-text text-light home-link fs-4">{{ movie.tagline }}</p>
-      <p class="card-text text-light container">
-        <b>Description: </b>
+      <p class="card-text text-light container first-letter-capitalize">
+        <b>{{ $t('description')}}: </b>
         <br />
       </p>
 
@@ -19,19 +19,19 @@
       <p v-show="collapse == false" class="text-light">{{ movie.overview }}</p>
       <button
         v-show="collapse"
-        class="btn btn-outline-success no-border text-light me-4"
+        class="btn btn-outline-success no-border text-light me-4 first-letter-capitalize"
         style="display: inline"
         @click="show"
       >
-        Show more
+        {{ $t('show-more')}}
       </button>
       <button
         v-show="collapse == false"
-        class="btn btn-outline-success no-border text-light me-4"
+        class="btn btn-outline-success no-border text-light me-4 first-letter-capitalize"
         style="display: inline"
         @click="show"
       >
-        Show less
+        {{ $t('show-less')}}
       </button>
       <router-link
         :to="{
@@ -39,7 +39,7 @@
           params: { id: movie.id, type: $route.params.type },
         }"
       >
-        <button type="button" @click="scrollUP" class="btn btn-outline-info">Details</button>
+        <button type="button" @click="scrollUP" class="btn btn-outline-info first-letter-capitalize">{{ $t('detail')}}</button>
       </router-link>
     </div>
   </div>
@@ -129,5 +129,9 @@ body {
 }
 .mar-l {
   margin-left: 10mm;
+}
+
+.first-letter-capitalize::first-letter{
+  text-transform: capitalize;
 }
 </style>

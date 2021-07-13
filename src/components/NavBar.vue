@@ -34,9 +34,9 @@
             <li class="nav-item">
               <router-link
                 @click="SwitchTo(false)"
-                class="nav-link fs-2 text-light home-link"
+                class="nav-link fs-2 text-light home-link first-letter-capitalize"
                 :to="{ name: 'Series' }"
-                >TV Series</router-link
+                >{{ $t('TV-series')}}</router-link
               >
             </li>
           </ul>
@@ -49,6 +49,7 @@
             >
               <option value="en">English</option>
               <option value="it">Italiano</option>
+              <option value="de">Deutsche</option>
             </select>
           
           </div>
@@ -56,20 +57,20 @@
           <form class="d-flex">
             <input
               v-if="mOs === true"
-              class="form-control me-2 bg-dark text-light"
+              class="form-control me-2 bg-dark text-light first-letter-capitalize"
               type="search"
-              placeholder="Search a movie"
+              :placeholder="$t('search-a-movie')"
               aria-label="Search"
             />
             <input
               v-else
-              class="form-control me-2 bg-dark text-light"
+              class="form-control me-2 bg-dark text-light first-letter-capitalize"
               type="search"
-              placeholder="Search a TV Series"
+              :placeholder="$t('search-a-TV-series')"
               aria-label="Search"
             />
             <button class="btn btn-outline-success submit-button" type="submit">
-              Search
+              {{ $t('search')}}
             </button>
           </form>
         </div>
@@ -141,5 +142,9 @@ export default {
 
 .exact-active {
   color: #dc3545 !important;
+}
+
+.first-letter-capitalize::first-letter{
+  text-transform: capitalize;
 }
 </style>

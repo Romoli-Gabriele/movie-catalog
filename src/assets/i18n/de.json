@@ -1,13 +1,14 @@
 {
     "review": "rezension",
     "detail": "detail",
+    "show": "anzeigen",
     "popularity": "popularität",
     "description": "beschreibung",
     "relase-date": "veröffentlichungsdatum",
     "genres": "genres",
     "search": "suche",
     "search-a-movie": "suche einen Film",
-    "search-a-TV-Series": "suche eine TV-Serie",
+    "search-a-TV-series": "suche eine TV-Serie",
     "number-of-reviews" : "anzahl der Bewertungen",
     "status": "status",
     "release-date" : "veröffentlichungsdatum",
@@ -15,7 +16,9 @@
     "watch-now" : "schau jetzt",
     "show-more" : "zeig mehr",
     "show-less" : "zeige weniger",
-    "TV-Series" : "TV-Serie",
-    "select-language" : "sprache auswählen"
-
+    "TV-series" : "TV Serie",
+    "select-language" : "sprache auswählen",
+    "page-not-found" : "seite nicht gefunden",
+    "the-page-you-are-looking-for-does-not-exist" : "die Seite die Sie suchen existiert nicht",
+    "return-home" : "home"
 }

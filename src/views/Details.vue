@@ -25,8 +25,8 @@
               v-for="p in movie.genres"
               >{{ p.name }}</span
             >
-            <p class="text-light">
-              <b>Review:</b>
+            <p class="text-light first-letter-capitalize">
+              <b>{{ $t('review')}}:</b>
               <Reviews
                 :value="movie.vote_average"
                 :full="'fa-star'"
@@ -37,11 +37,11 @@
               />
               ({{ Math.round((movie.vote_average / 2) * 10) / 10 }})
             </p>
-            <p class="text-light">
-              <b>Number of reviews:</b> {{ this.movie.vote_count }}
+            <p class="text-light first-letter-capitalize">
+              <b>{{$t('number-of-reviews')}}:</b> {{ this.movie.vote_count }}
             </p>
-            <p class="text-light">
-              <b>Popularity: </b>
+            <p class="text-light first-letter-capitalize">
+              <b>{{ $t('popularity')}}: </b>
               <Reviews
                 :value="movie.popularity"
                 :full="'fa-heart'"
@@ -52,24 +52,24 @@
               />
               ({{ Math.round((movie.popularity / 1000) * 10) / 10 }})
             </p>
-            <p class="text-light">
-              <b>Description: </b>
+            <p class="text-light first-letter-capitalize">
+              <b>{{ $t('description')}}: </b>
               <br />
               {{ movie.overview }}
             </p>
-            <p class="text-light"><b>Status:</b> {{ this.movie.status }}</p>
-            <p class="text-light">
-              <b>Release date: </b> {{ this.convertDate() }}
+            <p class="text-light first-letter-capitalize"><b>{{ $t('status')}}:</b> {{ this.movie.status }}</p>
+            <p class="text-light first-letter-capitalize">
+              <b>{{ $t('release-date')}}: </b> {{ this.convertDate() }}
             </p>
-            <p class="text-light">
-              <b>Original language: </b>
+            <p class="text-light first-letter-capitalize">
+              <b>{{ $t('original-language')}}: </b>
               {{ this.language(movie.original_language) }}
             </p>
             <br />
             <br />
             <a :href="movie.homepage" target="_blank"
               ><button type="button" class="btn btn-outline-warning text-light">
-                Watch now
+                {{ $t('watch-now')}}
               </button>
             </a>
           </div>
@@ -195,3 +195,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.first-letter-capitalize::first-letter{
+  text-transform: capitalize;
+}
+</style>

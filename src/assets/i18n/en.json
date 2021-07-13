@@ -1,5 +1,6 @@
 {
     "review": "review",
+    "show": "show",
     "detail": "detail",
     "popularity": "popularity",
     "description": "description",
@@ -12,10 +13,13 @@
     "status": "status",
     "release-date" : "release date",
     "original-language" : "original language",
-    "weatch-now" : "weatch now",
+    "watch-now" : "watch now",
     "show-more" : "show more",
     "show-less" : "show less",
-    "TV-Series" : "TV Series",
-    "select-language" : "select language"
+    "TV-series" : "TV Series",
+    "select-language" : "select language",
+    "page-not-found" : "page not found",
+    "the-page-you-are-looking-for-does-not-exist" : "The page you are looking for does not exist",
+    "return-home" : "return home"
 
 }
