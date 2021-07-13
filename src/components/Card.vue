@@ -32,8 +32,8 @@
                     </li>
                     <li v-show="collImg" class="list-group-item bg-dark text-light">
                         <ul >
-                            <b class="capitalize-first-letter">{{$t('genres')}}: </b>
-                            <li :key="p" class="bg-dark text-light" v-for="p in movie.genre_ids">{{convertGenres(p)}}</li>
+                            <b class="capitalize-first-letter">{{$t('genres')}}:</b> <br>
+                            <Genres :movieG="movie.genre_ids" :type="movie.media_type"/>
                         </ul>
 
                     </li>
@@ -46,11 +46,13 @@
 <script>
 import Reviews from "./Reviews.vue";
 import { genreService } from "../services/genreService";
+import Genres from "../components/Genres.vue"
 
 export default {
   name: "Card",
   components: {
     Reviews,
+    Genres
   },
   props: {
     movie: {

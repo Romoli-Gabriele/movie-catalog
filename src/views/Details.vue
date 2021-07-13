@@ -84,14 +84,12 @@
 <script>
 import Reviews from "../components/Reviews.vue";
 import Carousel from "../components/Carousel.vue";
-
 export default {
   name: "Details",
   components: {
     Reviews,
     Carousel,
   },
-
   data() {
     return {
       similarList: [],
@@ -150,7 +148,6 @@ export default {
         date = this.movie.first_air_date;
       }
       if (!date) return "";
-
       if(localStorage.getItem('language') == 'it'){
         date = date.split("-").reverse().join("/");
       }
@@ -168,7 +165,6 @@ export default {
         .then((data) => {
           this.similarList = data.results;
         });
-
       fetch(
         "https://api.themoviedb.org/3/" +
           this.$route.params.type +
@@ -182,7 +178,6 @@ export default {
         });
     },
   },
-
   mounted() {
     this.callDati();
   },
