@@ -42,6 +42,9 @@ const availableTranslations = [
         name: "English",
     },
 ]
+if(localStorage.getItem('language') == undefined){
+    localStorage.setItem('language', navigator.language);
+}
 
 
 export const languageService = {
