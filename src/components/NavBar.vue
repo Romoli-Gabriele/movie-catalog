@@ -87,11 +87,12 @@
   </div>
 </template>
 <script>
+import { languageService} from "../services/languageService";
 export default {
   name: "NavBar",
   components: {},
   data() {
-    const language = localStorage.getItem('language') || 'en';
+    const language = languageService.getCurrentLanguage() || 'en';
     return {
       mOs: true,
       language: language
@@ -103,7 +104,7 @@ export default {
       this.mOs = t;
     },
     handleChange(event) {
-      localStorage.setItem("language", event.target.value); //prima c'era lingua al posto di lingua.target.value
+      languageService.setCurrentLanguage(event.target.value); //prima c'era lingua al posto di lingua.target.value
       window.location.reload();
     },
   },

@@ -84,6 +84,12 @@
 <script>
 import Reviews from "../components/Reviews.vue";
 import Carousel from "../components/Carousel.vue";
+<<<<<<< HEAD
+=======
+import { languageService } from "../services/languageService";
+import { apiService } from "../services/apiService";
+
+>>>>>>> 2e4f33d40531c52fcc2c55364754ec25cf3041d2
 export default {
   name: "Details",
   components: {
@@ -95,50 +101,12 @@ export default {
       similarList: [],
       movie: {},
       movieList: [],
-      mezza: false, //mezza stella
-      mezzo: false, // mezzo cuore
-      languageList: [
-        {
-          iso_639_1: "de",
-          english_name: "German",
-          name: "Deutsch",
-        },
-        {
-          iso_639_1: "it",
-          english_name: "Italian",
-          name: "Italiano",
-        },
-        {
-          iso_639_1: "ja",
-          english_name: "Japanese",
-          name: "日本語",
-        },
-        {
-          iso_639_1: "fr",
-          english_name: "French",
-          name: "Français",
-        },
-        {
-          iso_639_1: "en",
-          english_name: "English",
-          name: "English",
-        },
-        {
-          iso_639_1: "es",
-          english_name: "Spanish",
-          name: "Español",
-        },
-      ],
+      
     };
   },
   methods: {
     language(l) {
-      for (let j = 0; j < 6; j++) {
-        if (this.languageList[j].iso_639_1 == l) {
-          return this.languageList[j].english_name;
-        }
-      }
-      return l;
+      return languageService.getLanguageById(l).name;
     },
     convertDate() {
       let date;
@@ -148,11 +116,17 @@ export default {
         date = this.movie.first_air_date;
       }
       if (!date) return "";
+<<<<<<< HEAD
       if(localStorage.getItem('language') == 'it'){
+=======
+
+      if(languageService.getCurrentLanguage() == 'it'){
+>>>>>>> 2e4f33d40531c52fcc2c55364754ec25cf3041d2
         date = date.split("-").reverse().join("/");
       }
       return date;
     },
+<<<<<<< HEAD
     callDati() {
       fetch(
         "https://api.themoviedb.org/3/" +
@@ -176,7 +150,17 @@ export default {
         .then((data) => {
           this.movie = data;
         });
+=======
+    callDati(){
+      apiService.getSimilar(this.$route.params.type, this.$route.params.id).then((data) => {
+      this.similarList = data.results;
+    });
+    apiService.getDetail(this.$route.params.type, this.$route.params.id).then((data) => {
+      this.movie = data;
+    });
+>>>>>>> 2e4f33d40531c52fcc2c55364754ec25cf3041d2
     },
+    
   },
   mounted() {
     this.callDati();
