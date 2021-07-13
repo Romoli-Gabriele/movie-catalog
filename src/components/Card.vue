@@ -46,11 +46,8 @@
 <script>
 import Reviews from "./Reviews.vue";
 import { genreService } from "../services/genreService";
-<<<<<<< HEAD
 import Genres from "../components/Genres.vue"
-=======
 import { languageService } from "../services/languageService";
->>>>>>> 2e4f33d40531c52fcc2c55364754ec25cf3041d2
 
 export default {
   name: "Card",
