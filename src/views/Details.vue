@@ -38,7 +38,7 @@
               ({{ Math.round((movie.vote_average / 2) * 10) / 10 }})
             </p>
             <p class="text-light first-letter-capitalize">
-              <b>{{$t('number-of-reviews')}}:</b> {{ this.movie.vote_count }}
+              <b>{{$t('number-of-reviews')}}:</b> {{ movie.vote_count }}
             </p>
             <p class="text-light first-letter-capitalize">
               <b>{{ $t('popularity')}}: </b>
@@ -57,13 +57,13 @@
               <br />
               {{ movie.overview }}
             </p>
-            <p class="text-light first-letter-capitalize"><b>{{ $t('status')}}:</b> {{ this.movie.status }}</p>
+            <p class="text-light first-letter-capitalize"><b>{{ $t('status')}}:</b> {{ movie.status }}</p>
             <p class="text-light first-letter-capitalize">
-              <b>{{ $t('release-date')}}: </b> {{ this.convertDate() }}
+              <b>{{ $t('release-date')}}: </b> {{ convertDate() }}
             </p>
             <p class="text-light first-letter-capitalize">
               <b>{{ $t('original-language')}}: </b>
-              {{ this.language(movie.original_language) }}
+              {{ language(movie.original_language) }}
             </p>
             <br />
             <br />
