@@ -28,7 +28,6 @@
                     </li>
                     <li v-show="collImg" class="text-light list-group-item bg-dark">
                         <b>Release date: </b>{{convertDate()}}
-                        <!-- <b>Original language: </b> {{language(movie.original_language)}} -->
                     </li>
                     <li v-show="collImg" class="list-group-item bg-dark text-light">
                         <ul >
@@ -45,7 +44,6 @@
 
 <script>
 import Reviews from "./Reviews.vue";
-//import { languageService } from "../services/languageService";
 import { genreService } from "../services/genreService";
 
 export default {
@@ -78,9 +76,7 @@ export default {
       date = date.split("-").reverse().join("/");
       return date;
     },
-    // language(l) {
-    //   return languageService.getLanguageById(l);
-    // },
+
     imgSwitch() {
       if (this.collImg) {
         this.collImg = false;

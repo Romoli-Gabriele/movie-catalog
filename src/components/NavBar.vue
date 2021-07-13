@@ -41,20 +41,16 @@
             </li>
           </ul>
 
-          <div class="dropdown me-4">
-            <button
-              class="btn btn-secondary dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton1"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
+          <div class="me-4">
+            <select
+              class="bg-secondary"
+              v-model="language"
+              @change="handleChange($event)"
             >
-              Seleziona lingua
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" @click="cambioLingua('en')">Inglese</a></li>
-              <li><a class="dropdown-item" @click="cambioLingua('it')">Italiano</a></li>
-            </ul>
+              <option value="en">English</option>
+              <option value="it">Italiano</option>
+            </select>
+          
           </div>
 
           <form class="d-flex">
@@ -93,18 +89,20 @@ export default {
   name: "NavBar",
   components: {},
   data() {
+    const language = localStorage.getItem('language') || 'en';
     return {
       mOs: true,
+      language: language
+
     };
   },
   methods: {
     SwitchTo(t) {
       this.mOs = t;
     },
-    cambioLingua(lingua) {
-      localStorage.setItem("language", lingua);
+    handleChange(event) {
+      localStorage.setItem("language", event.target.value); //prima c'era lingua al posto di lingua.target.value
       window.location.reload();
-      console.log(lingua);
     },
   },
 };
