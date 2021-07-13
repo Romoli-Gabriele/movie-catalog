@@ -84,12 +84,9 @@
 <script>
 import Reviews from "../components/Reviews.vue";
 import Carousel from "../components/Carousel.vue";
-<<<<<<< HEAD
-=======
 import { languageService } from "../services/languageService";
 import { apiService } from "../services/apiService";
 
->>>>>>> 2e4f33d40531c52fcc2c55364754ec25cf3041d2
 export default {
   name: "Details",
   components: {
@@ -116,41 +113,14 @@ export default {
         date = this.movie.first_air_date;
       }
       if (!date) return "";
-<<<<<<< HEAD
-      if(localStorage.getItem('language') == 'it'){
-=======
+
 
       if(languageService.getCurrentLanguage() == 'it'){
->>>>>>> 2e4f33d40531c52fcc2c55364754ec25cf3041d2
         date = date.split("-").reverse().join("/");
       }
       return date;
     },
-<<<<<<< HEAD
-    callDati() {
-      fetch(
-        "https://api.themoviedb.org/3/" +
-          this.$route.params.type +
-          "/" +
-          this.$route.params.id +
-          "/similar?api_key=6f9286d54de4891ea7a5c91779e09786&language="+localStorage.getItem('language')+"&page=1"
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          this.similarList = data.results;
-        });
-      fetch(
-        "https://api.themoviedb.org/3/" +
-          this.$route.params.type +
-          "/" +
-          this.$route.params.id +
-          "?api_key=6f9286d54de4891ea7a5c91779e09786&language="+localStorage.getItem('language')
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          this.movie = data;
-        });
-=======
+
     callDati(){
       apiService.getSimilar(this.$route.params.type, this.$route.params.id).then((data) => {
       this.similarList = data.results;
@@ -158,7 +128,7 @@ export default {
     apiService.getDetail(this.$route.params.type, this.$route.params.id).then((data) => {
       this.movie = data;
     });
->>>>>>> 2e4f33d40531c52fcc2c55364754ec25cf3041d2
+
     },
     
   },
