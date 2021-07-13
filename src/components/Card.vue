@@ -67,13 +67,17 @@ export default {
   methods: {
     convertDate() {
       let date;
+      
       if (this.movie.media_type == "movie") {
         date = this.movie.release_date;
       } else {
         date = this.movie.first_air_date;
       }
-
-      date = date.split("-").reverse().join("/");
+      
+      if(localStorage.getItem('language') == 'it'){
+        date = date.split("-").reverse().join("/");
+      }
+      
       return date;
     },
 
