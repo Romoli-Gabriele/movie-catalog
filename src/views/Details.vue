@@ -150,7 +150,10 @@ export default {
         date = this.movie.first_air_date;
       }
       if (!date) return "";
-      date = date.split("-").reverse().join("/");
+
+      if(localStorage.getItem('language') == 'it'){
+        date = date.split("-").reverse().join("/");
+      }
       return date;
     },
     callDati() {
