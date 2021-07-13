@@ -1,0 +1,21 @@
+{
+    "review": "Rezension",
+    "detail": "Detail",
+    "popularity": "Popularität",
+    "description": "Beschreibung",
+    "relase-date": "Veröffentlichungsdatum",
+    "genres": "Genres",
+    "search": "Suche",
+    "Search a movie": "suche einen Film",
+    "Search a TV Series": "suche eine TV-Serie",
+    "Number of reviews" : "Anzahl der Bewertungen",
+    "Status": "Status",
+    "Release date" : "Veröffentlichungsdatum",
+    "Original language" : "Ursprache",
+    "Watch now" : "Schau jetzt",
+    "Show more" : "Zeig mehr",
+    "Show less" : "zeige weniger",
+    "TV Series" : "TV-Serie",
+    "Select language" : "Sprache auswählen"
+
+}
