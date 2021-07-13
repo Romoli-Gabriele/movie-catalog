@@ -108,6 +108,10 @@ export default {
 };
 </script>
 <style>
+.title{
+    font-family: 'Yellowtail', cursive; margin-right: 9mm;
+    font-size: 17mm;
+}
 .logo {
   font-size: 20mm;
   color: #fff;
