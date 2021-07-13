@@ -19,14 +19,14 @@
 </template>
 
 <script>
-import Card from "./Card.vue";
+ import Card from "./Card.vue";
 import { apiService } from "../services/apiService";
 import FakeCard from "../components/FakeCard.vue";
 
 export default {
   name: "TrendingCards",
   components: {
-    Card,
+     Card,
     FakeCard,
   },
   props: {

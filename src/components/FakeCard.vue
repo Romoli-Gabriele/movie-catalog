@@ -1,8 +1,8 @@
 <template>
 
-    <div class="card mx-auto my-5 bg-dark" style="max-width: 20rem" ref="loadMoreCards">
+    <div class="card mx-auto my-5 bg-dark" ref="loadMoreCards">
       <div class="card-body">
-        <div class="image-placeholder placeholder bg-secondary"></div>
+        <div class="image-placeholder placeholder bg-secondary w-100"></div>
         <div class="title-placeholder placeholder w-75 bg-danger"></div>
         <div
           class="
@@ -39,9 +39,9 @@
     </div>
 
   <div v-for="i in 3" :key="i">
-    <div class="card mx-auto my-5 bg-dark" style="max-width: 20rem">
+    <div class="card mx-auto my-5 bg-dark">
       <div class="card-body">
-        <div class="image-placeholder placeholder bg-secondary"></div>
+        <div class="image-placeholder placeholder bg-secondary w-100"></div>
         <div class="title-placeholder placeholder w-75 bg-danger"></div>
         <div
           class="
@@ -114,6 +114,7 @@ export default {
 
 
 <style scoped>
+
 .image-placeholder {
   width: 16rem;
   height: 20rem;
