@@ -1,10 +1,15 @@
-import { createApp } from 'vue'
+import {
+  createApp
+} from 'vue'
 import App from './App.vue'
 import router from './router'
-import { createI18n } from 'vue-i18n'
+import i18n from './i18n'
+import axios from 'axios'
 
-const i18n = createI18n({
-    // something vue-i18n options here ...
-  })
-createApp(App).use(router).mount('#app');
-App.use(i18n)
+const language = localStorage.getItem('language') || 'en';
+axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.headers['Accept-Language'] = language;
+
+createApp(App).use(router)
+  .use(i18n)
+  .mount('#app');
