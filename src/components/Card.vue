@@ -22,7 +22,7 @@
                         <button class="btn btn-outline-success no-border text-light me-4 capitalize-first-letter bottone" style="display: inline" v-show="show == false" @click="toggleShow()">{{ $t('show-more') }}</button>
                         <button class="btn btn-outline-success no-border text-light me-4 capitalize-first-letter bottone" style="display: inline" v-show="show" @click="toggleShow()">{{ $t('show-less') }}</button>
                         <router-link :to="{ name: 'Details', params: { id: movie.id, type: movie.media_type} }">
-                        <button type="button" class="btn btn-outline-info capitalize-first-letter bottone">
+                        <button type="button" class="btn btn-outline-info capitalize-first-letter">
                         {{ $t('detail')}}
                         </button>
                         </router-link>
@@ -117,6 +117,6 @@ export default {
         text-transform: capitalize;
     }
     .bottone{
-      font-size: 4mm;
+        margin-right: 18px !important;
     }
 </style>
