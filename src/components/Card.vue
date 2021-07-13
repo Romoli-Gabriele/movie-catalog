@@ -46,6 +46,7 @@
 <script>
 import Reviews from "./Reviews.vue";
 import { genreService } from "../services/genreService";
+import { languageService } from "../services/languageService";
 
 export default {
   name: "Card",
@@ -75,7 +76,7 @@ export default {
         date = this.movie.first_air_date;
       }
       
-      if(localStorage.getItem('language') == 'it'){
+      if(languageService.getCurrentLanguage() == 'it'){
         date = date.split("-").reverse().join("/");
       }
       

@@ -51,5 +51,11 @@ export const languageService = {
     
     getAvailableTranslation(isoLanguage){
         return availableTranslations.find(l => l.iso_639_1 === isoLanguage)
+    },
+    getCurrentLanguage(){
+        return localStorage.getItem('language');
+    },
+    setCurrentLanguage(l){
+        localStorage.setItem('language', l);
     }
 }
