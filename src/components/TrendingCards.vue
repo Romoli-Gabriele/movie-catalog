@@ -34,10 +34,6 @@ export default {
       type: String,
       required: true,
     },
-    language:{
-      type: String,
-      required: true,
-    }
   },
   data() {
     return {
