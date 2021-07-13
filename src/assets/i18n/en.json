@@ -1,0 +1,21 @@
+{
+    "review": "review",
+    "detail": "detail",
+    "popularity": "popularity",
+    "description": "description",
+    "relase-date": "relase date",
+    "genres": "genres",
+    "search": "search",
+    "search-a-movie": "search a movie",
+    "search-a-TV-series": "search a TV series",
+    "number-of-reviews" : "number of reviews",
+    "status": "status",
+    "release-date" : "release date",
+    "original-language" : "original language",
+    "weatch-now" : "weatch now",
+    "show-more" : "show more",
+    "show-less" : "show less",
+    "TV-Series" : "TV Series",
+    "select-language" : "select language"
+
+}
