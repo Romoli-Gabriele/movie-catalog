@@ -6,30 +6,32 @@
           <div
             class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6"
           >
-          <div class="bindIMG" :style="BindBgImage(movie.poster_path)" style="max-height: 100%; min-height: 900px; height: auto !important">
+          <div v-show="movie.media_type != 'person'" class="bindIMG" :style="BindBgImage(movie.poster_path)" style="max-height: 100%; min-height: 900px; height: auto !important">
+          <div v-show="movie.media_type == 'person'" class="bindIMG" :style="BindBgImage(movie.poster_path)" style="max-height: 100%; min-height: 900px; height: auto !important">
           </div>
           </div>
           <div
             class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6"
           >
           <div class="card-text-height">
-            <h5 class="card-title text-danger home-link fs-2">
-              {{ movie.name }}
-            </h5>
-            <h5 class="card-title text-danger home-link fs-2">
+            
+            <h5 v-if="movie.media_type == 'movie'" class="card-title text-danger home-link fs-2">
               {{ movie.title }}
             </h5>
-            <p class="card-title text-light home-link fs-4">
+            <h5 v-else class="card-title text-danger home-link fs-2">
+              {{ movie.name }}
+            </h5>
+            <p v-show="movie.media_type != 'person'" class="card-title text-light home-link fs-4">
               {{ movie.tagline }}
             </p>
-            <span
+            <span  v-show="movie.media_type != 'person'"
               class="badge bg-info mx-1 my-2 text-dark"
               :key="p.id"
               v-for="p in movie.genres ?? []"
             >
               {{ p.name }}
             </span>
-            <p class="text-light first-letter-capitalize">
+            <p v-show="movie.media_type != 'person'" class="text-light first-letter-capitalize">
               <b>{{ $t("review") }}:</b>
               <Reviews
                 :value="movie.vote_average"
@@ -41,7 +43,7 @@
               />
               ({{ Math.round((movie.vote_average / 2) * 10) / 10 }})
             </p>
-            <p class="text-light first-letter-capitalize">
+            <p v-show="movie.media_type != 'person'" class="text-light first-letter-capitalize">
               <b>{{ $t("number-of-reviews") }}:</b> {{ movie.vote_count }}
             </p>
             <p class="text-light first-letter-capitalize">
@@ -56,24 +58,24 @@
               />
               ({{ Math.round((movie.popularity / 1000) * 10) / 10 }})
             </p>
-            <p class="text-light first-letter-capitalize">
+            <p v-show="movie.media_type != 'person'" class="text-light first-letter-capitalize">
               <b>{{ $t("description") }}: </b>
               <br />
               {{ movie.overview }}
             </p>
-            <p class="text-light first-letter-capitalize">
+            <p v-show="movie.media_type != 'person'" class="text-light first-letter-capitalize">
               <b>{{ $t("status") }}:</b> {{ movie.status }}
             </p>
-            <p class="text-light first-letter-capitalize">
+            <p v-show="movie.media_type != 'person'" class="text-light first-letter-capitalize">
               <b>{{ $t("release-date") }}: </b> {{ convertDate() }}
             </p>
-            <p class="text-light first-letter-capitalize">
+            <p v-show="movie.media_type != 'person'" class="text-light first-letter-capitalize">
               <b>{{ $t("original-language") }}: </b>
               {{ language(movie.original_language) }}
             </p>
             <br />
             <br />
-            <a :href="movie.homepage" target="_blank"
+            <a v-show="movie.media_type != 'person'" :href="movie.homepage" target="_blank"
               ><button type="button" class="btn btn-outline-warning text-light">
                 {{ $t("watch-now") }}
               </button>
@@ -130,16 +132,22 @@ export default {
       return `background: url('https://image.tmdb.org/t/p/w500/${poster}') no-repeat center center;`
     },
     callDati() {
-      apiService
-        .getSimilar(this.$route.params.type, this.$route.params.id)
-        .then((data) => {
-          this.similarList = data.results;
-        });
+      
       apiService
         .getDetail(this.$route.params.type, this.$route.params.id)
         .then((data) => {
           this.movie = data;
         });
+
+        if(this.$route.params.type =="movie" ||this.$route.params.type == "tv"){
+      apiService
+        .getSimilar(this.$route.params.type, this.$route.params.id)
+        .then((data) => {
+          this.similarList = data.results;
+        });
+      }else{
+        this.similarList = this.movie.known_for;
+      }
     },
   },
   mounted() {
