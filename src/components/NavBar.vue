@@ -73,6 +73,8 @@
               type="search"
               :placeholder="$t('search-a-movie')"
               aria-label="Search"
+              id="myInput"
+              @keyup="searchFunction()"
             />
             <input
               v-else
@@ -86,7 +88,10 @@
               type="search"
               :placeholder="$t('search-a-TV-series')"
               aria-label="Search"
+              id="myInput"
+              @keyup="searchFunction()"
             />
+            
             <button class="btn btn-outline-success submit-button" type="submit">
               {{ $t("search") }}
             </button>
@@ -126,7 +131,7 @@ export default {
           return true;
         }
       }
-      return false
+      return false;
     },
     SwitchTo(t) {
       this.mOs = t;
@@ -135,6 +140,32 @@ export default {
       languageService.setCurrentLanguage(event.target.value); //prima c'era lingua al posto di lingua.target.value
       window.location.reload();
     },
+    // searchFunction() {
+    //   var input, filter, ul, li, item, i, txtValue;
+    //   // User Input
+    //   input = document.getElementById("myInput");
+    //   // Filter, makes search not case sensitive
+    //   filter = input.value.toUpperCase();
+    //   // Grabs the parent element by id
+    //   // ul = document.getElementById("stateList");
+    //   movieList = [];
+    //   // Individual item on list
+    //   // li = ul.getElementsByTagName("li");
+    //   //movie = movieList.getElementsByTagName("movie");
+    //   movie = null;
+
+    //   for (i = 0; i < movie.length; i++) {
+    //     item = movie[i];
+    //     // Iterate over each list item to see if the value of the input, ignoring case, matches the inner text or inner html of the item.
+    //     txtValue = item.textContent || item.innerText;
+    //     if (txtValue.toUpperCase().indexOf(filter) > -1) {
+    //       // Displays list items that are a match, and nothing if no match
+    //       movie[i].style.display = "";
+    //     } else {
+    //       movie[i].style.display = "none";
+    //     }
+    //   }
+    // },
   },
 };
 </script>

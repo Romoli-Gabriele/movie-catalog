@@ -126,7 +126,6 @@ export default {
       return date;
     },
     BindBgImage(poster) {
-      console.log(`https://image.tmdb.org/t/p/original/${poster}`)
       return `background: url('https://image.tmdb.org/t/p/w500/${poster}') no-repeat center center;`
     },
     callDati() {
