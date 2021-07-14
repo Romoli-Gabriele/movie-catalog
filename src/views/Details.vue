@@ -2,79 +2,93 @@
   <div>
     <div class="mx-3 card bg-dark mb-3 py-3">
       <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 col-xxl-5">
           <img
-            class="mx-auto d-block w-100 px-3"
+            class="mx-auto d-block img-det px-3"
             :src="'https://image.tmdb.org/t/p/original/' + movie.poster_path"
           />
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7  col-xl-7 col-xxl-7">
           <div class="card-body">
-            <h5 class="card-title text-danger home-link fs-2">
-              {{ movie.name }}
-            </h5>
-            <h5 class="card-title text-danger home-link fs-2">
-              {{ movie.title }}
-            </h5>
-            <p class="card-title text-light home-link fs-4">
-              {{ movie.tagline }}
-            </p>
-            <span
-              class="badge bg-info mx-1 my-2 text-dark"
-              :key="p.id"
-              v-for="p in movie.genres ?? []"
-            >
-              {{ p.name }}
-            </span>
-            <p class="text-light first-letter-capitalize">
-              <b>{{ $t("review") }}:</b>
-              <Reviews
-                :value="movie.vote_average"
-                :full="'fa-star'"
-                :half="'fa-star-half-alt'"
-                :empty="'fa-star'"
-                :color="'text-warning'"
-                :type="true"
-              />
-              ({{ Math.round((movie.vote_average / 2) * 10) / 10 }})
-            </p>
-            <p class="text-light first-letter-capitalize">
-              <b>{{ $t("number-of-reviews") }}:</b> {{ movie.vote_count }}
-            </p>
-            <p class="text-light first-letter-capitalize">
-              <b>{{ $t("popularity") }}: </b>
-              <Reviews
-                :value="movie.popularity"
-                :full="'fa-heart'"
-                :half="'fa-heart-broken'"
-                :empty="'fa-heart'"
-                :color="'text-danger'"
-                :type="false"
-              />
-              ({{ Math.round((movie.popularity / 1000) * 10) / 10 }})
-            </p>
-            <p class="text-light first-letter-capitalize">
-              <b>{{ $t("description") }}: </b>
-              <br />
-              {{ movie.overview }}
-            </p>
-            <p class="text-light first-letter-capitalize">
-              <b>{{ $t("status") }}:</b> {{ movie.status }}
-            </p>
-            <p class="text-light first-letter-capitalize">
-              <b>{{ $t("release-date") }}: </b> {{ convertDate() }}
-            </p>
-            <p class="text-light first-letter-capitalize">
-              <b>{{ $t("original-language") }}: </b>
-              {{ language(movie.original_language) }}
-            </p>
-            <br />
-            <br />
-            <a :href="movie.homepage" target="_blank"
-              ><button type="button" class="btn btn-outline-warning text-light">
-                {{ $t("watch-now") }}
-              </button>
-            </a>
+            <div class="row justify-content-center">
+              <div class="col-4">
+                <h5 class="card-title text-danger home-link fs-2">
+                  {{ movie.name }}
+                </h5>
+                <h5 class="card-title text-danger home-link fs-2">
+                  {{ movie.title }}
+                </h5>
+                <p class="card-title text-light home-link fs-4">
+                  {{ movie.tagline }}
+                </p>
+                <span
+                  class="badge bg-info mx-1 my-2 text-dark"
+                  :key="p.id"
+                  v-for="p in movie.genres ?? []"
+                >
+                  {{ p.name }}
+                </span>
+                <p class="text-light first-letter-capitalize">
+                  <b>{{ $t("review") }}:</b>
+                  <Reviews
+                    :value="movie.vote_average"
+                    :full="'fa-star'"
+                    :half="'fa-star-half-alt'"
+                    :empty="'fa-star'"
+                    :color="'text-warning'"
+                    :type="true"
+                  />
+                  ({{ Math.round((movie.vote_average / 2) * 10) / 10 }})
+                </p>
+                <p class="text-light first-letter-capitalize">
+                  <b>{{ $t("number-of-reviews") }}:</b> {{ movie.vote_count }}
+                </p>
+                <p class="text-light first-letter-capitalize">
+                  <b>{{ $t("popularity") }}: </b>
+                  <Reviews
+                    :value="movie.popularity"
+                    :full="'fa-heart'"
+                    :half="'fa-heart-broken'"
+                    :empty="'fa-heart'"
+                    :color="'text-danger'"
+                    :type="false"
+                  />
+                  ({{ Math.round((movie.popularity / 1000) * 10) / 10 }})
+                </p>
+              </div>
+              <div class="col-4">
+                <br>
+                <br>
+                <p class="text-light first-letter-capitalize">
+                  <b>{{ $t("description") }}: </b>
+                  <br />
+                  {{ movie.overview }}
+                </p>
+              </div>
+              <div class="col-4">
+                <br>
+                <br>
+                <p class="text-light first-letter-capitalize">
+                  <b>{{ $t("status") }}:</b> {{ movie.status }}
+                </p>
+                <p class="text-light first-letter-capitalize">
+                  <b>{{ $t("release-date") }}: </b> {{ convertDate() }}
+                </p>
+                <p class="text-light first-letter-capitalize">
+                  <b>{{ $t("original-language") }}: </b>
+                  {{ language(movie.original_language) }}
+                </p>
+                <br />
+                <a :href="movie.homepage" target="_blank"
+                  ><button
+                    type="button"
+                    class="btn btn-outline-warning text-light"
+                  >
+                    {{ $t("watch-now") }}
+                  </button>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -154,5 +168,9 @@ export default {
 <style scoped>
 .first-letter-capitalize::first-letter {
   text-transform: capitalize;
+}
+.img-det {
+  height: 500px;
+  width: 350px;
 }
 </style>
