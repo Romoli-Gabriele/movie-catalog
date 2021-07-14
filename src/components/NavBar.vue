@@ -90,16 +90,13 @@
               aria-label="Search"
             />
 
-            <select type="search" data-live-search="true">
-              <option v-for="movieOSerie in searchList" :key="movieOSerie.id">
-                <router-link
-                  :to="{
-                    name: 'Details',
-                    params: { id: movieOSerie.id, type: movieOSerie.media_type },
-                  }"
-                >
-                  {{ movieOSerie.title }}
-                </router-link>
+            <select type="search" data-live-search="true" v-model="selectedItem" @change="navigateTo">
+              <option
+                v-for="movieOSerie in searchList"
+                :key="movieOSerie.id"
+                :value="movieOSerie"
+              >
+                {{ movieOSerie.title }}
               </option>
             </select>
 
@@ -136,6 +133,7 @@ export default {
       mOs: true,
       language: language,
       searchList: [],
+      selectedItem: null
     };
   },
   methods: {
@@ -149,6 +147,10 @@ export default {
         .then((data) => {
           this.searchList = data.results;
         });
+    },
+    navigateTo() {
+
+      this.$router.push({name: "Details", params:{id: this.selectedItem.id, /*type*/}})
     },
     filtra(iso) {
       for (let index = 0; index < navigator.languages.length; index++) {
