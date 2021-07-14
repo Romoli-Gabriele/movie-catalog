@@ -1,6 +1,6 @@
 <template>
- <div  class="card bg-dark mb-3">
-            <img :src="'https://image.tmdb.org/t/p/w500/'+image()" @click="imgSwitch()" class="card-img-top" alt="...">
+ <div class="card bg-dark mb-3 sistema-width">
+            <img :src="'https://image.tmdb.org/t/p/original/'+image()" @click="imgSwitch()" class="card-img-top" alt="...">
             
             <div class="card-body">
                 <h5 class="card-title text-danger home-link fs-3">{{ movie.name }}</h5>
@@ -17,14 +17,14 @@
                     <li class="list-group-item bg-dark text-light capitalize-first-letter">
                         <b>{{ $t('description')}}: </b>
                         <br>
-                        <p v-show="show == false">{{ description(movie.overview, true)}}   ...</p>
-                        <p v-show="show">{{ movie.overview}}</p>
-                        <button class="btn btn-outline-success no-border text-light me-4 capitalize-first-letter bottone" style="display: inline" v-show="show == false" @click="toggleShow()">{{ $t('show-more') }}</button>
-                        <button class="btn btn-outline-success no-border text-light me-4 capitalize-first-letter bottone" style="display: inline" v-show="show" @click="toggleShow()">{{ $t('show-less') }}</button>
+                        <p v-show="show == false" class="description-height">{{ description(movie.overview, true)}}   <a class="text-danger capitalize-first-letter" @click="toggleShowImgSwitch()">...{{ $t('show-more') }}</a></p>
+                        <p v-show="show" class="description-height">{{ movie.overview}} <a class="text-danger capitalize-first-letter" @click="toggleShowImgSwitch()">...{{$t('show-less')}}</a></p>
                         <router-link :to="{ name: 'Details', params: { id: movie.id, type: movie.media_type} }">
-                        <button type="button" class="btn btn-outline-info capitalize-first-letter">
-                        {{ $t('detail')}}
-                        </button>
+                          <div class="card-footer">
+                            <button type="button" class="btn btn-outline-info capitalize-first-letter">
+                            {{ $t('detail')}}
+                            </button>
+                          </div>
                         </router-link>
                     </li>
                     <li v-show="collImg" class="text-light list-group-item bg-dark">
@@ -46,14 +46,14 @@
 <script>
 import Reviews from "./Reviews.vue";
 import { genreService } from "../services/genreService";
-import Genres from "../components/Genres.vue"
+import Genres from "../components/Genres.vue";
 import { languageService } from "../services/languageService";
 
 export default {
   name: "Card",
   components: {
     Reviews,
-    Genres
+    Genres,
   },
   props: {
     movie: {
@@ -71,17 +71,17 @@ export default {
   methods: {
     convertDate() {
       let date;
-      
+
       if (this.movie.media_type == "movie") {
         date = this.movie.release_date;
       } else {
         date = this.movie.first_air_date;
       }
-      
-      if(languageService.getCurrentLanguage() == 'it'){
+
+      if (languageService.getCurrentLanguage() == "it") {
         date = date.split("-").reverse().join("/");
       }
-      
+
       return date;
     },
 
@@ -99,9 +99,13 @@ export default {
         return this.movie.poster_path;
       }
     },
+    toggleShowImgSwitch(){
+      this.imgSwitch();
+      this.toggleShow();
+    },
     description(s, m) {
       if (m) {
-        var r = s.slice(0, 70);
+        var r = s.slice(0, 170);
       }
       return r;
     },
@@ -116,10 +120,21 @@ export default {
 </script>
 
 <style>
-    .capitalize-first-letter::first-letter{
-        text-transform: capitalize;
-    }
-    .bottone{
-        margin-right: 18px !important;
-    }
+.capitalize-first-letter::first-letter {
+  text-transform: capitalize;
+}
+.bottone {
+  margin-right: 18px !important;
+}
+.sistema-width {
+  min-height: 900px;
+  max-height: 2000px;
+  height: auto !important;
+}
+
+.description-height {
+  min-height: 150px;
+  max-height: 500px;
+  height: auto;
+}
 </style>

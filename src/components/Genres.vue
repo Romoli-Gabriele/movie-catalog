@@ -12,7 +12,6 @@
 import { genreService } from "../services/genreService";
 export default {
   name: "Genres",
-
   props: {
     type: {
       type: String,

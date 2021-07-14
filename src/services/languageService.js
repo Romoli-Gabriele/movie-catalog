@@ -43,6 +43,16 @@ const availableTranslations = [
     },
 ]
 
+if(localStorage.getItem('language') == "undefined"){
+    localStorage.setItem('language', 'en')
+    
+    for (let index = 0; index < availableTranslations.length; index++) {
+        if (navigator.language.slice(0,2) == availableTranslations[index].iso_639_1) {
+            
+            localStorage.setItem('language', navigator.language.slice(0,2));
+        }
+    }
+}
 
 export const languageService = {
     getLanguageById(isoLanguage) {

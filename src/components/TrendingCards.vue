@@ -11,7 +11,11 @@
       mx-3
     "
   >
-    <div v-for="movie in movieList" :key="movie.id">
+    <div
+      v-for="movie in movieList"
+      :key="movie.id"
+      class="d-flex align-items-stretch"
+    >
       <Card :movie="movie"></Card>
     </div>
     <FakeCard @load-more="loadMoreContent()"> </FakeCard>
@@ -19,14 +23,14 @@
 </template>
 
 <script>
- import Card from "./Card.vue";
+import Card from "./Card.vue";
 import { apiService } from "../services/apiService";
 import FakeCard from "../components/FakeCard.vue";
 
 export default {
   name: "TrendingCards",
   components: {
-     Card,
+    Card,
     FakeCard,
   },
   props: {
@@ -45,9 +49,11 @@ export default {
   methods: {
     loadMoreContent() {
       this.page++;
-      apiService.getMovieFetch(this.tipo, this.page, this.language).then((data) => {
-        this.movieList = [...this.movieList, ...data.results];
-      });
+      apiService
+        .getMovieFetch(this.tipo, this.page, this.language)
+        .then((data) => {
+          this.movieList = [...this.movieList, ...data.results];
+        });
     },
   },
   mounted() {

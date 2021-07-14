@@ -1,15 +1,18 @@
 <template>
   <div>
     <div class="mx-3 card bg-dark mb-3 py-3">
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
-          <img
-            class="mx-auto d-block w-100 px-3"
-            :src="'https://image.tmdb.org/t/p/original/' + movie.poster_path"
-          />
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
-          <div class="card-body">
+      <div class="card-body card-body-max-height">
+        <div class="row">
+          <div
+            class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6"
+          >
+          <div class="bindIMG" :style="BindBgImage(movie.poster_path)" style="max-height: 100%; min-height: 900px; height: auto !important">
+          </div>
+          </div>
+          <div
+            class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6"
+          >
+          <div class="card-text-height">
             <h5 class="card-title text-danger home-link fs-2">
               {{ movie.name }}
             </h5>
@@ -22,11 +25,12 @@
             <span
               class="badge bg-info mx-1 my-2 text-dark"
               :key="p.id"
-              v-for="p in movie.genres"
-              >{{ p.name }}</span
+              v-for="p in movie.genres ?? []"
             >
+              {{ p.name }}
+            </span>
             <p class="text-light first-letter-capitalize">
-              <b>{{ $t('review')}}:</b>
+              <b>{{ $t("review") }}:</b>
               <Reviews
                 :value="movie.vote_average"
                 :full="'fa-star'"
@@ -38,10 +42,10 @@
               ({{ Math.round((movie.vote_average / 2) * 10) / 10 }})
             </p>
             <p class="text-light first-letter-capitalize">
-              <b>{{$t('number-of-reviews')}}:</b> {{ movie.vote_count }}
+              <b>{{ $t("number-of-reviews") }}:</b> {{ movie.vote_count }}
             </p>
             <p class="text-light first-letter-capitalize">
-              <b>{{ $t('popularity')}}: </b>
+              <b>{{ $t("popularity") }}: </b>
               <Reviews
                 :value="movie.popularity"
                 :full="'fa-heart'"
@@ -53,25 +57,28 @@
               ({{ Math.round((movie.popularity / 1000) * 10) / 10 }})
             </p>
             <p class="text-light first-letter-capitalize">
-              <b>{{ $t('description')}}: </b>
+              <b>{{ $t("description") }}: </b>
               <br />
               {{ movie.overview }}
             </p>
-            <p class="text-light first-letter-capitalize"><b>{{ $t('status')}}:</b> {{ movie.status }}</p>
             <p class="text-light first-letter-capitalize">
-              <b>{{ $t('release-date')}}: </b> {{ convertDate() }}
+              <b>{{ $t("status") }}:</b> {{ movie.status }}
             </p>
             <p class="text-light first-letter-capitalize">
-              <b>{{ $t('original-language')}}: </b>
+              <b>{{ $t("release-date") }}: </b> {{ convertDate() }}
+            </p>
+            <p class="text-light first-letter-capitalize">
+              <b>{{ $t("original-language") }}: </b>
               {{ language(movie.original_language) }}
             </p>
             <br />
             <br />
             <a :href="movie.homepage" target="_blank"
               ><button type="button" class="btn btn-outline-warning text-light">
-                {{ $t('watch-now')}}
+                {{ $t("watch-now") }}
               </button>
             </a>
+            </div>
           </div>
         </div>
       </div>
@@ -98,12 +105,11 @@ export default {
       similarList: [],
       movie: {},
       movieList: [],
-      
     };
   },
   methods: {
     language(l) {
-      return languageService.getLanguageById(l).name;
+      return languageService.getLanguageById(l)?.name;
     },
     convertDate() {
       let date;
@@ -114,20 +120,27 @@ export default {
       }
       if (!date) return "";
 
-      if(languageService.getCurrentLanguage() == 'it'){
+      if (languageService.getCurrentLanguage() == "it") {
         date = date.split("-").reverse().join("/");
       }
       return date;
     },
-    callDati(){
-      apiService.getSimilar(this.$route.params.type, this.$route.params.id).then((data) => {
-      this.similarList = data.results;
-    });
-    apiService.getDetail(this.$route.params.type, this.$route.params.id).then((data) => {
-      this.movie = data;
-    });
+    BindBgImage(poster) {
+      console.log(`https://image.tmdb.org/t/p/original/${poster}`)
+      return `background: url('https://image.tmdb.org/t/p/w500/${poster}') no-repeat center center;`
     },
-    
+    callDati() {
+      apiService
+        .getSimilar(this.$route.params.type, this.$route.params.id)
+        .then((data) => {
+          this.similarList = data.results;
+        });
+      apiService
+        .getDetail(this.$route.params.type, this.$route.params.id)
+        .then((data) => {
+          this.movie = data;
+        });
+    },
   },
   mounted() {
     this.callDati();
@@ -146,7 +159,23 @@ export default {
 </script>
 
 <style scoped>
-.first-letter-capitalize::first-letter{
+.first-letter-capitalize::first-letter {
   text-transform: capitalize;
+}
+
+.bindIMG{
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+}
+
+.card-body-max-height {
+  max-height: 1600px;
+  height: auto;
+}
+.card-text-height {
+  height: auto;
+  max-height: 900px;
 }
 </style>
