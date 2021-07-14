@@ -15,17 +15,18 @@
                 min-height: 900px;
                 height: auto !important;
               "
-            >
+            />
             <div
-                class="bindIMG"
-                :style="BindBgImage(movie.profile_path)"
-                style="
-                  max-height: 100%;
-                  min-height: 900px;
-                  height: auto !important;
-                "
-              ></div>
-            </div>
+              
+              class="bindIMG"
+              :style="BindBgImage(movie.profile_path)"
+              style="
+                max-height: 100%;
+                min-height: 900px;
+                height: auto !important;
+              "
+            />
+            
           </div>
           <div
             class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6"
@@ -44,6 +45,12 @@
                 class="card-title text-light home-link fs-4"
               >
                 {{ movie.tagline }}
+              </p>
+              <p
+                v-show="type == 'person'"
+                class="card-title text-light home-link fs-4"
+              >
+                {{ movie.known_for_department }}
               </p>
               <span
                 v-show="type != 'person'"
@@ -107,6 +114,12 @@
                 <b>{{ $t("release-date") }}: </b> {{ convertDate() }}
               </p>
               <p
+                
+                class="text-light first-letter-capitalize"
+              >
+                <b> compleanno: </b> {{ convertDate() }}
+              </p>
+              <p
                 v-show="type != 'person'"
                 class="text-light first-letter-capitalize"
               >
@@ -161,11 +174,15 @@ export default {
       return languageService.getLanguageById(l)?.name;
     },
     convertDate() {
+      // eslint-disable-next-line no-debugger
+      debugger
       let date;
       if (this.type == "movie") {
         date = this.movie.release_date;
-      } else {
+      } else if(this.type =='tv') {
         date = this.movie.first_air_date;
+      }else{
+        date = this.movie.birthday;
       }
       if (!date) return "";
 
@@ -175,7 +192,6 @@ export default {
       return date;
     },
     BindBgImage(poster) {
-      console.log(`https://image.tmdb.org/t/p/w500${poster}`);
       return `background: url('https://image.tmdb.org/t/p/w500${poster}') no-repeat center center;`;
     },
     callDati() {
