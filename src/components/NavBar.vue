@@ -59,7 +59,7 @@
               <option v-show="filtra('de')" value="de">Deutsche</option>
             </select>
           </div>
-          
+
           <div class="d-flex">
             <input
               id="param"
@@ -89,14 +89,27 @@
               :placeholder="$t('search-a-TV-series')"
               aria-label="Search"
             />
-            <button class="btn btn-outline-success" @click="cerca()">
+
+            <select type="search" data-live-search="true">
+              <option v-for="movieOSerie in searchList" :key="movieOSerie.id">
+                <router-link
+                  :to="{
+                    name: 'Details',
+                    params: { id: movieOSerie.id, type: movieOSerie.media_type },
+                  }"
+                >
+                  {{ movieOSerie.title }}
+                </router-link>
+              </option>
+            </select>
+
+            <button
+              class="btn btn-outline-success submit-button"
+              @click="cerca()"
+              type="submit"
+            >
               {{ $t("search") }}
             </button>
-            <ul>
-              <li v-for="o in searchList" :key="o.id">
-                {{o.title}}
-              </li>
-            </ul>
           </div>
         </div>
       </div>
@@ -111,7 +124,7 @@
   </div>
 </template>
 <script>
-import { apiService } from '../services/apiService';
+import { apiService } from "../services/apiService";
 import { languageService } from "../services/languageService";
 
 export default {
@@ -123,20 +136,19 @@ export default {
       mOs: true,
       language: language,
       searchList: [],
-
     };
   },
   methods: {
-    cerca(){
+    cerca() {
       var tipo = "tv";
-      if(this.mOs){
-        tipo = "movie"
+      if (this.mOs) {
+        tipo = "movie";
       }
-      apiService.getSearch(tipo ,document.getElementById("param").value)
-      .then((data) => {
+      apiService
+        .getSearch(tipo, document.getElementById("param").value)
+        .then((data) => {
           this.searchList = data.results;
         });
-
     },
     filtra(iso) {
       for (let index = 0; index < navigator.languages.length; index++) {
@@ -144,7 +156,7 @@ export default {
           return true;
         }
       }
-      return false
+      return false;
     },
     SwitchTo(t) {
       this.mOs = t;
@@ -153,8 +165,33 @@ export default {
       languageService.setCurrentLanguage(event.target.value); //prima c'era lingua al posto di lingua.target.value
       window.location.reload();
     },
+    // searchFunction() {
+    //   var input, filter, ul, li, item, i, txtValue;
+    //   // User Input
+    //   input = document.getElementById("myInput");
+    //   // Filter, makes search not case sensitive
+    //   filter = input.value.toUpperCase();
+    //   // Grabs the parent element by id
+    //   // ul = document.getElementById("stateList");
+    //   movieList = [];
+    //   // Individual item on list
+    //   // li = ul.getElementsByTagName("li");
+    //   //movie = movieList.getElementsByTagName("movie");
+    //   movie = null;
+
+    //   for (i = 0; i < movie.length; i++) {
+    //     item = movie[i];
+    //     // Iterate over each list item to see if the value of the input, ignoring case, matches the inner text or inner html of the item.
+    //     txtValue = item.textContent || item.innerText;
+    //     if (txtValue.toUpperCase().indexOf(filter) > -1) {
+    //       // Displays list items that are a match, and nothing if no match
+    //       movie[i].style.display = "";
+    //     } else {
+    //       movie[i].style.display = "none";
+    //     }
+    //   }
+    // },
   },
-  
 };
 </script>
 <style>
