@@ -24,8 +24,8 @@ export const apiService = {
     getDetail(type, id){
         return apiCall(`${type}/${id}`)
     },
-    getSearch(type, query){
-        return apiCall(`search/${type}/`, {
+    getSearch(query){
+        return apiCall(`search/multi/`, {
             query
         })
     }
