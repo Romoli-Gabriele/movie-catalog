@@ -59,9 +59,10 @@
               <option v-show="filtra('de')" value="de">Deutsche</option>
             </select>
           </div>
-
-          <form class="d-flex">
+          
+          <div class="d-flex">
             <input
+              id="param"
               v-if="mOs === true"
               class="
                 form-control
@@ -75,6 +76,7 @@
               aria-label="Search"
             />
             <input
+              id="param"
               v-else
               class="
                 form-control
@@ -87,10 +89,15 @@
               :placeholder="$t('search-a-TV-series')"
               aria-label="Search"
             />
-            <button class="btn btn-outline-success submit-button" type="submit">
+            <button class="btn btn-outline-success" @click="cerca()">
               {{ $t("search") }}
             </button>
-          </form>
+            <ul>
+              <li v-for="o in searchList" :key="o.id">
+                {{o.title}}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </nav>
@@ -104,7 +111,9 @@
   </div>
 </template>
 <script>
+import { apiService } from '../services/apiService';
 import { languageService } from "../services/languageService";
+
 export default {
   name: "NavBar",
   components: {},
@@ -113,16 +122,25 @@ export default {
     return {
       mOs: true,
       language: language,
+      searchList: [],
+
     };
   },
   methods: {
+    cerca(){
+      var tipo = "tv";
+      if(this.mOs){
+        tipo = "movie"
+      }
+      apiService.getSearch(tipo ,document.getElementById("param").value)
+      .then((data) => {
+          this.searchList = data.results;
+        });
+
+    },
     filtra(iso) {
       for (let index = 0; index < navigator.languages.length; index++) {
-        // eslint-disable-next-line no-debugger
-        debugger;
         if (navigator.languages[index] == iso) {
-          // eslint-disable-next-line no-debugger
-          debugger;
           return true;
         }
       }
@@ -136,6 +154,7 @@ export default {
       window.location.reload();
     },
   },
+  
 };
 </script>
 <style>
