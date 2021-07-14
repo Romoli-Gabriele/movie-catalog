@@ -40,6 +40,11 @@ const availableTranslations = [{
         english_name: "English",
         name: "English",
     },
+    {
+        iso_639_1: "de",
+        english_name: "German",
+        name: "Deutsch",
+    },
 ]
 
 if (!localStorage.getItem('language')) {

@@ -63,7 +63,6 @@
           <div class="d-flex">
             <input
               id="param"
-              v-if="mOs === true"
               class="
                 form-control
                 me-2
@@ -72,29 +71,15 @@
                 first-letter-capitalize
               "
               type="search"
-              :placeholder="$t('search-a-movie')"
-              aria-label="Search"
-            />
-            <input
-              id="param"
-              v-else
-              class="
-                form-control
-                me-2
-                bg-dark
-                text-light
-                first-letter-capitalize
-              "
-              type="search"
-              :placeholder="$t('search-a-TV-series')"
+              :placeholder="$t('search')"
               aria-label="Search"
             />
             <button class="btn btn-outline-success" @click="cerca()">
               {{ $t("search") }}
             </button>
             <ul>
-              <li v-for="o in searchList" :key="o.id">
-                {{o.title}}
+              <li v-for="obj in searchList" :key="obj.id">
+                {{obj.media_type}}
               </li>
             </ul>
           </div>
@@ -120,7 +105,6 @@ export default {
   data() {
     const language = languageService.getCurrentLanguage() || "en";
     return {
-      mOs: true,
       language: language,
       searchList: [],
 
@@ -128,11 +112,8 @@ export default {
   },
   methods: {
     cerca(){
-      var tipo = "tv";
-      if(this.mOs){
-        tipo = "movie"
-      }
-      apiService.getSearch(tipo ,document.getElementById("param").value)
+      
+      apiService.getSearch(document.getElementById("param").value)
       .then((data) => {
           this.searchList = data.results;
         });
