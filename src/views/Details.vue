@@ -1,15 +1,18 @@
 <template>
   <div>
     <div class="mx-3 card bg-dark mb-3 py-3">
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
-          <img
-            class="mx-auto d-block w-100 px-3"
-            :src="'https://image.tmdb.org/t/p/original/' + movie.poster_path"
-          />
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
-          <div class="card-body">
+      <div class="card-body card-body-max-height">
+        <div class="row">
+          <div
+            class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6"
+          >
+          <div class="bindIMG" :style="BindBgImage(movie.poster_path)" style="max-height: 100%; min-height: 900px; height: auto !important">
+          </div>
+          </div>
+          <div
+            class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6"
+          >
+          <div class="card-text-height">
             <h5 class="card-title text-danger home-link fs-2">
               {{ movie.name }}
             </h5>
@@ -75,6 +78,7 @@
                 {{ $t("watch-now") }}
               </button>
             </a>
+            </div>
           </div>
         </div>
       </div>
@@ -121,7 +125,10 @@ export default {
       }
       return date;
     },
-
+    BindBgImage(poster) {
+      console.log(`https://image.tmdb.org/t/p/original/${poster}`)
+      return `background: url('https://image.tmdb.org/t/p/w500/${poster}') no-repeat center center;`
+    },
     callDati() {
       apiService
         .getSimilar(this.$route.params.type, this.$route.params.id)
@@ -154,5 +161,21 @@ export default {
 <style scoped>
 .first-letter-capitalize::first-letter {
   text-transform: capitalize;
+}
+
+.bindIMG{
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+}
+
+.card-body-max-height {
+  max-height: 1600px;
+  height: auto;
+}
+.card-text-height {
+  height: auto;
+  max-height: 900px;
 }
 </style>
