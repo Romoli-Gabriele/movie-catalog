@@ -42,20 +42,18 @@ const availableTranslations = [
         name: "English",
     },
 ]
-/*
+
 if(localStorage.getItem('language') == "undefined"){
     localStorage.setItem('language', 'en')
-    // eslint-disable-next-line no-debugger
-    debugger;
+    
     for (let index = 0; index < availableTranslations.length; index++) {
-        
-        if (navigator.language.slice(0,1) == this.availableTraslations[index].iso_639_1) {
+        if (navigator.language.slice(0,2) == availableTranslations[index].iso_639_1) {
             
-            localStorage.setItem('language', navigator.language);
+            localStorage.setItem('language', navigator.language.slice(0,2));
         }
     }
 }
-*/
+
 export const languageService = {
     getLanguageById(isoLanguage) {
         return availableLanguages.find(l => l.iso_639_1 === isoLanguage)
