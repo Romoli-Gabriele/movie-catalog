@@ -34,9 +34,15 @@
             <li class="nav-item">
               <router-link
                 @click="SwitchTo(false)"
-                class="nav-link fs-2 text-light home-link first-letter-capitalize"
+                class="
+                  nav-link
+                  fs-2
+                  text-light
+                  home-link
+                  first-letter-capitalize
+                "
                 :to="{ name: 'Series' }"
-                >{{ $t('TV-series')}}</router-link
+                >{{ $t("TV-series") }}</router-link
               >
             </li>
           </ul>
@@ -49,29 +55,40 @@
               style="padding-right: 0px"
             >
               <option value="en">English</option>
-              <option value="it">Italiano</option>
-              <option value="de">Deutsche</option>
+              <option v-show="filtra('it')" value="it">Italiano</option>
+              <option v-show="filtra('de')" value="de">Deutsche</option>
             </select>
-          
           </div>
 
           <form class="d-flex">
             <input
               v-if="mOs === true"
-              class="form-control me-2 bg-dark text-light first-letter-capitalize"
+              class="
+                form-control
+                me-2
+                bg-dark
+                text-light
+                first-letter-capitalize
+              "
               type="search"
               :placeholder="$t('search-a-movie')"
               aria-label="Search"
             />
             <input
               v-else
-              class="form-control me-2 bg-dark text-light first-letter-capitalize"
+              class="
+                form-control
+                me-2
+                bg-dark
+                text-light
+                first-letter-capitalize
+              "
               type="search"
               :placeholder="$t('search-a-TV-series')"
               aria-label="Search"
             />
             <button class="btn btn-outline-success submit-button" type="submit">
-              {{ $t('search')}}
+              {{ $t("search") }}
             </button>
           </form>
         </div>
@@ -87,19 +104,30 @@
   </div>
 </template>
 <script>
-import { languageService} from "../services/languageService";
+import { languageService } from "../services/languageService";
 export default {
   name: "NavBar",
   components: {},
   data() {
-    const language = languageService.getCurrentLanguage() || 'en';
+    const language = languageService.getCurrentLanguage() || "en";
     return {
       mOs: true,
-      language: language
-
+      language: language,
     };
   },
   methods: {
+    filtra(iso) {
+      for (let index = 0; index < navigator.languages.length; index++) {
+        // eslint-disable-next-line no-debugger
+        debugger;
+        if (navigator.languages[index] == iso) {
+          // eslint-disable-next-line no-debugger
+          debugger;
+          return true;
+        }
+      }
+      return false
+    },
     SwitchTo(t) {
       this.mOs = t;
     },
@@ -111,9 +139,10 @@ export default {
 };
 </script>
 <style>
-.title{
-    font-family: 'Yellowtail', cursive; margin-right: 9mm;
-    font-size: 17mm;
+.title {
+  font-family: "Yellowtail", cursive;
+  margin-right: 9mm;
+  font-size: 17mm;
 }
 .logo {
   font-size: 20mm;
@@ -150,8 +179,7 @@ export default {
   color: #dc3545 !important;
 }
 
-.first-letter-capitalize::first-letter{
+.first-letter-capitalize::first-letter {
   text-transform: capitalize;
 }
-
 </style>
