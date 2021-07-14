@@ -63,7 +63,6 @@
           <div class="d-flex">
             <input
               id="param"
-              v-if="mOs === true"
               class="
                 form-control
                 me-2
@@ -72,21 +71,7 @@
                 first-letter-capitalize
               "
               type="search"
-              :placeholder="$t('search-a-movie')"
-              aria-label="Search"
-            />
-            <input
-              id="param"
-              v-else
-              class="
-                form-control
-                me-2
-                bg-dark
-                text-light
-                first-letter-capitalize
-              "
-              type="search"
-              :placeholder="$t('search-a-TV-series')"
+              :placeholder="$t('search')"
               aria-label="Search"
             />
 
@@ -130,27 +115,22 @@ export default {
   data() {
     const language = languageService.getCurrentLanguage() || "en";
     return {
-      mOs: true,
       language: language,
       searchList: [],
       selectedItem: null
     };
   },
   methods: {
-    cerca() {
-      var tipo = "tv";
-      if (this.mOs) {
-        tipo = "movie";
-      }
-      apiService
-        .getSearch(tipo, document.getElementById("param").value)
-        .then((data) => {
+    cerca(){
+      
+      apiService.getSearch(document.getElementById("param").value)
+      .then((data) => {
           this.searchList = data.results;
         });
     },
     navigateTo() {
 
-      this.$router.push({name: "Details", params:{id: this.selectedItem.id, /*type*/}})
+      this.$router.push({name: "Details", params:{id: this.selectedItem.id, type: this.selectedItem.media_type}})
     },
     filtra(iso) {
       for (let index = 0; index < navigator.languages.length; index++) {
@@ -160,9 +140,7 @@ export default {
       }
       return false;
     },
-    SwitchTo(t) {
-      this.mOs = t;
-    },
+
     handleChange(event) {
       languageService.setCurrentLanguage(event.target.value); //prima c'era lingua al posto di lingua.target.value
       window.location.reload();
