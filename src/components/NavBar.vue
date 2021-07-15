@@ -77,7 +77,7 @@
               aria-label="Search"
             /> -->
           <Multiselect
-            id = "param"
+            id="param"
             mode="tags"
             :filterResults="false"
             :minChars="3"
@@ -87,12 +87,13 @@
             :max="1"
             :limit="5"
             :options="getMovies"
-            
+            :clearOnSelect="true"
+            :clearOnSearch="true"
           >
             <template v-slot:singlelabel="{ value }">
               <div class="multiselect-single-label">
                 <img class="character-label-icon" :src="value.icon" />
-                {{ value.name }}
+                {{ value.name }} 
               </div>
             </template>
 
@@ -187,25 +188,25 @@ export default {
         return data.results.map((item) => ({
           name: item.title || item.name,
           value: { id: item.id, type: item.media_type },
+          icon: 'https://image.tmdb.org/t/p/original/' + item.poster_path,
         }));
       });
     },
   },
   mounted() {
-
     if (window.navigator.userAgent.indexOf("Windows NT 10.0") != -1) {
-      document.onkeyup = (e) => {
+      document.onkeydown = (e) => {
         if (e.ctrlKey && e.which == 75) {
           e.preventDefault();
           window.document.getElementById("param").focus();
         }
       };
     } else if (window.navigator.userAgent.indexOf("Mac") != -1) {
-    document.onkeydown = (e) => {
-      if (e.metaKey && e.which == 75) {
-        window.document.getElementById("param").focus();
-      }
-    };
+      document.onkeydown = (e) => {
+        if (e.metaKey && e.which == 75) {
+          window.document.getElementById("param").focus();
+        }
+      };
     }
   },
 };
@@ -255,22 +256,28 @@ export default {
   text-transform: capitalize;
 }
 
-ul.multiselect-options{
+ul.multiselect-options {
   color: #fff;
   background-color: #212529;
   list-style-type: none;
   text-align: left;
   padding: 10px;
   cursor: default;
+  position: absolute;
+  width: 100%;
 }
 
-input.multiselect-tags-search{
+input.multiselect-tags-search {
   background-color: #212529;
   color: #fff;
   border: 1px solid #fff;
   height: 38px;
+  min-width: 200px;
 }
 
-
-
+.character-option-icon{
+  float: left;
+  width: 20px;
+  height: 20px;
+}
 </style>
