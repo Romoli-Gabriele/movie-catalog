@@ -93,17 +93,9 @@
               ref="multiselect"
 
           >
-            <!-- <template v-slot:singlelabel="{ value }" @click="navigateTo(value)"
->
-              <div class="multiselect-single-label">
-                <img class="character-label-icon" :src="value.icon" />
-                {{ value.name }} 
-              </div>
-            </template> -->
 
-            <template v-slot:option="{ option }" @click="navigateTo(option)"> 
-              <img class="character-option-icon" :src="option.icon"
-/>
+            <template v-slot:option="{ option }" @click="navigateTo(option)">
+              <img class="character-option-icon" :src="option.icon" />
               {{ option.name }}
             </template>
           </Multiselect>
@@ -165,6 +157,7 @@ export default {
         });
     },
     navigateTo(item) {
+
       this.$router.push({
         name: "Details",
         params: {
