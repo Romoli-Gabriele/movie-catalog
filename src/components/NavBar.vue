@@ -130,9 +130,14 @@ export default {
         });
     },
     navigateTo() {
-
       this.$router.push({name: "Details", params:{id: this.selectedItem.id, type: this.selectedItem.media_type}})
+      // this.reloadDetailPage()
     },
+    // reloadDetailPage(){
+    //   setTimeout(function(){
+    //     location.reload()
+    //   },1)
+    // },
     filtra(iso) {
       for (let index = 0; index < navigator.languages.length; index++) {
         if (navigator.languages[index] == iso) {

@@ -7,7 +7,7 @@
             class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6"
           >
             <div
-              v-show="type != 'person'"
+              v-show="$route.params.type != 'person'"
               class="bindIMG"
               :style="BindBgImage(movie.poster_path)"
               style="
@@ -17,7 +17,7 @@
               "
             />
             <div
-              v-show="type == 'person'"
+              v-show="$route.params.type == 'person'"
               class="bindIMG"
               :style="BindBgImage(movie.profile_path)"
               style="
@@ -38,19 +38,19 @@
                 {{ movie.name }}
               </h5>
               <p
-                v-show="type != 'person'"
+                v-show="$route.params.type != 'person'"
                 class="card-title text-light home-link fs-4"
               >
                 {{ movie.tagline }}
               </p>
               <p
-                v-show="type == 'person'"
+                v-show="$route.params.type == 'person'"
                 class="card-title text-light home-link fs-4"
               >
                 {{ movie.known_for_department }}
               </p>
               <span
-                v-show="type != 'person'"
+                v-show="$route.params.type != 'person'"
                 class="badge bg-info mx-1 my-2 text-dark"
                 :key="p.id"
                 v-for="p in movie.genres ?? []"
@@ -58,7 +58,7 @@
                 {{ p.name }}
               </span>
               <p
-                v-show="type != 'person'"
+                v-show="$route.params.type != 'person'"
                 class="text-light first-letter-capitalize"
               >
                 <b>{{ $t("review") }}:</b>
@@ -73,13 +73,13 @@
                 ({{ Math.round((movie.vote_average / 2) * 10) / 10 }})
               </p>
               <p
-                v-show="type != 'person'"
+                v-show="$route.params.type != 'person'"
                 class="text-light first-letter-capitalize"
               >
                 <b>{{ $t("number-of-reviews") }}:</b> {{ movie.vote_count }}
               </p>
               <p
-                v-show="type != 'person'"
+                v-show="$route.params.type != 'person'"
                 class="text-light first-letter-capitalize"
               >
                 <b>{{ $t("popularity") }}: </b>
@@ -94,7 +94,7 @@
                 ({{ Math.round((movie.popularity / 1000) * 10) / 10 }})
               </p>
               <p
-                v-show="type != 'person'"
+                v-show="$route.params.type != 'person'"
                 class="text-light first-letter-capitalize"
               >
                 <b>{{ $t("description") }}: </b>
@@ -102,7 +102,7 @@
                 {{ movie.overview }}
               </p>
               <p
-                v-show="type == 'person'"
+                v-show="$route.params.type != 'person'"
                 class="text-light first-letter-capitalize"
               >
                 <b>{{ $t("biography")}}: </b>
@@ -110,22 +110,22 @@
                 {{ movie.biography}}
               </p>
               <p
-                v-show="type != 'person'"
+                v-show="$route.params.type != 'person'"
                 class="text-light first-letter-capitalize"
               >
                 <b>{{ $t("status") }}:</b> {{ movie.status }}
               </p>
               <p class="text-light first-letter-capitalize">
-                <b v-if="type == 'person'"> {{ $t("birthday")}}: </b>
+                <b v-if="$route.params.type == 'person'"> {{ $t("birthday")}}: </b>
                 <b v-else>{{ $t("release-date") }}: </b>
                 {{ convertDate() }}
               </p>
-              <p  v-if="type == 'person'" class="text-light first-letter-capitalize">
+              <p  v-if="$route.params.type == 'person'" class="text-light first-letter-capitalize">
                 <b>{{ $t("place-of-birth")}} </b>
                 {{ movie.place_of_birth }}
               </p>
               <p
-                v-show="type != 'person'"
+                v-show="$route.params.type != 'person'"
                 class="text-light first-letter-capitalize"
               >
                 <b>{{ $t("original-language") }}: </b>
@@ -134,15 +134,15 @@
               <br />
               <br />
               <a
-                
+                v-show="$route.params.type != 'person'"
                 :href="movie.homepage"
                 target="_blank"
                 ><button
                   type="button"
                   class="btn btn-outline-warning text-light"
                 >
-                  <b v-show="type != 'person'">{{ $t("watch-now") }}</b>
-                  <b v-show="type == 'person'">{{ $t("website")}}</b>
+                  <b v-show="$route.params.type != 'person'">{{ $t("watch-now") }}</b>
+                  <b v-show="$route.params.type == 'person'">{{ $t("website")}}</b>
                 </button>
               </a>
             </div>
@@ -151,9 +151,9 @@
       </div>
     </div>
     <Carousel
-      v-show="type != 'person'"
+      v-show="$route.params.type != 'person'"
       :similarList="similarList"
-      :type="type"
+      :type="$route.params.type"
     />
   </div>
 </template>
@@ -176,7 +176,6 @@ export default {
       similarList: [],
       movie: {},
       movieList: [],
-      type: this.$route.params.type,
     };
   },
   methods: {
@@ -185,9 +184,9 @@ export default {
     },
     convertDate() {
       let date;
-      if (this.type == "movie") {
+      if (this.$route.params.type == "movie") {
         date = this.movie.release_date;
-      } else if (this.type == "tv") {
+      } else if (this.$route.params.type == "tv") {
         date = this.movie.first_air_date;
       } else {
         date = this.movie.birthday;
@@ -202,9 +201,12 @@ export default {
       return `background: url('https://image.tmdb.org/t/p/w500${poster}') no-repeat center center;`;
     },
     callDati() {
-      apiService.getDetail(this.type, this.$route.params.id).then((data) => {
-        this.movie = data;
-      });
+
+      apiService
+        .getDetail(this.$route.params.type, this.$route.params.id)
+        .then((data) => {
+          this.movie = data;
+        });
 
       if (
         this.$route.params.type == "movie" ||
@@ -224,9 +226,8 @@ export default {
     this.callDati();
   },
   watch: {
-    "$route.params.search": {
-      handler: function (search) {
-        console.log(search);
+    "$route.params": {
+      handler: function () {
         this.callDati();
       },
       deep: true,
