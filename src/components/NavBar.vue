@@ -78,22 +78,24 @@
             /> -->
           <Multiselect
             mode="tags"
-            :placeholder="$t('search')"
             :filterResults="false"
             :minChars="3"
             :resolveOnLoad="false"
             :delay="0"
             :searchable="true"
+            :max="1"
+            :limit="5"
             :options="getMovies"
+            @change="navigateTo"
           >
-            <template v-slot:singlelabel="{ value }">
+            <template v-slot:singlelabel="{ value }" @click="navigateTo" >
               <div class="multiselect-single-label">
                 <img class="character-label-icon" :src="value.icon" />
                 {{ value.name }}
               </div>
             </template>
 
-            <template v-slot:option="{ option }">
+            <template v-slot:option="{ option }" @click="navigateTo">
               <img class="character-option-icon" :src="option.icon" />
               {{ option.name }}
             </template>
@@ -235,7 +237,20 @@ export default {
   text-transform: capitalize;
 }
 
-.div.multiselect-placeholder{
-  background: #fff !important;
+ul.multiselect-options{
+  color: #fff;
+  background-color: #212529;
+  list-style-type: none;
+  text-align: left;
+  padding: 10px;
+  cursor: default;
 }
+
+input.multiselect-tags-search{
+  background-color: #212529;
+  color: #fff;
+  border: 1px solid #fff;
+  height: 38px;
+}
+
 </style>
