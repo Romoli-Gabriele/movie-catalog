@@ -90,14 +90,9 @@
             @change="navigateTo"
             
           >
-            <template v-slot:singlelabel="{ value }" @click="navigateTo" >
-              <div class="multiselect-single-label">
-                <img class="character-label-icon" :src="value.icon" />
-                {{ value.name }}
-              </div>
-            </template>
 
-            <template v-slot:option="{ option }" @click="navigateTo">
+
+            <template v-slot:option="{ option }" @click="navigateTo(option)">
               <img class="character-option-icon" :src="option.icon" />
               {{ option.name }}
             </template>
@@ -159,12 +154,14 @@ export default {
           this.searchList = data.results;
         });
     },
-    navigateTo() {
+    navigateTo(item) {
+      // eslint-disable-next-line no-debugger
+      debugger;
       this.$router.push({
         name: "Details",
         params: {
-          id: this.selectedItem.id,
-          type: this.selectedItem.media_type,
+          id: item[0].id,
+          type: item[0].type,
         },
       });
     },
