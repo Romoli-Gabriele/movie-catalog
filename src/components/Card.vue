@@ -28,7 +28,7 @@
                         </router-link>
                     </li>
                     <li v-show="collImg" class="text-light list-group-item bg-dark">
-                        <b class="capitalize-first-letter">{{$t('release-date')}}: </b>{{convertDate()}}
+                        <b class="capitalize-first-letter">{{$t('release-date')}}: </b>{{formatterService.formatDate(movie)}}
                     </li>
                     <li v-show="collImg" class="list-group-item bg-dark text-light">
                         <ul >
@@ -47,7 +47,7 @@
 import Reviews from "./Reviews.vue";
 import { genreService } from "../services/genreService";
 import Genres from "../components/Genres.vue";
-import { languageService } from "../services/languageService";
+import { formatterService } from "../services/formatterService";
 
 export default {
   name: "Card",
@@ -65,26 +65,11 @@ export default {
     return {
       show: false,
       collImg: false,
+      formatterService,
     };
   },
 
   methods: {
-    convertDate() {
-      let date;
-
-      if (this.movie.media_type == "movie") {
-        date = this.movie.release_date;
-      } else {
-        date = this.movie.first_air_date;
-      }
-
-      if (languageService.getCurrentLanguage() == "it") {
-        date = date.split("-").reverse().join("/");
-      }
-
-      return date;
-    },
-
     imgSwitch() {
       if (this.collImg) {
         this.collImg = false;
@@ -99,7 +84,7 @@ export default {
         return this.movie.poster_path;
       }
     },
-    toggleShowImgSwitch(){
+    toggleShowImgSwitch() {
       this.imgSwitch();
       this.toggleShow();
     },

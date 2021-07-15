@@ -118,7 +118,7 @@
               <p class="text-light first-letter-capitalize">
                 <b v-if="$route.params.type == 'person'"> {{ $t("birthday")}}: </b>
                 <b v-else>{{ $t("release-date") }}: </b>
-                {{ convertDate() }}
+                {{ formatterService.formatDate(movie) }}
               </p>
               <p  v-if="$route.params.type == 'person'" class="text-light first-letter-capitalize">
                 <b>{{ $t("place-of-birth")}} </b>
@@ -163,6 +163,7 @@
 import Reviews from "../components/Reviews.vue";
 import Carousel from "../components/Carousel.vue";
 import { languageService } from "../services/languageService";
+import { formatterService } from "../services/formatterService";
 import { apiService } from "../services/apiService";
 
 export default {
@@ -173,9 +174,10 @@ export default {
   },
   data() {
     return {
-      similarList: [],
       movie: {},
       movieList: [],
+      similarList: [],
+      formatterService,
     };
   },
   methods: {
