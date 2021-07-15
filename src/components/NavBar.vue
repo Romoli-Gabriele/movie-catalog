@@ -87,18 +87,23 @@
             :max="1"
             :limit="5"
             :options="getMovies"
-            :clearOnSelect="true"
-            :clearOnSearch="true"
+            clearOnSelect="true"
+            clearOnSearch="true"
+            @change="navigateTo"
+              ref="multiselect"
+
           >
-            <template v-slot:singlelabel="{ value }">
+            <!-- <template v-slot:singlelabel="{ value }" @click="navigateTo(value)"
+>
               <div class="multiselect-single-label">
                 <img class="character-label-icon" :src="value.icon" />
                 {{ value.name }} 
               </div>
-            </template>
+            </template> -->
 
-            <template v-slot:option="{ option }" @click="navigateTo(option)">
-              <img class="character-option-icon" :src="option.icon" />
+            <template v-slot:option="{ option }" @click="navigateTo(option)"> 
+              <img class="character-option-icon" :src="option.icon"
+/>
               {{ option.name }}
             </template>
           </Multiselect>
@@ -164,10 +169,11 @@ export default {
         name: "Details",
         params: {
           id: item[0].id,
-          type: item[0].media_type,
+          type: item[0].type,
         },
       });
     },
+
     filtra(iso) {
       for (let index = 0; index < navigator.languages.length; index++) {
         if (navigator.languages[index] == iso) {
@@ -194,6 +200,7 @@ export default {
     },
   },
   mounted() {
+    this.$refs.multiselect.clear()
     if (window.navigator.userAgent.indexOf("Windows NT 10.0") != -1) {
       document.onkeydown = (e) => {
         if (e.ctrlKey && e.which == 75) {
