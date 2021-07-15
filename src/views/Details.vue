@@ -184,21 +184,6 @@ export default {
     language(l) {
       return languageService.getLanguageById(l)?.name;
     },
-    convertDate() {
-      let date;
-      if (this.$route.params.type == "movie") {
-        date = this.movie.release_date;
-      } else if (this.$route.params.type == "tv") {
-        date = this.movie.first_air_date;
-      } else {
-        date = this.movie.birthday;
-      }
-
-      if (languageService.getCurrentLanguage() == "it") {
-        date = date.split("-").reverse().join("/");
-      }
-      return date;
-    },
     BindBgImage(poster) {
       return `background: url('https://image.tmdb.org/t/p/w500${poster}') no-repeat center center;`;
     },

@@ -108,7 +108,7 @@
                 :value="movieOSerie"
               >
                 {{ movieOSerie.title }}
-                {{ movieOSerie.name}}
+                {{ movieOSerie.name }}
               </option>
             </select> -->
 
@@ -189,6 +189,22 @@ export default {
         }));
       });
     },
+  },
+  mounted() {
+
+    if (window.navigator.userAgent.indexOf("Windows NT 10.0") != -1) {
+      document.onkeyup = (e) => {
+        if (e.ctrlKey && e.which == 75) {
+          window.document.getElementById("param").focus();
+        }
+      };
+    } else if (window.navigator.userAgent.indexOf("Mac") != -1) {
+    document.onkeydown = (e) => {
+      if (e.metaKey && e.which == 75) {
+        window.document.getElementById("param").focus();
+      }
+    };
+    }
   },
 };
 </script>
