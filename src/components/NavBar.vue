@@ -87,17 +87,16 @@
             :max="1"
             :limit="5"
             :options="getMovies"
-            @change="navigateTo"
             
           >
-            <template v-slot:singlelabel="{ value }" @click="navigateTo" >
+            <template v-slot:singlelabel="{ value }">
               <div class="multiselect-single-label">
                 <img class="character-label-icon" :src="value.icon" />
                 {{ value.name }}
               </div>
             </template>
 
-            <template v-slot:option="{ option }" @click="navigateTo">
+            <template v-slot:option="{ option }">
               <img class="character-option-icon" :src="option.icon" />
               {{ option.name }}
             </template>
@@ -270,5 +269,7 @@ input.multiselect-tags-search{
   border: 1px solid #fff;
   height: 38px;
 }
+
+
 
 </style>
