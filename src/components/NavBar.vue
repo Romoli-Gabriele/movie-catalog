@@ -174,9 +174,9 @@ export default {
         }
       };
     } else if (window.navigator.userAgent.indexOf("Mac") != -1) {
-    document.onkeyup = (e) => {
+    document.onkeydown = (e) => {
       if (e.metaKey && e.which == 75) {
-        alert("funziona");
+        window.document.getElementById("param").focus();
       }
     };
     }
