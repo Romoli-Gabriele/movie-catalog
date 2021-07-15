@@ -19,5 +19,9 @@
     "select-language" : "sprache auswählen",
     "page-not-found" : "seite nicht gefunden",
     "the-page-you-are-looking-for-does-not-exist" : "die Seite die Sie suchen existiert nicht",
-    "return-home" : "home"
+    "return-home" : "home",
+    "biography" : "biografie",
+    "birthday" : "geburtstag",
+    "place-of-birth" : "geburtsort",
+    "website" : "webseite"
 }

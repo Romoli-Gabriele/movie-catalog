@@ -15,17 +15,17 @@
                 min-height: 900px;
                 height: auto !important;
               "
-            >
-              <div
-                class="bindIMG"
-                :style="BindBgImage(movie.profile_path)"
-                style="
-                  max-height: 100%;
-                  min-height: 900px;
-                  height: auto !important;
-                "
-              ></div>
-            </div>
+            />
+            <div
+              v-show="$route.params.type == 'person'"
+              class="bindIMG"
+              :style="BindBgImage(movie.profile_path)"
+              style="
+                max-height: 100%;
+                min-height: 900px;
+                height: auto !important;
+              "
+            />
           </div>
           <div
             class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6"
@@ -42,6 +42,12 @@
                 class="card-title text-light home-link fs-4"
               >
                 {{ movie.tagline }}
+              </p>
+              <p
+                v-show="$route.params.type == 'person'"
+                class="card-title text-light home-link fs-4"
+              >
+                {{ movie.known_for_department }}
               </p>
               <span
                 v-show="$route.params.type != 'person'"
@@ -72,7 +78,10 @@
               >
                 <b>{{ $t("number-of-reviews") }}:</b> {{ movie.vote_count }}
               </p>
-              <p class="text-light first-letter-capitalize">
+              <p
+                v-show="$route.params.type != 'person'"
+                class="text-light first-letter-capitalize"
+              >
                 <b>{{ $t("popularity") }}: </b>
                 <Reviews
                   :value="movie.popularity"
@@ -96,13 +105,24 @@
                 v-show="$route.params.type != 'person'"
                 class="text-light first-letter-capitalize"
               >
-                <b>{{ $t("status") }}:</b> {{ movie.status }}
+                <b>{{ $t("biography")}}: </b>
+                <br />
+                {{ movie.biography}}
               </p>
               <p
                 v-show="$route.params.type != 'person'"
                 class="text-light first-letter-capitalize"
               >
-                <b>{{ $t("release-date") }}: </b> {{ convertDate() }}
+                <b>{{ $t("status") }}:</b> {{ movie.status }}
+              </p>
+              <p class="text-light first-letter-capitalize">
+                <b v-if="$route.params.type == 'person'"> {{ $t("birthday")}}: </b>
+                <b v-else>{{ $t("release-date") }}: </b>
+                {{ convertDate() }}
+              </p>
+              <p  v-if="$route.params.type == 'person'" class="text-light first-letter-capitalize">
+                <b>{{ $t("place-of-birth")}} </b>
+                {{ movie.place_of_birth }}
               </p>
               <p
                 v-show="$route.params.type != 'person'"
@@ -121,7 +141,8 @@
                   type="button"
                   class="btn btn-outline-warning text-light"
                 >
-                  {{ $t("watch-now") }}
+                  <b v-show="$route.params.type != 'person'">{{ $t("watch-now") }}</b>
+                  <b v-show="$route.params.type == 'person'">{{ $t("website")}}</b>
                 </button>
               </a>
             </div>
@@ -132,7 +153,7 @@
     <Carousel
       v-show="$route.params.type != 'person'"
       :similarList="similarList"
-      :type="type"
+      :type="$route.params.type"
     />
   </div>
 </template>
@@ -165,10 +186,11 @@ export default {
       let date;
       if (this.$route.params.type == "movie") {
         date = this.movie.release_date;
-      } else {
+      } else if (this.$route.params.type == "tv") {
         date = this.movie.first_air_date;
+      } else {
+        date = this.movie.birthday;
       }
-      if (!date) return "";
 
       if (languageService.getCurrentLanguage() == "it") {
         date = date.split("-").reverse().join("/");
@@ -176,7 +198,6 @@ export default {
       return date;
     },
     BindBgImage(poster) {
-      console.log(`https://image.tmdb.org/t/p/w500${poster}`);
       return `background: url('https://image.tmdb.org/t/p/w500${poster}') no-repeat center center;`;
     },
     callDati() {

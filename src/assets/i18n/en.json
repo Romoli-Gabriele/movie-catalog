@@ -19,6 +19,9 @@
     "select-language" : "select language",
     "page-not-found" : "page not found",
     "the-page-you-are-looking-for-does-not-exist" : "The page you are looking for does not exist",
-    "return-home" : "return home"
-
+    "return-home" : "return home",
+    "biography" : "biography",
+    "birthday" : "birthday",
+    "place-of-birth" : "place of birth",
+    "website" : "website"
 }
