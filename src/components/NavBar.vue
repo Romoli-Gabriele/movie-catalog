@@ -87,14 +87,14 @@
             :max="1"
             :limit="5"
             :options="getMovies"
-            clearOnSelect="true"
-            clearOnSearch="true"
+            :clearOnSelect="true"
+            :clearOnSearch="true"
             @change="navigateTo"
               ref="multiselect"
 
           >
 
-            <template v-slot:option="{ option }" @click="navigateTo(option)">
+            <template v-slot:option="{ option }" @change="navigateTo(option)">
               <img class="character-option-icon" :src="option.icon" />
               {{ option.name }}
             </template>
