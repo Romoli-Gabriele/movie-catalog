@@ -59,7 +59,7 @@
               <option v-show="filtra('de')" value="de">Deutsche</option>
             </select>
           </div>
-          
+
           <div class="d-flex">
             <input
               id="param"
@@ -74,14 +74,25 @@
               :placeholder="$t('search')"
               aria-label="Search"
             />
-            <button class="btn btn-outline-success" @click="cerca()">
+
+            <select type="search" data-live-search="true" v-model="selectedItem" @change="navigateTo">
+              <option
+                v-for="movieOSerie in searchList"
+                :key="movieOSerie.id"
+                :value="movieOSerie"
+              >
+                {{ movieOSerie.title }}
+                {{ movieOSerie.name}}
+              </option>
+            </select>
+
+            <button
+              class="btn btn-outline-success submit-button"
+              @click="cerca()"
+              type="submit"
+            >
               {{ $t("search") }}
             </button>
-            <ul>
-              <li v-for="obj in searchList" :key="obj.id">
-                {{obj.media_type}}
-              </li>
-            </ul>
           </div>
         </div>
       </div>
@@ -96,7 +107,7 @@
   </div>
 </template>
 <script>
-import { apiService } from '../services/apiService';
+import { apiService } from "../services/apiService";
 import { languageService } from "../services/languageService";
 
 export default {
@@ -107,7 +118,7 @@ export default {
     return {
       language: language,
       searchList: [],
-
+      selectedItem: null
     };
   },
   methods: {
@@ -117,7 +128,10 @@ export default {
       .then((data) => {
           this.searchList = data.results;
         });
+    },
+    navigateTo() {
 
+      this.$router.push({name: "Details", params:{id: this.selectedItem.id, type: this.selectedItem.media_type}})
     },
     filtra(iso) {
       for (let index = 0; index < navigator.languages.length; index++) {
@@ -125,7 +139,7 @@ export default {
           return true;
         }
       }
-      return false
+      return false;
     },
     SwitchTo(t) {
       this.mOs = t;
@@ -135,7 +149,6 @@ export default {
       window.location.reload();
     },
   },
-  
 };
 </script>
 <style>
