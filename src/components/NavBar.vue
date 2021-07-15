@@ -196,6 +196,7 @@ export default {
     if (window.navigator.userAgent.indexOf("Windows NT 10.0") != -1) {
       document.onkeyup = (e) => {
         if (e.ctrlKey && e.which == 75) {
+          e.preventDefault();
           window.document.getElementById("param").focus();
         }
       };
