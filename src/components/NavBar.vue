@@ -97,7 +97,7 @@
               </div>
             </template>
 
-            <template v-slot:option="{ option }">
+            <template v-slot:option="{ option }" @click="navigateTo(option)">
               <img class="character-option-icon" :src="option.icon" />
               {{ option.name }}
             </template>
@@ -159,12 +159,12 @@ export default {
           this.searchList = data.results;
         });
     },
-    navigateTo() {
+    navigateTo(item) {
       this.$router.push({
         name: "Details",
         params: {
-          id: this.selectedItem.id,
-          type: this.selectedItem.media_type,
+          id: item[0].id,
+          type: item[0].media_type,
         },
       });
     },
