@@ -1,3 +1,5 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable vue/no-deprecated-slot-attribute */
 <template>
   <div>
     <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
@@ -60,7 +62,7 @@
             </select>
           </div>
 
-          <div class="d-flex">
+          <!-- <div class="d-flex">
             <input
               id="param"
               class="
@@ -73,9 +75,31 @@
               type="search"
               :placeholder="$t('search')"
               aria-label="Search"
-            />
+            /> -->
+          <Multiselect
+            mode="tags"
+            :placeholder="$t('search')"
+            :filterResults="false"
+            :minChars="3"
+            :resolveOnLoad="false"
+            :delay="0"
+            :searchable="true"
+            :options="getMovies"
+          >
+            <template v-slot:singlelabel="{ value }">
+              <div class="multiselect-single-label">
+                <img class="character-label-icon" :src="value.icon" />
+                {{ value.name }}
+              </div>
+            </template>
 
-            <select type="search" data-live-search="true" v-model="selectedItem" @change="navigateTo">
+            <template v-slot:option="{ option }">
+              <img class="character-option-icon" :src="option.icon" />
+              {{ option.name }}
+            </template>
+          </Multiselect>
+
+          <!-- <select type="search" data-live-search="true" v-model="selectedItem" @change="navigateTo">
               <option
                 v-for="movieOSerie in searchList"
                 :key="movieOSerie.id"
@@ -84,16 +108,16 @@
                 {{ movieOSerie.title }}
                 {{ movieOSerie.name}}
               </option>
-            </select>
+            </select> -->
 
-            <button
-              class="btn btn-outline-success submit-button"
-              @click="cerca()"
-              type="submit"
-            >
-              {{ $t("search") }}
-            </button>
-          </div>
+          <button
+            class="btn btn-outline-success submit-button"
+            @click="cerca()"
+            type="submit"
+          >
+            {{ $t("search") }}
+          </button>
+          <!--</div>-->
         </div>
       </div>
     </nav>
@@ -109,35 +133,37 @@
 <script>
 import { apiService } from "../services/apiService";
 import { languageService } from "../services/languageService";
+import Multiselect from "@vueform/multiselect";
 
 export default {
   name: "NavBar",
-  components: {},
+  components: { Multiselect },
   data() {
     const language = languageService.getCurrentLanguage() || "en";
     return {
       language: language,
       searchList: [],
-      selectedItem: null
+      selectedItem: null,
+      value: null,
     };
   },
   methods: {
-    cerca(){
-      
-      apiService.getSearch(document.getElementById("param").value)
-      .then((data) => {
+    cerca() {
+      apiService
+        .getSearch(document.getElementById("param").value)
+        .then((data) => {
           this.searchList = data.results;
         });
     },
     navigateTo() {
-      this.$router.push({name: "Details", params:{id: this.selectedItem.id, type: this.selectedItem.media_type}})
-      // this.reloadDetailPage()
+      this.$router.push({
+        name: "Details",
+        params: {
+          id: this.selectedItem.id,
+          type: this.selectedItem.media_type,
+        },
+      });
     },
-    // reloadDetailPage(){
-    //   setTimeout(function(){
-    //     location.reload()
-    //   },1)
-    // },
     filtra(iso) {
       for (let index = 0; index < navigator.languages.length; index++) {
         if (navigator.languages[index] == iso) {
@@ -152,6 +178,14 @@ export default {
     handleChange(event) {
       languageService.setCurrentLanguage(event.target.value); //prima c'era lingua al posto di lingua.target.value
       window.location.reload();
+    },
+    getMovies(search) {
+      return apiService.getSearch(search).then((data) => {
+        return data.results.map((item) => ({
+          name: item.title || item.name,
+          value: { id: item.id, type: item.media_type },
+        }));
+      });
     },
   },
 };
@@ -199,5 +233,9 @@ export default {
 
 .first-letter-capitalize::first-letter {
   text-transform: capitalize;
+}
+
+.div.multiselect-placeholder{
+  background: #fff !important;
 }
 </style>
