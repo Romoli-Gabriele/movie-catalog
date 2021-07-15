@@ -17,7 +17,7 @@
               "
             />
             <div
-              
+              v-show="type == 'person'"
               class="bindIMG"
               :style="BindBgImage(movie.profile_path)"
               style="
@@ -26,15 +26,12 @@
                 height: auto !important;
               "
             />
-            
           </div>
           <div
             class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6"
           >
             <div class="card-text-height">
-              <h5
-                class="card-title text-danger home-link fs-2"
-              >
+              <h5 class="card-title text-danger home-link fs-2">
                 {{ movie.title }}
               </h5>
               <h5 class="card-title text-danger home-link fs-2">
@@ -81,7 +78,10 @@
               >
                 <b>{{ $t("number-of-reviews") }}:</b> {{ movie.vote_count }}
               </p>
-              <p class="text-light first-letter-capitalize">
+              <p
+                v-show="type != 'person'"
+                class="text-light first-letter-capitalize"
+              >
                 <b>{{ $t("popularity") }}: </b>
                 <Reviews
                   :value="movie.popularity"
@@ -102,22 +102,27 @@
                 {{ movie.overview }}
               </p>
               <p
+                v-show="type == 'person'"
+                class="text-light first-letter-capitalize"
+              >
+                <b>{{ $t("biography")}}: </b>
+                <br />
+                {{ movie.biography}}
+              </p>
+              <p
                 v-show="type != 'person'"
                 class="text-light first-letter-capitalize"
               >
                 <b>{{ $t("status") }}:</b> {{ movie.status }}
               </p>
-              <p
-                v-show="type != 'person'"
-                class="text-light first-letter-capitalize"
-              >
-                <b>{{ $t("release-date") }}: </b> {{ convertDate() }}
+              <p class="text-light first-letter-capitalize">
+                <b v-if="type == 'person'"> {{ $t("birthday")}}: </b>
+                <b v-else>{{ $t("release-date") }}: </b>
+                {{ convertDate() }}
               </p>
-              <p
-                
-                class="text-light first-letter-capitalize"
-              >
-                <b> compleanno: </b> {{ convertDate() }}
+              <p  v-if="type == 'person'" class="text-light first-letter-capitalize">
+                <b>{{ $t("place-of-birth")}} </b>
+                {{ movie.place_of_birth }}
               </p>
               <p
                 v-show="type != 'person'"
@@ -129,14 +134,15 @@
               <br />
               <br />
               <a
-                v-show="type != 'person'"
+                
                 :href="movie.homepage"
                 target="_blank"
                 ><button
                   type="button"
                   class="btn btn-outline-warning text-light"
                 >
-                  {{ $t("watch-now") }}
+                  <b v-show="type != 'person'">{{ $t("watch-now") }}</b>
+                  <b v-show="type == 'person'">{{ $t("website")}}</b>
                 </button>
               </a>
             </div>
@@ -144,7 +150,11 @@
         </div>
       </div>
     </div>
-    <Carousel  v-show="type != 'person'" :similarList="similarList" :type="type" />
+    <Carousel
+      v-show="type != 'person'"
+      :similarList="similarList"
+      :type="type"
+    />
   </div>
 </template>
 
@@ -174,17 +184,14 @@ export default {
       return languageService.getLanguageById(l)?.name;
     },
     convertDate() {
-      // eslint-disable-next-line no-debugger
-      debugger
       let date;
       if (this.type == "movie") {
         date = this.movie.release_date;
-      } else if(this.type =='tv') {
+      } else if (this.type == "tv") {
         date = this.movie.first_air_date;
-      }else{
+      } else {
         date = this.movie.birthday;
       }
-      if (!date) return "";
 
       if (languageService.getCurrentLanguage() == "it") {
         date = date.split("-").reverse().join("/");
@@ -195,11 +202,9 @@ export default {
       return `background: url('https://image.tmdb.org/t/p/w500${poster}') no-repeat center center;`;
     },
     callDati() {
-      apiService
-        .getDetail(this.type, this.$route.params.id)
-        .then((data) => {
-          this.movie = data;
-        });
+      apiService.getDetail(this.type, this.$route.params.id).then((data) => {
+        this.movie = data;
+      });
 
       if (
         this.$route.params.type == "movie" ||
