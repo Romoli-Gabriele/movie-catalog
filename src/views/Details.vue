@@ -7,7 +7,7 @@
             class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6"
           >
             <div
-              v-show="type != 'person'"
+              v-show="$route.params.type != 'person'"
               class="bindIMG"
               :style="BindBgImage(movie.poster_path)"
               style="
@@ -16,7 +16,7 @@
                 height: auto !important;
               "
             >
-            <div
+              <div
                 class="bindIMG"
                 :style="BindBgImage(movie.profile_path)"
                 style="
@@ -31,22 +31,20 @@
             class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6"
           >
             <div class="card-text-height">
-              <h5
-                class="card-title text-danger home-link fs-2"
-              >
+              <h5 class="card-title text-danger home-link fs-2">
                 {{ movie.title }}
               </h5>
               <h5 class="card-title text-danger home-link fs-2">
                 {{ movie.name }}
               </h5>
               <p
-                v-show="type != 'person'"
+                v-show="$route.params.type != 'person'"
                 class="card-title text-light home-link fs-4"
               >
                 {{ movie.tagline }}
               </p>
               <span
-                v-show="type != 'person'"
+                v-show="$route.params.type != 'person'"
                 class="badge bg-info mx-1 my-2 text-dark"
                 :key="p.id"
                 v-for="p in movie.genres ?? []"
@@ -54,7 +52,7 @@
                 {{ p.name }}
               </span>
               <p
-                v-show="type != 'person'"
+                v-show="$route.params.type != 'person'"
                 class="text-light first-letter-capitalize"
               >
                 <b>{{ $t("review") }}:</b>
@@ -69,7 +67,7 @@
                 ({{ Math.round((movie.vote_average / 2) * 10) / 10 }})
               </p>
               <p
-                v-show="type != 'person'"
+                v-show="$route.params.type != 'person'"
                 class="text-light first-letter-capitalize"
               >
                 <b>{{ $t("number-of-reviews") }}:</b> {{ movie.vote_count }}
@@ -87,7 +85,7 @@
                 ({{ Math.round((movie.popularity / 1000) * 10) / 10 }})
               </p>
               <p
-                v-show="type != 'person'"
+                v-show="$route.params.type != 'person'"
                 class="text-light first-letter-capitalize"
               >
                 <b>{{ $t("description") }}: </b>
@@ -95,19 +93,19 @@
                 {{ movie.overview }}
               </p>
               <p
-                v-show="type != 'person'"
+                v-show="$route.params.type != 'person'"
                 class="text-light first-letter-capitalize"
               >
                 <b>{{ $t("status") }}:</b> {{ movie.status }}
               </p>
               <p
-                v-show="type != 'person'"
+                v-show="$route.params.type != 'person'"
                 class="text-light first-letter-capitalize"
               >
                 <b>{{ $t("release-date") }}: </b> {{ convertDate() }}
               </p>
               <p
-                v-show="type != 'person'"
+                v-show="$route.params.type != 'person'"
                 class="text-light first-letter-capitalize"
               >
                 <b>{{ $t("original-language") }}: </b>
@@ -116,7 +114,7 @@
               <br />
               <br />
               <a
-                v-show="type != 'person'"
+                v-show="$route.params.type != 'person'"
                 :href="movie.homepage"
                 target="_blank"
                 ><button
@@ -131,7 +129,11 @@
         </div>
       </div>
     </div>
-    <Carousel  v-show="type != 'person'" :similarList="similarList" :type="type" />
+    <Carousel
+      v-show="$route.params.type != 'person'"
+      :similarList="similarList"
+      :type="type"
+    />
   </div>
 </template>
 
@@ -153,7 +155,6 @@ export default {
       similarList: [],
       movie: {},
       movieList: [],
-      type: this.$route.params.type,
     };
   },
   methods: {
@@ -162,7 +163,7 @@ export default {
     },
     convertDate() {
       let date;
-      if (this.type == "movie") {
+      if (this.$route.params.type == "movie") {
         date = this.movie.release_date;
       } else {
         date = this.movie.first_air_date;
@@ -179,8 +180,9 @@ export default {
       return `background: url('https://image.tmdb.org/t/p/w500${poster}') no-repeat center center;`;
     },
     callDati() {
+
       apiService
-        .getDetail(this.type, this.$route.params.id)
+        .getDetail(this.$route.params.type, this.$route.params.id)
         .then((data) => {
           this.movie = data;
         });
@@ -203,9 +205,8 @@ export default {
     this.callDati();
   },
   watch: {
-    "$route.params.search": {
-      handler: function (search) {
-        console.log(search);
+    "$route.params": {
+      handler: function () {
         this.callDati();
       },
       deep: true,
