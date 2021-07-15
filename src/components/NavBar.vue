@@ -157,7 +157,7 @@ export default {
         });
     },
     navigateTo(item) {
-
+      if(item.length != 0){
       this.$router.push({
         name: "Details",
         params: {
@@ -165,6 +165,7 @@ export default {
           type: item[0].type,
         },
       });
+      }
     },
 
     filtra(iso) {
