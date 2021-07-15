@@ -75,14 +75,19 @@
               aria-label="Search"
             />
 
-            <select type="search" data-live-search="true" v-model="selectedItem" @change="navigateTo">
+            <select
+              type="search"
+              data-live-search="true"
+              v-model="selectedItem"
+              @change="navigateTo"
+            >
               <option
                 v-for="movieOSerie in searchList"
                 :key="movieOSerie.id"
                 :value="movieOSerie"
               >
                 {{ movieOSerie.title }}
-                {{ movieOSerie.name}}
+                {{ movieOSerie.name }}
               </option>
             </select>
 
@@ -118,19 +123,25 @@ export default {
     return {
       language: language,
       searchList: [],
-      selectedItem: null
+      selectedItem: null,
     };
   },
   methods: {
-    cerca(){
-      
-      apiService.getSearch(document.getElementById("param").value)
-      .then((data) => {
+    cerca() {
+      apiService
+        .getSearch(document.getElementById("param").value)
+        .then((data) => {
           this.searchList = data.results;
         });
     },
     navigateTo() {
-      this.$router.push({name: "Details", params:{id: this.selectedItem.id, type: this.selectedItem.media_type}})
+      this.$router.push({
+        name: "Details",
+        params: {
+          id: this.selectedItem.id,
+          type: this.selectedItem.media_type,
+        },
+      });
       // this.reloadDetailPage()
     },
     // reloadDetailPage(){
@@ -153,6 +164,13 @@ export default {
       languageService.setCurrentLanguage(event.target.value); //prima c'era lingua al posto di lingua.target.value
       window.location.reload();
     },
+  },
+  mounted() {
+    window.document.onkeyup = function (e) {
+      if (e.ctrlKey && e.which == 75) {
+        document.getElementById('param').focus();
+      }
+    };
   },
 };
 </script>
