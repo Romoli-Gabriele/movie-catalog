@@ -77,6 +77,7 @@
               aria-label="Search"
             /> -->
           <Multiselect
+            id = "param"
             mode="tags"
             :filterResults="false"
             :minChars="3"
@@ -87,6 +88,7 @@
             :limit="5"
             :options="getMovies"
             @change="navigateTo"
+            
           >
             <template v-slot:singlelabel="{ value }" @click="navigateTo" >
               <div class="multiselect-single-label">
