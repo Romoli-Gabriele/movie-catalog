@@ -102,7 +102,7 @@
                 {{ movie.overview }}
               </p>
               <p
-                v-show="$route.params.type != 'person'"
+                v-show="$route.params.type == 'person'"
                 class="text-light first-letter-capitalize"
               >
                 <b>{{ $t("biography")}}: </b>
