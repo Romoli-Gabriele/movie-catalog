@@ -8,10 +8,10 @@
                 <p class="card-text">
                 <ul class="list-group list-group-flush bg-dark">
                     <li class="list-group-item bg-dark text-light capitalize-first-letter"><b>{{ $t('review')}}: </b> 
-                        <Reviews :value="movie.vote_average" :full="'fa-star'" :half="'fa-star-half-alt'" :empty="'fa-star'" :color="'text-warning'" :type="true"></Reviews>
+                        <Reviews :value="movie.vote_average" :fullIcon="'fa-star'" :halfIcon="'fa-star-half-alt'" :emptyIcon="'fa-star'" :color="'text-warning'" :iconType="true"></Reviews>
                     </li>
                     <li class="list-group-item bg-dark text-light capitalize-first-letter"><b>{{ $t('popularity')}}: </b>
-                        <Reviews :value="movie.popularity" :full="'fa-heart'" :half="'fa-heart-broken'" :empty="'fa-heart'" :color="'text-danger'" :type="false"></Reviews>
+                        <Reviews :value="movie.popularity" :fullIcon="'fa-heart'" :halfIcon="'fa-heart-broken'" :emptyIcon="'fa-heart'" :color="'text-danger'" :iconType="false"></Reviews>
                     </li>
 
                     <li class="list-group-item bg-dark text-light capitalize-first-letter">

@@ -105,9 +105,9 @@
                 v-show="$route.params.type == 'person'"
                 class="text-light first-letter-capitalize"
               >
-                <b>{{ $t("biography")}}: </b>
+                <b>{{ $t("biography") }}: </b>
                 <br />
-                {{ movie.biography}}
+                {{ movie.biography }}
               </p>
               <p
                 v-show="$route.params.type != 'person'"
@@ -116,12 +116,17 @@
                 <b>{{ $t("status") }}:</b> {{ movie.status }}
               </p>
               <p class="text-light first-letter-capitalize">
-                <b v-if="$route.params.type == 'person'"> {{ $t("birthday")}}: </b>
+                <b v-if="$route.params.type == 'person'">
+                  {{ $t("birthday") }}:
+                </b>
                 <b v-else>{{ $t("release-date") }}: </b>
                 {{ formatterService.formatDate(movie) }}
               </p>
-              <p  v-if="$route.params.type == 'person'" class="text-light first-letter-capitalize">
-                <b>{{ $t("place-of-birth")}} </b>
+              <p
+                v-if="$route.params.type == 'person'"
+                class="text-light first-letter-capitalize"
+              >
+                <b>{{ $t("place-of-birth") }} </b>
                 {{ movie.place_of_birth }}
               </p>
               <p
@@ -131,6 +136,57 @@
                 <b>{{ $t("original-language") }}: </b>
                 {{ language(movie.original_language) }}
               </p>
+              
+              <!-- Button trigger modal -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                Launch demo modal
+              </button>
+
+              <!-- Modal -->
+              <div
+                class="modal fade"
+                id="exampleModal"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">
+                        Modal title
+                      </h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      <StarRating />
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button type="button" class="btn btn-primary">
+                        Save changes
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <br />
               <br />
               <a
@@ -141,8 +197,12 @@
                   type="button"
                   class="btn btn-outline-warning text-light"
                 >
-                  <b v-show="$route.params.type != 'person'">{{ $t("watch-now") }}</b>
-                  <b v-show="$route.params.type == 'person'">{{ $t("website")}}</b>
+                  <b v-show="$route.params.type != 'person'">{{
+                    $t("watch-now")
+                  }}</b>
+                  <b v-show="$route.params.type == 'person'">{{
+                    $t("website")
+                  }}</b>
                 </button>
               </a>
             </div>
@@ -188,7 +248,6 @@ export default {
       return `background: url('https://image.tmdb.org/t/p/w500${poster}') no-repeat center center;`;
     },
     callDati() {
-
       apiService
         .getDetail(this.$route.params.type, this.$route.params.id)
         .then((data) => {
