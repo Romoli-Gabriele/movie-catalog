@@ -19,7 +19,7 @@
                         <br>
                         <p v-show="show == false" class="description-height">{{ description(movie.overview, true)}}   <a class="text-danger capitalize-first-letter" @click="toggleShow()">...{{ $t('show-more') }}</a></p>
                         <p v-show="show" class="description-height">{{ movie.overview}} <a class="text-danger capitalize-first-letter" @click="toggleShow()">...{{$t('show-less')}}</a></p>
-                        <router-link :to="{ name: 'Details', params: { id: movie.id, type: movie.media_type} }" @click="moveUp">
+                        <router-link :to="{ name: 'Details', params: { id: movie.id, type: movie.media_type} }" >
                             <button type="button" class="btn btn-outline-info capitalize-first-letter">
                             {{ $t('detail')}}
                             </button>
@@ -65,9 +65,6 @@ export default {
     };
   },
   methods: {
-    moveUp(){
-           window.scrollTo(0,0);
-    },
     imgSwitch() {
       if (this.collImg) {
         this.collImg = false;

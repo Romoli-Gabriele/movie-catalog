@@ -1,10 +1,12 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import {
+  createRouter,
+  createWebHistory
+} from 'vue-router'
 import Home from '../views/Home.vue'
 import pageNotFound from '../views/pageNotFound.vue'
 
 
-const routes = [
-  {
+const routes = [{
     path: '/:catchAll(.*)*',
     name: "pageNotFound",
     component: pageNotFound
@@ -20,31 +22,31 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Series.vue'),
-  },  
+    component: () => import( /* webpackChunkName: "about" */ '../views/Series.vue'),
+  },
   {
-    path: '/details/:id/:type', 
+    path: '/details/:id/:type',
     name: 'Details',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Details.vue'), 
-    props:{
-      id:{
+    component: () => import( /* webpackChunkName: "about" */ '../views/Details.vue'),
+    props: {
+      id: {
         type: Number,
         required: true,
       },
-      type:{
+      type: {
         type: String,
         required: true,
       },
-      language:{
+      language: {
         type: String,
         required: true,
       }
     }
   },
- 
+
 ]
 
 const router = createRouter({
@@ -52,6 +54,11 @@ const router = createRouter({
   routes,
   linkActiveClass: "active",
   linkExactActiveClass: "exact-active",
+
+  scrollBehavior: () => ({
+    top: 0,
+    behavior: "smooth"
+  })
 })
 
 export default router
