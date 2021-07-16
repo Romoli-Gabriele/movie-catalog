@@ -78,7 +78,7 @@
             /> -->
           <Multiselect
             id="param"
-            mode="tags"
+            v-model="selectedSearch"
             :filterResults="false"
             :minChars="3"
             :resolveOnLoad="false"
@@ -87,13 +87,11 @@
             :max="1"
             :limit="5"
             :options="getMovies"
-            :clearOnSelect="true"
-            :clearOnSearch="true"
             @change="navigateTo"
-              ref="multiselect"
-
+            placeholder="Choose a programming language"
+            ref="multiselect"
+            class="text-start"
           >
-
             <template v-slot:option="{ option }" @change="navigateTo(option)">
               <img class="character-option-icon" :src="option.icon" />
               {{ option.name }}
@@ -145,7 +143,7 @@ export default {
       language: language,
       searchList: [],
       selectedItem: null,
-      value: null,
+      selectedSearch: null,
     };
   },
   methods: {
@@ -157,14 +155,17 @@ export default {
         });
     },
     navigateTo(item) {
-      if(item.length != 0){
-      this.$router.push({
-        name: "Details",
-        params: {
-          id: item[0].id,
-          type: item[0].type,
-        },
-      });
+      // eslint-disable-next-line no-debugger
+      debugger;
+      if (item) {
+        this.selectedItem = item;
+        this.$router.push({
+          name: "Details",
+          params: {
+            id: item.id,
+            type: item.type,
+          },
+        });
       }
     },
 
@@ -187,14 +188,25 @@ export default {
       return apiService.getSearch(search).then((data) => {
         return data.results.map((item) => ({
           name: item.title || item.name,
-          value: { id: item.id, type: item.media_type },
-          icon: 'https://image.tmdb.org/t/p/original/' + item.poster_path,
+          label: item.title || item.name,
+          value: {
+            id: item.id,
+            type: item.media_type,
+            name: item.title || item.name,
+          },
+          icon: "https://image.tmdb.org/t/p/original/" + item.poster_path,
         }));
       });
     },
   },
   mounted() {
-    this.$refs.multiselect.clear()
+    // this.$nextTick(() => {
+    //   // eslint-disable-next-line no-debugger
+    //   debugger;
+    //   this.$refs.multiselect.clear();
+    // });
+
+    window.pippo = this;
     if (window.navigator.userAgent.indexOf("Windows NT 10.0") != -1) {
       document.onkeydown = (e) => {
         if (e.ctrlKey && e.which == 75) {
@@ -247,6 +259,9 @@ export default {
 .submit-button {
   border-radius: 0;
   border-left: none;
+  margin-top: 10px;
+  height: 40px;
+  margin-bottom: 2px;
 }
 
 .exact-active {
@@ -265,20 +280,43 @@ ul.multiselect-options {
   padding: 10px;
   cursor: default;
   position: absolute;
-  width: 100%;
+  width: 300px;
 }
 
-input.multiselect-tags-search {
+input.multiselect-search {
   background-color: #212529;
   color: #fff;
   border: 1px solid #fff;
-  height: 38px;
-  min-width: 200px;
+  height: 40px;
+  min-width: 300px;
 }
 
-.character-option-icon{
+.character-option-icon {
   float: left;
   width: 20px;
   height: 20px;
 }
+
+div.multiselect-placeholder,
+div.multiselect-single-label {
+  margin-top: -32px;
+  font-size: 16px;
+  color: white;
+  margin-left: 10px;
+}
+
+.is-selected {
+  background-color: #dc3545;
+}
+
+.is-pointed{
+  -webkit-box-shadow: 4px 4px 12px -1px rgba(0, 0, 0, 0.8);
+  box-shadow: 4px 4px 12px -1px rgba(0, 0, 0, 0.8);}
+
+/* div.multiselect-single-label{
+  margin-top: -30px;
+  font-size: 16px;
+  color: white;
+  margin-left: 10px;
+} */
 </style>
