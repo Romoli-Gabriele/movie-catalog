@@ -17,9 +17,9 @@
                     <li class="list-group-item bg-dark text-light capitalize-first-letter">
                         <b>{{ $t('description')}}: </b>
                         <br>
-                        <p v-show="show == false" class="description-height">{{ description(movie.overview, true)}}   <a class="text-danger capitalize-first-letter" @click="toggleShowImgSwitch()">...{{ $t('show-more') }}</a></p>
-                        <p v-show="show" class="description-height">{{ movie.overview}} <a class="text-danger capitalize-first-letter" @click="toggleShowImgSwitch()">...{{$t('show-less')}}</a></p>
-                        <router-link :to="{ name: 'Details', params: { id: movie.id, type: movie.media_type} }">
+                        <p v-show="show == false" class="description-height">{{ description(movie.overview, true)}}   <a class="text-danger capitalize-first-letter" @click="toggleShow()">...{{ $t('show-more') }}</a></p>
+                        <p v-show="show" class="description-height">{{ movie.overview}} <a class="text-danger capitalize-first-letter" @click="toggleShow()">...{{$t('show-less')}}</a></p>
+                        <router-link :to="{ name: 'Details', params: { id: movie.id, type: movie.media_type} }" @click="moveUp">
                             <button type="button" class="btn btn-outline-info capitalize-first-letter">
                             {{ $t('detail')}}
                             </button>
@@ -29,11 +29,10 @@
                         <b class="capitalize-first-letter">{{$t('release-date')}}: </b>{{formatterService.formatDate(movie)}}
                     </li>
                     <li v-show="collImg" class="list-group-item bg-dark text-light">
-                        <ul >
-                            <b class="capitalize-first-letter">{{$t('genres')}}:</b> <br>
+                        <ul class="capitalize-first-letter m-0 p-0">
+                            <b>{{$t('genres')}}:</b> <br>
                             <Genres :movieG="movie.genre_ids" :type="movie.media_type"/>
                         </ul>
-
                     </li>
                 </ul>
                 </p>
@@ -66,6 +65,9 @@ export default {
     };
   },
   methods: {
+    moveUp(){
+           window.scrollTo(0,0);
+    },
     imgSwitch() {
       if (this.collImg) {
         this.collImg = false;
@@ -73,6 +75,7 @@ export default {
         this.collImg = true;
       }
     },
+    
     image() {
       if (this.collImg) {
         return this.movie.backdrop_path;
@@ -113,7 +116,7 @@ export default {
 }
 .description-height {
   min-height: 150px;
-  max-height: 500px;
+  max-height: 800px;
   height: auto;
 }
 </style>
