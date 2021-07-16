@@ -62,20 +62,6 @@
             </select>
           </div>
 
-          <!-- <div class="d-flex">
-            <input
-              id="param"
-              class="
-                form-control
-                me-2
-                bg-dark
-                text-light
-                first-letter-capitalize
-              "
-              type="search"
-              :placeholder="$t('search')"
-              aria-label="Search"
-            /> -->
           <Multiselect
             id="param"
             v-model="selectedSearch"
@@ -88,7 +74,7 @@
             :limit="5"
             :options="getMovies"
             @change="navigateTo"
-            placeholder="Choose a programming language"
+            :placeholder=" $t('search') + ctrlOrCmd()"
             ref="multiselect"
             class="text-start"
           >
@@ -98,17 +84,6 @@
             </template>
           </Multiselect>
 
-          <!-- <select type="search" data-live-search="true" v-model="selectedItem" @change="navigateTo">
-              <option
-                v-for="movieOSerie in searchList"
-                :key="movieOSerie.id"
-                :value="movieOSerie"
-              >
-                {{ movieOSerie.title }}
-                {{ movieOSerie.name }}
-              </option>
-            </select> -->
-
           <button
             class="btn btn-outline-success submit-button"
             @click="cerca()"
@@ -116,7 +91,6 @@
           >
             {{ $t("search") }}
           </button>
-          <!--</div>-->
         </div>
       </div>
     </nav>
@@ -147,6 +121,10 @@ export default {
     };
   },
   methods: {
+    ctrlOrCmd(){
+      if (window.navigator.userAgent.indexOf("Windows NT 10.0") != -1) return "  (ctrl + k)"
+      if (window.navigator.userAgent.indexOf("Mac") != -1) return "  (cmd + k)"
+    },
     cerca() {
       apiService
         .getSearch(document.getElementById("param").value)
@@ -155,8 +133,6 @@ export default {
         });
     },
     navigateTo(item) {
-      // eslint-disable-next-line no-debugger
-      debugger;
       if (item) {
         this.selectedItem = item;
         this.$router.push({
@@ -200,11 +176,6 @@ export default {
     },
   },
   mounted() {
-    // this.$nextTick(() => {
-    //   // eslint-disable-next-line no-debugger
-    //   debugger;
-    //   this.$refs.multiselect.clear();
-    // });
 
     window.pippo = this;
     if (window.navigator.userAgent.indexOf("Windows NT 10.0") != -1) {

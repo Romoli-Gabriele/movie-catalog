@@ -20,11 +20,9 @@
                         <p v-show="show == false" class="description-height">{{ description(movie.overview, true)}}   <a class="text-danger capitalize-first-letter" @click="toggleShowImgSwitch()">...{{ $t('show-more') }}</a></p>
                         <p v-show="show" class="description-height">{{ movie.overview}} <a class="text-danger capitalize-first-letter" @click="toggleShowImgSwitch()">...{{$t('show-less')}}</a></p>
                         <router-link :to="{ name: 'Details', params: { id: movie.id, type: movie.media_type} }">
-                          <div class="card-footer">
                             <button type="button" class="btn btn-outline-info capitalize-first-letter">
                             {{ $t('detail')}}
                             </button>
-                          </div>
                         </router-link>
                     </li>
                     <li v-show="collImg" class="text-light list-group-item bg-dark">
