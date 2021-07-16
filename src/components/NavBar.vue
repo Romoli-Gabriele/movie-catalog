@@ -51,10 +51,9 @@
 
           <div class="me-4">
             <select
-              class="btn btn-secondary"
+              class="btn btn-secondary select-language-button"
               v-model="language"
               @change="handleChange($event)"
-              style="padding-right: 0px"
             >
               <option value="en">English</option>
               <option v-show="filtra('it')" value="it">Italiano</option>
@@ -311,12 +310,11 @@ div.multiselect-single-label {
 
 .is-pointed{
   -webkit-box-shadow: 4px 4px 12px -1px rgba(0, 0, 0, 0.8);
-  box-shadow: 4px 4px 12px -1px rgba(0, 0, 0, 0.8);}
+  box-shadow: 4px 4px 12px -1px rgba(0, 0, 0, 0.8);
+  }
 
-/* div.multiselect-single-label{
-  margin-top: -30px;
-  font-size: 16px;
-  color: white;
-  margin-left: 10px;
-} */
+.select-language-button{
+  margin-top: 10px;
+  padding-right: 0px;
+}
 </style>

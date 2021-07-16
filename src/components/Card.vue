@@ -27,12 +27,12 @@
                           </div>
                         </router-link>
                     </li>
-                    <li v-show="collImg" class="text-light list-group-item bg-dark">
-                        <b class="capitalize-first-letter">{{$t('release-date')}}: </b>{{formatterService.formatDate(movie)}}
+                    <li v-show="collImg" class="text-light list-group-item bg-dark capitalize-first-letter">
+                        <b>{{$t('release-date')}}: </b>{{formatterService.formatDate(movie)}}
                     </li>
                     <li v-show="collImg" class="list-group-item bg-dark text-light">
-                        <ul >
-                            <b class="capitalize-first-letter">{{$t('genres')}}:</b> <br>
+                        <ul class="capitalize-first-letter m-0 p-0">
+                            <b>{{$t('genres')}}:</b> <br>
                             <Genres :movieG="movie.genre_ids" :type="movie.media_type"/>
                         </ul>
 
