@@ -1,4 +1,6 @@
-import { languageService } from "./languageService";
+import {
+    languageService
+} from "./languageService";
 const baseUrl = "https://api.themoviedb.org/3/"
 const apiKey = "6f9286d54de4891ea7a5c91779e09786";
 
@@ -21,12 +23,21 @@ export const apiService = {
     getSimilar(type, id) {
         return apiCall(`${type}/${id}/similar`);
     },
-    getDetail(type, id){
+    getDetail(type, id) {
         return apiCall(`${type}/${id}`)
     },
-    getSearch(query){
+    getSearch(query) {
         return apiCall(`search/multi`, {
             query
         })
-    }
+    },
+    postRate(type, id, /*voto*/) { //metodo che posta la recensione: non funziona, guarda https://developers.themoviedb.org/3/movies/rate-movie per fixarlo 
+        var guest_id;
+        
+        apiCall(`/authentication/guest_session/new`).then((data) => {
+            guest_id = data.guest_session_id;
+
+        });
+        apiCall(`/${type}/${id}/rating`, { guest_id })
+    },
 }
