@@ -1,12 +1,19 @@
 <template>
-    
-    <div>
-        <i :key="c" v-for="c in calcF(value)" class="fas" :class="full + ' ' +color"></i>
-        <i v-show="mezzo" class="fas" :class=" half+' '+color"></i>
-        <i :key="o" v-for="o in calcW(value)" class="far" :class="empty+' '+color" ></i>
-        
-    </div>
-
+  <div>
+    <i
+      :key="c"
+      v-for="c in calcF(value)"
+      class="fas"
+      :class="full + ' ' + color"
+    ></i>
+    <i v-show="mezzo" class="fas" :class="half + ' ' + color"></i>
+    <i
+      :key="o"
+      v-for="o in calcW(value)"
+      class="far"
+      :class="empty + ' ' + color"
+    ></i>
+  </div>
 </template>
 
 <script>
@@ -52,31 +59,19 @@ export default {
     methods:{
         calcF(x) { 
             if(this.type){
-                x = x / 2;
-            if (x - Math.round(x) >= 0.35 || x - Math.round(x) <= -0.35) {
+                x /= 2;
+            }else{
+                x /= 1000;
+            }
+            Math.round(x * 10) / 10;
+            if(x >= 5){
+                return 5;
+            }else if (x - Math.trunc(x) >= 0.39 && x - Math.trunc(x) <= 0.61) {
                 this.mezzo = true;
-                x--;
-
+                return Math.trunc(x)
+            }else{
+                return Math.round(x);
             }
-            return Math.round(x)
-        }else{
-            x = x / 1000;
-            if (x - Math.round(x) >= 0.4 || x - Math.round(x) <= -0.4) {
-                if (x < 5) {
-                    this.mezzo = true;
-                }
-
-            } else {
-                this.mezzo = false
-            }
-
-            if (Math.round(x) > 5) {
-
-                return 5
-            }
-
-            return Math.round(x) > 0 ? Math.round(x) : 0
-        }
             
         },
         
@@ -84,7 +79,7 @@ export default {
             let y = this.calcF(x);
 
             y = 5 - y;
-            if (this.mezzo && y > 0) {
+            if (this.mezzo && y > 0 ) {
                 y--;
 
             }
