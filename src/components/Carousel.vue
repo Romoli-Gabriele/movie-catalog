@@ -48,7 +48,7 @@
         <div class="row">
           <div v-for="f in 3" :key="f" class="col-4">
             <CarouselCard
-              :movie="similarList[f + k * 2]"
+              :movie="similarList[f + k * 3]"
               :type="type"
             ></CarouselCard>
           </div>
