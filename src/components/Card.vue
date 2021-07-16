@@ -20,19 +20,17 @@
                         <p v-show="show == false" class="description-height">{{ description(movie.overview, true)}}   <a class="text-danger capitalize-first-letter" @click="toggleShowImgSwitch()">...{{ $t('show-more') }}</a></p>
                         <p v-show="show" class="description-height">{{ movie.overview}} <a class="text-danger capitalize-first-letter" @click="toggleShowImgSwitch()">...{{$t('show-less')}}</a></p>
                         <router-link :to="{ name: 'Details', params: { id: movie.id, type: movie.media_type} }">
-                          <div class="card-footer">
                             <button type="button" class="btn btn-outline-info capitalize-first-letter">
                             {{ $t('detail')}}
                             </button>
-                          </div>
                         </router-link>
                     </li>
-                    <li v-show="collImg" class="text-light list-group-item bg-dark capitalize-first-letter">
-                        <b>{{$t('release-date')}}: </b>{{formatterService.formatDate(movie)}}
+                    <li v-show="collImg" class="text-light list-group-item bg-dark">
+                        <b class="capitalize-first-letter">{{$t('release-date')}}: </b>{{formatterService.formatDate(movie)}}
                     </li>
                     <li v-show="collImg" class="list-group-item bg-dark text-light">
-                        <ul class="capitalize-first-letter m-0 p-0">
-                            <b>{{$t('genres')}}:</b> <br>
+                        <ul >
+                            <b class="capitalize-first-letter">{{$t('genres')}}:</b> <br>
                             <Genres :movieG="movie.genre_ids" :type="movie.media_type"/>
                         </ul>
 
@@ -48,7 +46,6 @@ import Reviews from "./Reviews.vue";
 import { genreService } from "../services/genreService";
 import Genres from "../components/Genres.vue";
 import { formatterService } from "../services/formatterService";
-
 export default {
   name: "Card",
   components: {
@@ -68,7 +65,6 @@ export default {
       formatterService,
     };
   },
-
   methods: {
     imgSwitch() {
       if (this.collImg) {
@@ -103,7 +99,6 @@ export default {
   },
 };
 </script>
-
 <style>
 .capitalize-first-letter::first-letter {
   text-transform: capitalize;
@@ -116,10 +111,9 @@ export default {
   max-height: 2000px;
   height: auto !important;
 }
-
 .description-height {
   min-height: 150px;
-  max-height: 800px;
+  max-height: 500px;
   height: auto;
 }
 </style>
