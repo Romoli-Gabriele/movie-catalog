@@ -119,7 +119,7 @@ export default {
 
 .description-height {
   min-height: 150px;
-  max-height: 500px;
+  max-height: 800px;
   height: auto;
 }
 </style>

@@ -87,7 +87,7 @@
             :limit="5"
             :options="getMovies"
             @change="navigateTo"
-            placeholder="Choose a programming language"
+            :placeholder="$t('search')"
             ref="multiselect"
             class="text-start"
           >
@@ -154,8 +154,6 @@ export default {
         });
     },
     navigateTo(item) {
-      // eslint-disable-next-line no-debugger
-      debugger;
       if (item) {
         this.selectedItem = item;
         this.$router.push({
@@ -199,13 +197,7 @@ export default {
     },
   },
   mounted() {
-    // this.$nextTick(() => {
-    //   // eslint-disable-next-line no-debugger
-    //   debugger;
-    //   this.$refs.multiselect.clear();
-    // });
 
-    window.pippo = this;
     if (window.navigator.userAgent.indexOf("Windows NT 10.0") != -1) {
       document.onkeydown = (e) => {
         if (e.ctrlKey && e.which == 75) {
