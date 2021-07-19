@@ -31,5 +31,7 @@
         "good",
         "great",
         "wow"
-    ]
+    ],
+    "close" : "close",
+    "send-vote" : "send vote"
 }

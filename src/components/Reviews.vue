@@ -1,7 +1,8 @@
 <template>
   <div :class="color">
-    <!-- return ((type == "movie") ? moviesGenres : tvGenres).find(x => x.id === id) -->
     <i
+      data-bs-toggle="tooltip"
+      :data-bs-original-title="$t('review')"
       :key="item"
       v-for="(item, i) in calculateIcon"
       :class="item"
@@ -9,28 +10,24 @@
       @mouseover="itemClick(i)"
     >
     </i>
-    <p>{{ review }}</p>
-    <!-- <i
-      :key="item"
-      v-for="item in calculateFullIcon(value)"
-      class="fas"
-      :class="fullIcon + ' ' + color"
-    ></i>
-    <i v-show="mezzo" class="fas" :class="halfIcon + ' ' + color"></i>
-    <i
-      :key="item"
-      v-for="(item, i) in calculateEmptyIcon(value)"
-      class="far"
-      :class="emptyIcon + ' ' + color"
-      @click="$emit('changeRate', i)"
-    ></i> -->
+    <p class="text-light">{{review}}</p>
   </div>
 </template>
 
 <script>
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap";
+import { Tooltip } from "bootstrap/dist/js/bootstrap.esm.min.js";
+
 export default {
   name: "Reviews",
   emits: ["update:modelValue"],
+
+  mounted() {
+    Array.from(
+      document.querySelectorAll('button[data-bs-toggle="tooltip"]')
+    ).forEach((tooltipNode) => new Tooltip(tooltipNode));
+  },
 
   props: {
     reviewOrPopularity: {

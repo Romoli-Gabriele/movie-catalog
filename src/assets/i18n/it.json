@@ -31,5 +31,7 @@
         "buono",
         "fantastico",
         "wow"
-    ]
+    ],
+    "close" : "chiudi",
+    "send-vote" : "invia voto"
 }

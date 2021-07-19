@@ -31,5 +31,8 @@
         "gut",
         "groß",
         "wow"
-    ]
+    ],
+    "close" : "schließen",
+    "send-vote" : "Stimme senden"
+
 }

@@ -114,20 +114,20 @@
                 {{ movie.biography }}
               </p>
               <p
-                v-show="$route.params.type != 'person'"
+                v-show="$route.params.type !== 'person'"
                 class="text-light first-letter-capitalize"
               >
                 <b>{{ $t("status") }}:</b> {{ movie.status }}
               </p>
               <p class="text-light first-letter-capitalize">
-                <b v-if="$route.params.type == 'person'">
+                <b v-if="$route.params.type === 'person'">
                   {{ $t("birthday") }}:
                 </b>
                 <b v-else>{{ $t("release-date") }}: </b>
                 {{ formatterService.formatDate(movie) }}
               </p>
               <p
-                v-if="$route.params.type == 'person'"
+                v-if="$route.params.type === 'person'"
                 class="text-light first-letter-capitalize"
               >
                 <b>{{ $t("place-of-birth") }} </b>
@@ -160,17 +160,13 @@
                 aria-hidden="true"
               >
                 <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">
-                        Modal title
+                  <div class="modal-content bg-dark">
+                    <div
+                      class="modal-header justify-content-center text-center"
+                    >
+                      <h5 class="modal-title text-light" id="exampleModalLabel">
+                        {{ $t("rate-this-film") }}
                       </h5>
-                      <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                      ></button>
                     </div>
                     <div class="modal-body">
                       <Reviews
@@ -179,7 +175,6 @@
                         :emptyIcon="'fa-star'"
                         :color="'text-warning'"
                         :review-or-popularity="'review'"
-
                       ></Reviews>
                     </div>
                     <div class="modal-footer">
@@ -188,10 +183,14 @@
                         class="btn btn-secondary"
                         data-bs-dismiss="modal"
                       >
-                        Close
+                        {{ $t("close") }}
                       </button>
-                      <button type="button" class="btn btn-primary">
-                        Save changes
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        data-bs-dismiss="modal"
+                      >
+                        {{ $t("send-vote") }}
                       </button>
                     </div>
                   </div>
