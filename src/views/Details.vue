@@ -63,13 +63,15 @@
               >
                 <b>{{ $t("review") }}:</b>
                 <Reviews
-                  :value="movie.vote_average"
-                  :full="'fa-star'"
-                  :half="'fa-star-half-alt'"
-                  :empty="'fa-star'"
+                  :model-value="movie.vote_average"
+                  :fullIcon="'fa-star'"
+                  :halfIcon="'fa-star-half-alt'"
+                  :emptyIcon="'fa-star'"
                   :color="'text-warning'"
-                  :type="true"
-                />
+                  :review-or-popularity="'review'"
+                  readOnly
+                ></Reviews>
+
                 ({{ Math.round((movie.vote_average / 2) * 10) / 10 }})
               </p>
               <p
@@ -84,13 +86,15 @@
               >
                 <b>{{ $t("popularity") }}: </b>
                 <Reviews
-                  :value="movie.popularity"
-                  :full="'fa-heart'"
-                  :half="'fa-heart-broken'"
-                  :empty="'fa-heart'"
+                  :model-value="movie.popularity"
+                  :fullIcon="'fa-heart'"
+                  :halfIcon="'fa-heart-broken'"
+                  :emptyIcon="'fa-heart'"
                   :color="'text-danger'"
-                  :type="false"
-                />
+                  :review-or-popularity="'popularity'"
+                  readOnly
+                ></Reviews>
+
                 ({{ Math.round((movie.popularity / 1000) * 10) / 10 }})
               </p>
               <p
@@ -136,7 +140,7 @@
                 <b>{{ $t("original-language") }}: </b>
                 {{ language(movie.original_language) }}
               </p>
-              
+
               <!-- Button trigger modal -->
               <button
                 type="button"
@@ -169,7 +173,14 @@
                       ></button>
                     </div>
                     <div class="modal-body">
-                      <StarRating />
+                      <Reviews
+                        v-model="dataRate"
+                        :fullIcon="'fa-star'"
+                        :emptyIcon="'fa-star'"
+                        :color="'text-warning'"
+                        :review-or-popularity="'review'"
+
+                      ></Reviews>
                     </div>
                     <div class="modal-footer">
                       <button
@@ -204,6 +215,7 @@
                     $t("website")
                   }}</b>
                 </button>
+                <br />
               </a>
             </div>
           </div>
@@ -237,6 +249,7 @@ export default {
       movie: {},
       movieList: [],
       similarList: [],
+      dataRate: 0,
       formatterService,
     };
   },

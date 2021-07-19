@@ -247,7 +247,7 @@ ul.multiselect-options {
   list-style-type: none;
   text-align: left;
   padding: 10px;
-  cursor: default;
+  cursor: pointer;
   position: absolute;
   width: 300px;
 }

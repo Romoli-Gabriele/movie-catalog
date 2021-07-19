@@ -8,17 +8,17 @@
                 <p class="card-text">
                 <ul class="list-group list-group-flush bg-dark">
                     <li class="list-group-item bg-dark text-light capitalize-first-letter"><b>{{ $t('review')}}: </b> 
-                        <Reviews :value="movie.vote_average" :fullIcon="'fa-star'" :halfIcon="'fa-star-half-alt'" :emptyIcon="'fa-star'" :color="'text-warning'" :iconType="true"></Reviews>
+                        <Reviews :model-value="movie.vote_average" :fullIcon="'fa-star'" :halfIcon="'fa-star-half-alt'" :emptyIcon="'fa-star'" :color="'text-warning'" :review-or-popularity="'review'" readOnly></Reviews>
                     </li>
                     <li class="list-group-item bg-dark text-light capitalize-first-letter"><b>{{ $t('popularity')}}: </b>
-                        <Reviews :value="movie.popularity" :fullIcon="'fa-heart'" :halfIcon="'fa-heart-broken'" :emptyIcon="'fa-heart'" :color="'text-danger'" :iconType="false"></Reviews>
+                        <Reviews :model-value="movie.popularity" :fullIcon="'fa-heart'" :halfIcon="'fa-heart-broken'" :emptyIcon="'fa-heart'" :color="'text-danger'" :review-or-popularity="'popularity'" readOnly></Reviews>
                     </li>
 
                     <li class="list-group-item bg-dark text-light capitalize-first-letter">
                         <b>{{ $t('description')}}: </b>
                         <br>
-                        <p v-show="show == false" class="description-height">{{ description(movie.overview, true)}}   <a class="text-danger capitalize-first-letter" @click="toggleShow()">...{{ $t('show-more') }}</a></p>
-                        <p v-show="show" class="description-height">{{ movie.overview}} <a class="text-danger capitalize-first-letter" @click="toggleShow()">...{{$t('show-less')}}</a></p>
+                        <p v-show="show == false" class="description-height">{{ description(movie.overview, true)}}   <a class="text-danger capitalize-first-letter cursor" @click="toggleShow()">...{{ $t('show-more') }}</a></p>
+                        <p v-show="show" class="description-height">{{ movie.overview}} <a class="text-danger capitalize-first-letter cursor" @click="toggleShow()">...{{$t('show-less')}}</a></p>
                         <router-link :to="{ name: 'Details', params: { id: movie.id, type: movie.media_type} }" >
                             <button type="button" class="btn btn-outline-info capitalize-first-letter">
                             {{ $t('detail')}}
@@ -56,6 +56,10 @@ export default {
       type: Object,
       required: true,
     },
+    dataValue: {
+      type: Number,
+      required: true
+    }
   },
   data() {
     return {
@@ -115,5 +119,8 @@ export default {
   min-height: 150px;
   max-height: 800px;
   height: auto;
+}
+.cursor{
+  cursor: pointer;
 }
 </style>

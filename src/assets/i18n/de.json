@@ -23,5 +23,13 @@
     "biography" : "biografie",
     "birthday" : "geburtstag",
     "place-of-birth" : "geburtsort",
-    "website" : "webseite"
+    "website" : "webseite",
+    "rate-this-film": "bewerte den film",
+    "reviews": [
+        "sehr schlecht",
+        "ok",
+        "gut",
+        "groß",
+        "wow"
+    ]
 }

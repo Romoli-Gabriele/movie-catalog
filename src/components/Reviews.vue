@@ -1,30 +1,40 @@
 <template>
-  <div>
+  <div :class="color">
     <!-- return ((type == "movie") ? moviesGenres : tvGenres).find(x => x.id === id) -->
-
     <i
-      :key="c"
-      v-for="c in calculateFullIcon(value)"
+      :key="item"
+      v-for="(item, i) in calculateIcon"
+      :class="item"
+      @click="itemClick(i)"
+      @mouseover="itemClick(i)"
+    >
+    </i>
+    <p>{{ review }}</p>
+    <!-- <i
+      :key="item"
+      v-for="item in calculateFullIcon(value)"
       class="fas"
       :class="fullIcon + ' ' + color"
     ></i>
     <i v-show="mezzo" class="fas" :class="halfIcon + ' ' + color"></i>
     <i
-      :key="o"
-      v-for="o in calculateEmptyIcon(value)"
+      :key="item"
+      v-for="(item, i) in calculateEmptyIcon(value)"
       class="far"
       :class="emptyIcon + ' ' + color"
-    ></i>
+      @click="$emit('changeRate', i)"
+    ></i> -->
   </div>
 </template>
 
 <script>
 export default {
   name: "Reviews",
+  emits: ["update:modelValue"],
 
   props: {
-    iconType: {
-      type: Boolean,
+    reviewOrPopularity: {
+      type: String,
       required: true,
     },
     fullIcon: {
@@ -39,7 +49,7 @@ export default {
       type: String,
       required: true,
     },
-    value: {
+    modelValue: {
       type: Number,
       required: true,
     },
@@ -47,38 +57,50 @@ export default {
       type: String,
       required: true,
     },
+    readOnly: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       mezzo: false,
+      review: "",
     };
   },
+
   methods: {
-    calculateFullIcon(x) {
-      if (this.iconType) {
-        x /= 2;
-      } else {
-        x /= 1000;
-      }
-      Math.round(x * 10) / 10;
-      if (x >= 5) {
-        return 5;
-      } else if (x - Math.trunc(x) >= 0.39 && x - Math.trunc(x) <= 0.61) {
-        this.mezzo = true;
-        return Math.trunc(x);
-      } else {
-        return Math.round(x);
+    itemClick(i) {
+      if (this.readOnly === false) {
+        this.$emit("update:modelValue", (i + 1) * 2);
+        this.calculateIcon;
+        this.review = this.$t("reviews." + i);
       }
     },
-
-    calculateEmptyIcon(x) {
-      let y = this.calculateFullIcon(x);
-      y = 5 - y;
-      if (this.mezzo && y > 0) {
-        y--;
+  },
+  computed: {
+    calculateIcon() {
+      let value = this.modelValue;
+      if (this.reviewOrPopularity === "review") {
+        value /= 2;
+      } else {
+        value /= 1000;
       }
-
-      return y;
+      const iconReviews = new Array(5).fill("far " + this.emptyIcon);
+      var i = 0;
+      while (i <= value - 1 && i < 5) {
+        iconReviews[i] = "fas " + this.fullIcon;
+        i++;
+      }
+      if (value % 1 >= 0.5) {
+        const index = iconReviews.findIndex(
+          (x) => x === "far " + this.emptyIcon
+        );
+        if (index > 0) {
+          iconReviews[index] = "fas " + this.halfIcon;
+        }
+      }
+      return iconReviews;
     },
   },
 };
