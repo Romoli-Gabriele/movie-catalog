@@ -141,62 +141,6 @@
                 {{ language(movie.original_language) }}
               </p>
 
-              <!-- Button trigger modal -->
-              <button
-                type="button"
-                class="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-              >
-                Launch demo modal
-              </button>
-
-              <!-- Modal -->
-              <div
-                class="modal fade"
-                id="exampleModal"
-                tabindex="-1"
-                aria-labelledby="exampleModalLabel"
-                aria-hidden="true"
-              >
-                <div class="modal-dialog">
-                  <div class="modal-content bg-dark">
-                    <div
-                      class="modal-header justify-content-center text-center"
-                    >
-                      <h5 class="modal-title text-light" id="exampleModalLabel">
-                        {{ $t("rate-this-film") }}
-                      </h5>
-                    </div>
-                    <div class="modal-body">
-                      <Reviews
-                        v-model="dataRate"
-                        :fullIcon="'fa-star'"
-                        :emptyIcon="'fa-star'"
-                        :color="'text-warning'"
-                        :review-or-popularity="'review'"
-                      ></Reviews>
-                    </div>
-                    <div class="modal-footer">
-                      <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-bs-dismiss="modal"
-                      >
-                        {{ $t("close") }}
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-primary"
-                        data-bs-dismiss="modal"
-                      >
-                        {{ $t("send-vote") }}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
               <br />
               <br />
               <a
@@ -216,6 +160,16 @@
                 </button>
                 <br />
               </a>
+              <p class="mt-3 text-light">
+                {{ $t("rate-this-film") }} :
+                <Reviews
+                  v-model="dataRate"
+                  :fullIcon="'fa-star'"
+                  :emptyIcon="'fa-star'"
+                  :color="'text-warning'"
+                  :review-or-popularity="'review'"
+                ></Reviews>
+              </p>
             </div>
           </div>
         </div>
@@ -286,6 +240,7 @@ export default {
   watch: {
     "$route.params": {
       handler: function () {
+        this.dataRate = 0;
         this.callDati();
       },
       deep: true,
