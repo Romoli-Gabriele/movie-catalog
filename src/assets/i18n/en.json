@@ -32,6 +32,13 @@
         "great",
         "wow"
     ],
+    "popular": [
+        "unknown",
+        "little known",
+        "ok",
+        "popular",
+        "very known"
+    ],
     "close" : "close",
     "send-vote" : "send vote"
 }

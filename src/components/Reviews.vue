@@ -1,8 +1,8 @@
 <template>
   <div :class="color">
     <i
-      data-bs-toggle="tooltip"
-      :data-bs-original-title="$t('review')"
+      :title="currentTitle"
+      :data-bs-original-title="review"
       :key="item"
       v-for="(item, i) in calculateIcon"
       :class="item"
@@ -10,7 +10,7 @@
       @mouseover="itemClick(i)"
     >
     </i>
-    <p class="text-light">{{review}}</p>
+    <p v-if="!readOnly" class="text-light">{{ review }}</p>
   </div>
 </template>
 
@@ -98,6 +98,20 @@ export default {
         }
       }
       return iconReviews;
+    },
+    currentTitle() {
+      let value = this.modelValue;
+      if (this.reviewOrPopularity === "review") {
+        return this.readOnly
+          ? this.$t("reviews." + parseInt(value / 2 - 1))
+          : "";
+      } else if (value/1000-1 > 4){
+            return this.readOnly ? this.$t("popular." + 4) : "";
+      } else {
+          return this.readOnly
+          ? this.$t("popular." + parseInt(value / 1000 - 1 ))
+          : "";
+      }
     },
   },
 };

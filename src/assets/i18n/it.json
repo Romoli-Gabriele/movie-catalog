@@ -32,6 +32,13 @@
         "fantastico",
         "wow"
     ],
+    "popular": [
+        "sconosciuto",
+        "poco conosciuto",
+        "ok",
+        "popolare",
+        "molto conosciuto"
+    ],
     "close" : "chiudi",
     "send-vote" : "invia voto"
 }

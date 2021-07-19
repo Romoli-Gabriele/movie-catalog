@@ -32,6 +32,13 @@
         "groß",
         "wow"
     ],
+    "popular": [
+        "Unbekannt",
+        "wenig bekannt",
+        "ok",
+        "Beliebt",
+        "sehr bekannt"
+    ],
     "close" : "schließen",
     "send-vote" : "Stimme senden"
 
