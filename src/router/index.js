@@ -4,12 +4,17 @@ import {
 } from 'vue-router'
 import Home from '../views/Home.vue'
 import pageNotFound from '../views/pageNotFound.vue'
-
+import RegisterPage from '../views/RegisterPage.vue'
 
 const routes = [{
     path: '/:catchAll(.*)*',
     name: "pageNotFound",
     component: pageNotFound
+  },
+  {
+    path: '/success',
+    name: "success",
+    component: RegisterPage
   },
   {
     path: '/',

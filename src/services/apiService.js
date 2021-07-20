@@ -1,6 +1,9 @@
 import {
     languageService
 } from "./languageService";
+import {
+    registerService
+} from "./registerService";
 const baseUrl = "https://api.themoviedb.org/3/"
 const apiKey = "6f9286d54de4891ea7a5c91779e09786";
 
@@ -31,13 +34,18 @@ export const apiService = {
             query
         })
     },
-    postRate(type, id, /*voto*/) { //metodo che posta la recensione: non funziona, guarda https://developers.themoviedb.org/3/movies/rate-movie per fixarlo 
-        var guest_id;
-        
-        apiCall(`/authentication/guest_session/new`).then((data) => {
-            guest_id = data.guest_session_id;
-
-        });
-        apiCall(`/${type}/${id}/rating`, { guest_id })
+    postRate(type, id, /*voto*/ ) { //metodo che posta la recensione: non funziona, guarda https://developers.themoviedb.org/3/movies/rate-movie per fixarlo 
+        apiCall(`/${type}/${id}/rating`, {
+            token: registerService.currentToken
+        })
     },
+
+    doLogin(redirect) {
+        apiCall(`/authentication/token/new`).then((data) => {
+            // eslint-disable-next-line no-debugger
+            debugger
+
+            location.href = `https://www.themoviedb.org/authenticate/${data.request_token}?redirect_to=${redirect}`
+        });
+    }
 }

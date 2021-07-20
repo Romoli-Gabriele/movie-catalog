@@ -19,19 +19,7 @@
 .sottotitolo {
   font-size: 50px;
 }
-</style>
 
-<script>
-export default {
-  methods: {
-    image() {
-      return this.movie.backdrop_path;
-    },
-  },
-};
-</script>
-
-<style scoped>
 .first-letter-capitalize::first-letter{
   text-transform: capitalize;
 }

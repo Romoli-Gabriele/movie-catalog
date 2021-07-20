@@ -176,6 +176,9 @@
                         :color="'text-warning'"
                         :review-or-popularity="'review'"
                       ></Reviews>
+                      <p v-if="!isUserLogged">
+                        Per votare devi <a @click="doLogin" >autenticarti</a>
+                      </p>
                     </div>
                     <div class="modal-footer">
                       <button
@@ -236,6 +239,7 @@ import Carousel from "../components/Carousel.vue";
 import { languageService } from "../services/languageService";
 import { formatterService } from "../services/formatterService";
 import { apiService } from "../services/apiService";
+import { registerService } from "../services/registerService";
 
 export default {
   name: "Details",
@@ -250,6 +254,7 @@ export default {
       similarList: [],
       dataRate: 0,
       formatterService,
+      isUserLogged: registerService.isLogged,
     };
   },
   methods: {
@@ -258,6 +263,13 @@ export default {
     },
     BindBgImage(poster) {
       return `background: url('https://image.tmdb.org/t/p/w500${poster}') no-repeat center center;`;
+    },
+    doLogin() {
+      const redirectUrl = this.$router.resolve({
+        name: "success",
+      });
+
+      apiService.doLogin(location.origin + redirectUrl.fullPath);
     },
     callDati() {
       apiService

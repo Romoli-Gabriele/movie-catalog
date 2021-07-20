@@ -1,7 +1,7 @@
 <template>
   <div class="card bg-dark mb-5">
     <img
-      :src="'https://image.tmdb.org/t/p/w300/' + movie.backdrop_path"
+      :src="'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path"
       alt="movie banner"
     />
     <div class="card-body">
