@@ -6,10 +6,12 @@
 </template>
 
 <script>
+import { apiService } from "../services/apiService";
 import { registerService } from "../services/registerService";
 export default {
   mounted() {
     registerService.saveToken(this.$route.query.request_token);
+    apiService.createNewSession();
   },
 };
 </script>

@@ -176,8 +176,14 @@
                         :color="'text-warning'"
                         :review-or-popularity="'review'"
                       ></Reviews>
-                      <p v-if="!isUserLogged">
-                        Per votare devi <a @click="doLogin" >autenticarti</a>
+                      <p class="text-light" v-if="!isUserLogged">
+                        Per votare devi
+                        <a
+                          @click="doLogin"
+                          class="text-primary"
+                          style="cursor: pointer"
+                          >autenticarti</a
+                        >
                       </p>
                     </div>
                     <div class="modal-footer">
@@ -192,6 +198,17 @@
                         type="button"
                         class="btn btn-primary"
                         data-bs-dismiss="modal"
+                        v-if="isUserLogged"
+                        @click="submitReview"
+                      >
+                        {{ $t("send-vote") }}
+                      </button>
+                      <button
+                        v-else
+                        type="button"
+                        class="btn btn-primary"
+                        data-bs-dismiss="modal"
+                        disabled
                       >
                         {{ $t("send-vote") }}
                       </button>
@@ -258,6 +275,14 @@ export default {
     };
   },
   methods: {
+    submitReview() {
+      // eslint-disable-next-line no-debugger
+      debugger
+      console.log(this.movie),
+      apiService
+        .postRate(this.$route.params.type, this.$route.params.id, this.dataRate)
+        .then((data) => console.log(data));
+    },
     language(l) {
       return languageService.getLanguageById(l)?.name;
     },

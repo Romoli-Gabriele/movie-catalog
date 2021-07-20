@@ -7,12 +7,11 @@ import {
 const baseUrl = "https://api.themoviedb.org/3/"
 const apiKey = "6f9286d54de4891ea7a5c91779e09786";
 
-
-const apiCall = (url, query = {}) => {
+const apiCall = (url, query = {}, options = {}) => {
     query.api_key = apiKey
     query.language = languageService.getCurrentLanguage();
 
-    return fetch(baseUrl + url + '?' + new URLSearchParams(query).toString())
+    return fetch(baseUrl + url + '?' + new URLSearchParams(query).toString(), options)
         .then((response) => response.json())
 }
 
@@ -34,18 +33,41 @@ export const apiService = {
             query
         })
     },
-    postRate(type, id, /*voto*/ ) { //metodo che posta la recensione: non funziona, guarda https://developers.themoviedb.org/3/movies/rate-movie per fixarlo 
-        apiCall(`/${type}/${id}/rating`, {
-            token: registerService.currentToken
-        })
+    postRate(type, id, voto) {
+        return apiCall(`${type}/${id}/rating`, {session_id: registerService.currentSessionToken}, {
+            method: "post",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                value: voto
+            }),
+
+        }).then()
     },
 
     doLogin(redirect) {
-        apiCall(`/authentication/token/new`).then((data) => {
-            // eslint-disable-next-line no-debugger
-            debugger
+        apiCall(`authentication/token/new`).then((data) => {
 
             location.href = `https://www.themoviedb.org/authenticate/${data.request_token}?redirect_to=${redirect}`
+        });
+    },
+
+    createNewSession() {
+        apiCall(`authentication/session/new`, {}, {
+            method: "post",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                request_token: registerService.currentToken
+            }),
+
+        }).then((data) => {
+
+            registerService.saveSessionToken(data.session_id)
         });
     }
 }
