@@ -6,18 +6,29 @@ const REVIEW_FILM_LIST = 'REVIEW_FILM_LIST';
 const DATE = 'DATE';
 
 export const reviewService = {
-    async saveReviews(type, force = false) {
+    async saveReviews(force = false) {
 
         if (this.hasOneDayPassed() || force) {
+            const tvReviews = await apiService.getMyReviews('tv')
+            const movieReviews = await apiService.getMyReviews('movie')
 
-            const result = await apiService.getMyReviews(type)
-            const mappedResult = await result.results.map((item) => ({
+            const tvMappedResult = tvReviews.results.map((item) => ({
                 id: item.id,
-                type: type,
+                type: 'tv',
                 rating: item.rating,
 
             }))
-            localStorage.setItem(REVIEW_FILM_LIST, JSON.stringify(mappedResult))
+
+            const movieMappedResult = movieReviews.results.map((item) => ({
+                id: item.id,
+                type: 'movie',
+                rating: item.rating,
+
+            }))
+
+
+            localStorage.setItem(REVIEW_FILM_LIST, JSON.stringify([...tvMappedResult, ...movieMappedResult]))
+            
             localStorage.setItem(DATE, JSON.stringify(new Date().toLocaleDateString()))
         }
     },
