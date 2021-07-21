@@ -47,15 +47,15 @@ const availableTranslations = [{
     },
 ]
 
-if (!localStorage.getItem('language')) {
-    localStorage.setItem('language', 'en')
+if (!JSON.parse(localStorage.getItem('language'))) {
+    localStorage.setItem('language', JSON.stringify('en'))
 
     const defaultLanguage = navigator.languages.find(lang =>
         availableTranslations.map(x => x.iso_639_1)
         .includes(lang))
 
     if (defaultLanguage) {
-        localStorage.setItem('language', defaultLanguage.slice(0, 2));
+        localStorage.setItem('language', JSON.stringify(defaultLanguage.slice(0, 2)));
 
     }
 }
@@ -69,9 +69,9 @@ export const languageService = {
         return availableTranslations.find(l => l.iso_639_1 === isoLanguage)
     },
     getCurrentLanguage() {
-        return localStorage.getItem('language');
+        return JSON.parse(localStorage.getItem('language'));
     },
     setCurrentLanguage(l) {
-        localStorage.setItem('language', l);
+        localStorage.setItem('language', JSON.stringify(l));
     }
 }

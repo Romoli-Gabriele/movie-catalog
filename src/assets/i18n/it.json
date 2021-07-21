@@ -40,5 +40,6 @@
         "molto conosciuto"
     ],
     "close" : "chiudi",
-    "send-vote" : "invia voto"
+    "send-vote" : "invia voto",
+    "make-comment" : " commenta"
 }

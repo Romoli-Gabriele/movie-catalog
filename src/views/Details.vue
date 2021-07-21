@@ -140,83 +140,6 @@
                 <b>{{ $t("original-language") }}: </b>
                 {{ language(movie.original_language) }}
               </p>
-
-              <!-- Button trigger modal -->
-              <button
-                type="button"
-                class="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-              >
-                Launch demo modal
-              </button>
-
-              <!-- Modal -->
-              <div
-                class="modal fade"
-                id="exampleModal"
-                tabindex="-1"
-                aria-labelledby="exampleModalLabel"
-                aria-hidden="true"
-              >
-                <div class="modal-dialog">
-                  <div class="modal-content bg-dark">
-                    <div
-                      class="modal-header justify-content-center text-center"
-                    >
-                      <h5 class="modal-title text-light" id="exampleModalLabel">
-                        {{ $t("rate-this-film") }}
-                      </h5>
-                    </div>
-                    <div class="modal-body">
-                      <Reviews
-                        v-model="dataRate"
-                        :fullIcon="'fa-star'"
-                        :emptyIcon="'fa-star'"
-                        :color="'text-warning'"
-                        :review-or-popularity="'review'"
-                      ></Reviews>
-                      <p class="text-light" v-if="!isUserLogged">
-                        Per votare devi
-                        <a
-                          @click="doLogin"
-                          class="text-primary"
-                          style="cursor: pointer"
-                          >autenticarti</a
-                        >
-                      </p>
-                    </div>
-                    <div class="modal-footer">
-                      <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-bs-dismiss="modal"
-                      >
-                        {{ $t("close") }}
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-primary"
-                        data-bs-dismiss="modal"
-                        v-if="isUserLogged"
-                        @click="submitReview"
-                      >
-                        {{ $t("send-vote") }}
-                      </button>
-                      <button
-                        v-else
-                        type="button"
-                        class="btn btn-primary"
-                        data-bs-dismiss="modal"
-                        disabled
-                      >
-                        {{ $t("send-vote") }}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
               <br />
               <br />
               <a
@@ -236,6 +159,41 @@
                 </button>
                 <br />
               </a>
+              <div v-if="currentReview == null">
+                <p class="mt-3 text-light">
+                  {{ $t("rate-this-film") }} :
+                  <Reviews
+                    v-model="dataRate"
+                    :fullIcon="'fa-star'"
+                    :emptyIcon="'fa-star'"
+                    :color="'text-warning'"
+                    :review-or-popularity="'review'"
+                    @click="submitReview"
+                  ></Reviews>
+                </p>
+                <p class="text-light" v-if="!isUserLogged">
+                  Per votare devi
+                  <a
+                    @click="doLogin"
+                    class="text-primary"
+                    style="cursor: pointer"
+                    >autenticarti</a
+                  >
+                </p>
+              </div>
+              <div v-else>
+                <p class="text-light mt-3">
+                  il tuo voto:
+                  <Reviews
+                    v-model="currentReview.rating"
+                    :fullIcon="'fa-star'"
+                    :emptyIcon="'fa-star'"
+                    :color="'text-warning'"
+                    :review-or-popularity="'review'"
+                    @click="submitReview"
+                  />
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -257,6 +215,7 @@ import { languageService } from "../services/languageService";
 import { formatterService } from "../services/formatterService";
 import { apiService } from "../services/apiService";
 import { registerService } from "../services/registerService";
+import { reviewService } from "../services/ReviewService";
 
 export default {
   name: "Details",
@@ -272,16 +231,19 @@ export default {
       dataRate: 0,
       formatterService,
       isUserLogged: registerService.isLogged,
+      currentReview: null,
     };
   },
   methods: {
     submitReview() {
-      // eslint-disable-next-line no-debugger
-      debugger
-      console.log(this.movie),
-      apiService
-        .postRate(this.$route.params.type, this.$route.params.id, this.dataRate)
-        .then((data) => console.log(data));
+      console.log("fatto"),
+        apiService
+          .postRate(
+            this.$route.params.type,
+            this.$route.params.id,
+            this.dataRate
+          )
+          .then();
     },
     language(l) {
       return languageService.getLanguageById(l)?.name;
@@ -296,7 +258,7 @@ export default {
 
       apiService.doLogin(location.origin + redirectUrl.fullPath);
     },
-    callDati() {
+    async callDati() {
       apiService
         .getDetail(this.$route.params.type, this.$route.params.id)
         .then((data) => {
@@ -312,6 +274,12 @@ export default {
           .then((data) => {
             this.similarList = data.results;
           });
+        if (this.isUserLogged) {
+          this.currentReview = await reviewService.getSingleReview(
+            this.$route.params.id,
+            this.$route.params.type
+          );
+        }
       } else {
         this.similarList = this.movie.known_for;
       }
@@ -323,6 +291,7 @@ export default {
   watch: {
     "$route.params": {
       handler: function () {
+        this.dataRate = 0;
         this.callDati();
       },
       deep: true,

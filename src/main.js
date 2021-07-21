@@ -13,6 +13,7 @@ const language = languageService.getCurrentLanguage() || 'en';
 axios.defaults.baseURL = 'http://localhost:5000';
 axios.defaults.headers['Accept-Language'] = language;
 
-createApp(App).use(router)
+createApp(App)
+  .use(router)
   .use(i18n)
   .mount('#app');

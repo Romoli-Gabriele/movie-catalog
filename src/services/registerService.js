@@ -4,11 +4,11 @@ const CURRENT_SESSION_TOKEN_LS_NAME = 'CURRENT_SESSION_TOKEN_LS_NAME';
 export const registerService = {
 
     saveToken(token) {
-        localStorage.setItem(CURRENT_TOKEN_LS_NAME, token)
+        localStorage.setItem(CURRENT_TOKEN_LS_NAME, JSON.stringify(token))
     },
 
     get currentToken() {
-        return localStorage.getItem(CURRENT_TOKEN_LS_NAME)
+        return JSON.parse(localStorage.getItem(CURRENT_TOKEN_LS_NAME))
     },
 
     get isLogged() {
@@ -16,11 +16,11 @@ export const registerService = {
     },
 
      saveSessionToken(sessionToken){
-        localStorage.setItem(CURRENT_SESSION_TOKEN_LS_NAME, sessionToken)
+        localStorage.setItem(CURRENT_SESSION_TOKEN_LS_NAME, JSON.stringify(sessionToken))
      },
 
      get currentSessionToken() {
-        return localStorage.getItem(CURRENT_SESSION_TOKEN_LS_NAME)
+        return JSON.parse(localStorage.getItem(CURRENT_SESSION_TOKEN_LS_NAME))
     },
 
 }

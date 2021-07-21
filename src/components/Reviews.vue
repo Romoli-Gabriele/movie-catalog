@@ -6,11 +6,12 @@
       :key="item"
       v-for="(item, i) in calculateIcon"
       :class="item"
-      @click="itemClick(i)"
-      @mouseover="itemClick(i)"
+      @click="itemClick(i, true)"
+      @mouseover="itemClick(i, false)"
     >
     </i>
     <p v-if="!readOnly" class="text-light">{{ review }}</p>
+    
   </div>
 </template>
 
@@ -59,17 +60,20 @@ export default {
   },
   data() {
     return {
-      mezzo: false,
       review: "",
+      hasVoted: false,
     };
   },
 
   methods: {
-    itemClick(i) {
+    itemClick(i, hasVoted) {
       if (this.readOnly === false) {
         this.$emit("update:modelValue", (i + 1) * 2);
         this.calculateIcon;
         this.review = this.$t("reviews." + i);
+        if (hasVoted) {
+          this.hasVoted = true;
+        }
       }
     },
   },
@@ -103,11 +107,11 @@ export default {
         return this.readOnly
           ? this.$t("reviews." + parseInt(value / 2 - 1))
           : "";
-      } else if (value/1000-1 > 4){
-            return this.readOnly ? this.$t("popular." + 4) : "";
+      } else if (value / 1000 - 1 > 4) {
+        return this.readOnly ? this.$t("popular." + 4) : "";
       } else {
-          return this.readOnly
-          ? this.$t("popular." + parseInt(value / 1000 - 1 ))
+        return this.readOnly
+          ? this.$t("popular." + parseInt(value / 1000 - 1))
           : "";
       }
     },
