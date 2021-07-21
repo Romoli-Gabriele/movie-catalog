@@ -40,5 +40,9 @@
         "very known"
     ],
     "close" : "close",
-    "send-vote" : "send vote"
+    "send-vote" : "send vote",
+    "to-vote-you-must" : "to vote you must",
+    "log-in" : "log in",
+    "your-vote" : "your vote",
+    "delete-vote" : "delete vote"
 }

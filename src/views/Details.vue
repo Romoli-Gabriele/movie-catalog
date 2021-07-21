@@ -172,18 +172,18 @@
                   ></Reviews>
                 </p>
                 <p class="text-light" v-if="!isUserLogged">
-                  Per votare devi
+                  {{ $t("to-vote-you-must") }}
                   <a
                     @click="doLogin"
                     class="text-primary"
                     style="cursor: pointer"
-                    >autenticarti</a
+                    >{{ $t("log-in") }}</a
                   >
                 </p>
               </div>
               <div v-else>
                 <p class="text-light mt-3">
-                  il tuo voto:
+                  {{ $t("your-vote") }}
                   <Reviews
                     v-model="currentReview.rating"
                     :fullIcon="'fa-star'"
@@ -192,6 +192,13 @@
                     :review-or-popularity="'review'"
                     @click="submitReview"
                   />
+                </p>
+                <p
+                  class="text-danger"
+                  style="cursor: pointer"
+                  @click="deleteReview"
+                >
+                  {{ $t("delete-vote") }}
                 </p>
               </div>
             </div>
@@ -236,14 +243,19 @@ export default {
   },
   methods: {
     submitReview() {
-      console.log("fatto"),
-        apiService
-          .postRate(
-            this.$route.params.type,
-            this.$route.params.id,
-            this.dataRate
-          )
-          .then();
+      apiService
+        .postRate(this.$route.params.type, this.$route.params.id, this.dataRate)
+        .then();
+    },
+
+    deleteReview() {
+      apiService
+        .deleteRate(
+          this.$route.params.type,
+          this.$route.params.id,
+          this.dataRate
+        )
+        .then();
     },
     language(l) {
       return languageService.getLanguageById(l)?.name;
@@ -285,9 +297,7 @@ export default {
       }
     },
   },
-  mounted() {
-    this.callDati();
-  },
+  mounted() {},
   watch: {
     "$route.params": {
       handler: function () {

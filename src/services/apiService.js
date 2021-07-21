@@ -45,9 +45,21 @@ export const apiService = {
             body: JSON.stringify({
                 value: voto
             }),
-
         }).then()
     },
+
+    deleteRate(type, id) {
+        return apiCall(`${type}/${id}/rating`, {
+            session_id: registerService.currentSessionToken
+        }, {
+            method: "delete",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+        }).then()
+    },
+
 
     doLogin(redirect) {
         apiCall(`authentication/token/new`).then((data) => {
@@ -74,7 +86,7 @@ export const apiService = {
     },
 
     getMyReviews(type) {
-        type = type === 'movie' ? "movies" : 'tv'
+        type = type === 'movie' ? 'movies' : 'tv'
         return apiCall(`account/${registerService.currentToken}/rated/${type}`, {
             session_id: registerService.currentSessionToken
         })

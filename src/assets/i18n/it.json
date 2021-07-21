@@ -41,5 +41,9 @@
     ],
     "close" : "chiudi",
     "send-vote" : "invia voto",
-    "make-comment" : " commenta"
+    "make-comment" : " commenta",
+    "to-vote-you-must" : "per votare devi",
+    "log-in" : "autenticarti",
+    "your-vote" : "il tuo voto",
+    "delete-vote" : "elimina il tuo voto"
 }

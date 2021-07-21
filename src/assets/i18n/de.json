@@ -40,6 +40,9 @@
         "sehr bekannt"
     ],
     "close" : "schließen",
-    "send-vote" : "Stimme senden"
-
+    "send-vote" : "Stimme senden",
+    "to-vote-you-must" : "um abzustimmen musst du",
+    "log-in" : "Einloggen",
+    "your-vote" : "deine Stimme",
+    "delete-vote" : "Stimme löschen"
 }
