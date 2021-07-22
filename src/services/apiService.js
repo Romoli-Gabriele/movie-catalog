@@ -69,7 +69,7 @@ export const apiService = {
     },
 
     createNewSession() {
-        apiCall(`authentication/session/new`, {}, {
+        return apiCall(`authentication/session/new`, {}, {
             method: "post",
             headers: {
                 'Accept': 'application/json',
@@ -82,6 +82,7 @@ export const apiService = {
         }).then((data) => {
 
             registerService.saveSessionToken(data.session_id)
+            console.log('1) fine salvataggio informazioni session token')
         });
     },
 

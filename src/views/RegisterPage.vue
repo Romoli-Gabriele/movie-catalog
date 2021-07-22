@@ -8,9 +8,22 @@ import { registerService } from "../services/registerService";
 export default {
   mounted() {
     registerService.saveToken(this.$route.query.request_token);
-    apiService.createNewSession();
 
-    console.log(this.$route.params);
+    apiService
+      .createNewSession()
+      .then(() =>
+        this.$router.push({
+          name: 'Details',
+          params: {
+            id: this.$route.params.id,
+            type: this.$route.params.type,
+          },
+        })
+      ),
+      
+      //router.push
+      //router redirect to id/type
+      console.log("2) redirect router");
   },
 };
 </script>

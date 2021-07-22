@@ -224,13 +224,12 @@ export default {
 }
 
 .submit-button {
-  border-radius: 0;
+  border-radius: 0px !important;
   border-left: none;
   margin-top: 10px;
   height: 40px;
   margin-bottom: 2px;
 }
-
 .exact-active {
   color: #dc3545 !important;
 }

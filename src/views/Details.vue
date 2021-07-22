@@ -288,6 +288,10 @@ export default {
     doLogin() {
       const redirectUrl = this.$router.resolve({
         name: "success",
+        params: {
+          id: this.$route.params.id,
+          type: this.$route.params.type,
+        },
       });
 
       apiService.doLogin(location.origin + redirectUrl.fullPath);
