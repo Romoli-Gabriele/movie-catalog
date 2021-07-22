@@ -156,6 +156,7 @@
                     $t("website")
                   }}</b>
                 </button>
+
                 <br />
               </a>
 
@@ -182,6 +183,13 @@
                   :review-or-popularity="'review'"
                   @click="submitReview"
                 ></Reviews>
+                <span
+                    v-if="hasClicked === false"
+                    class="spinner-border text-info"
+                    role="status"
+                    aria-hidden="true"
+                  >
+                  </span>
                 <p class="text-light" v-if="!isUserLogged">
                   {{ $t("to-vote-you-must") }}
                   <a
@@ -207,19 +215,29 @@
                 >
                   {{ $t("your-vote") }}
                 </p>
+                <div></div>
                 <Reviews
                   v-model="currentReview.rating"
                   :fullIcon="'fa-star'"
                   :emptyIcon="'fa-star'"
                   :color="'text-warning'"
                   :review-or-popularity="'review'"
-                  @click="submitReview"
+                  readOnly
                 />
                 <button
+                
                   type="button"
-                  class="btn btn-outline-danger mb-3"
+                  class="btn btn-outline-danger mt-2 mb-3"
                   @click="deleteReview"
                 >
+                <span
+                    v-if="hasClicked"
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                    
+                  >
+                  </span>
                   {{ $t("delete-vote") }}
                 </button>
               </div>
@@ -261,23 +279,27 @@ export default {
       formatterService,
       isUserLogged: registerService.isLogged,
       currentReview: null,
+      hasClicked: null,
     };
   },
   methods: {
     submitReview() {
+      this.hasClicked = false;
       apiService
         .postRate(this.$route.params.type, this.$route.params.id, this.dataRate)
-        .then();
+        .then(() => {
+          this.getCurrentReview(true);
+        });
     },
 
     deleteReview() {
+      this.hasClicked = true;
       apiService
-        .deleteRate(
-          this.$route.params.type,
-          this.$route.params.id,
-          this.dataRate
-        )
-        .then();
+        .deleteRate(this.$route.params.type, this.$route.params.id)
+        .then(() => {
+          this.currentReview = null;
+          this.dataRate = 0;
+        });
     },
     language(l) {
       return languageService.getLanguageById(l)?.name;
@@ -296,7 +318,7 @@ export default {
 
       apiService.doLogin(location.origin + redirectUrl.fullPath);
     },
-    async callDati() {
+    callDati() {
       apiService
         .getDetail(this.$route.params.type, this.$route.params.id)
         .then((data) => {
@@ -313,14 +335,20 @@ export default {
             this.similarList = data.results;
           });
         if (this.isUserLogged) {
-          this.currentReview = await reviewService.getSingleReview(
-            this.$route.params.id,
-            this.$route.params.type
-          );
+          setTimeout("", 5000);
+          this.getCurrentReview();
         }
       } else {
         this.similarList = this.movie.known_for;
       }
+    },
+    async getCurrentReview(force = false) {
+      this.currentReview = await reviewService.getSingleReview(
+        this.$route.params.id,
+        this.$route.params.type,
+        force
+      );
+      console.log(this.currentReview);
     },
   },
   mounted() {},
@@ -344,15 +372,16 @@ export default {
 }
 
 .review-box {
-  margin-top: 10px;
-  border: 2px solid #0b5ed7;
+  margin-top: 35px !important;
+  border: 2px solid #d62e30;
   width: 400px;
+  border-radius: 50px;
 }
 
 .review-box-header {
   margin-top: -15px;
   background-color: #212529;
-  width: 100px;
+  width: 150px;
   font-size: 16px;
 }
 

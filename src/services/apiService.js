@@ -4,6 +4,7 @@ import {
 import {
     registerService
 } from "./registerService";
+import { reviewService } from "./ReviewService";
 const baseUrl = "https://api.themoviedb.org/3/"
 const apiKey = "6f9286d54de4891ea7a5c91779e09786";
 
@@ -45,19 +46,21 @@ export const apiService = {
             body: JSON.stringify({
                 value: voto
             }),
-        }).then()
+        })
     },
 
     deleteRate(type, id) {
-        return apiCall(`${type}/${id}/rating`, {
+        return apiCall(`${type}/${id}/rating`,
+        {
             session_id: registerService.currentSessionToken
-        }, {
-            method: "delete",
+        }, 
+        {  
+            method: "DELETE",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-        }).then()
+        }).then( () => reviewService.currentReviews(true))
     },
 
 
