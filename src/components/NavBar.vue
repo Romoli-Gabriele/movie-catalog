@@ -1,5 +1,3 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
-/* eslint-disable vue/no-deprecated-slot-attribute */
 <template>
   <div>
     <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">

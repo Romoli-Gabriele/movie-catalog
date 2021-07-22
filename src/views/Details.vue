@@ -300,7 +300,8 @@ export default {
   mounted() {},
   watch: {
     "$route.params": {
-      handler: function () {
+      handler({ type, id } = {}) {
+        if (!type || !id) return;
         this.dataRate = 0;
         this.callDati();
       },
