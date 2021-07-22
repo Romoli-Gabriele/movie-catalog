@@ -141,7 +141,6 @@
                 {{ language(movie.original_language) }}
               </p>
               <br />
-              <br />
               <a
                 v-show="$route.params.type != 'person'"
                 :href="movie.homepage"
@@ -159,18 +158,30 @@
                 </button>
                 <br />
               </a>
-              <div v-if="currentReview == null">
-                <p class="mt-3 text-light">
-                  {{ $t("rate-this-film") }} :
-                  <Reviews
-                    v-model="dataRate"
-                    :fullIcon="'fa-star'"
-                    :emptyIcon="'fa-star'"
-                    :color="'text-warning'"
-                    :review-or-popularity="'review'"
-                    @click="submitReview"
-                  ></Reviews>
+
+              <div
+                v-if="currentReview == null"
+                class="mt-4 mx-auto review-box justify-content-center"
+              >
+                <p
+                  class="
+                    pt-0
+                    review-box-header
+                    mx-auto
+                    text-light
+                    first-letter-capitalize
+                  "
+                >
+                  <b>{{ $t("rate-this-film") }}</b>
                 </p>
+                <Reviews
+                  v-model="dataRate"
+                  :fullIcon="'fa-star'"
+                  :emptyIcon="'fa-star'"
+                  :color="'text-warning'"
+                  :review-or-popularity="'review'"
+                  @click="submitReview"
+                ></Reviews>
                 <p class="text-light" v-if="!isUserLogged">
                   {{ $t("to-vote-you-must") }}
                   <a
@@ -181,25 +192,36 @@
                   >
                 </p>
               </div>
-              <div v-else>
-                <p class="text-light mt-3">
-                  {{ $t("your-vote") }}
-                  <Reviews
-                    v-model="currentReview.rating"
-                    :fullIcon="'fa-star'"
-                    :emptyIcon="'fa-star'"
-                    :color="'text-warning'"
-                    :review-or-popularity="'review'"
-                    @click="submitReview"
-                  />
-                </p>
+              <div
+                v-else
+                class="mt-4 mx-auto review-box justify-content-center"
+              >
                 <p
-                  class="text-danger"
-                  style="cursor: pointer"
+                  class="
+                    pt-0
+                    review-box-header
+                    mx-auto
+                    text-light
+                    first-letter-capitalize
+                  "
+                >
+                  {{ $t("your-vote") }}
+                </p>
+                <Reviews
+                  v-model="currentReview.rating"
+                  :fullIcon="'fa-star'"
+                  :emptyIcon="'fa-star'"
+                  :color="'text-warning'"
+                  :review-or-popularity="'review'"
+                  @click="submitReview"
+                />
+                <button
+                  type="button"
+                  class="btn btn-outline-danger mb-3"
                   @click="deleteReview"
                 >
                   {{ $t("delete-vote") }}
-                </p>
+                </button>
               </div>
             </div>
           </div>
@@ -315,6 +337,19 @@ export default {
 <style scoped>
 .first-letter-capitalize::first-letter {
   text-transform: capitalize;
+}
+
+.review-box {
+  margin-top: 10px;
+  border: 2px solid #0b5ed7;
+  width: 400px;
+}
+
+.review-box-header {
+  margin-top: -15px;
+  background-color: #212529;
+  width: 100px;
+  font-size: 16px;
 }
 
 .bindIMG {

@@ -87,7 +87,6 @@ export const apiService = {
 
     getMyReviews(type) {
         type = type == 'movie' ? 'movies' : 'tv'
-        console.log(type)
         return apiCall(`account/${registerService.currentToken}/rated/${type}`, {
             session_id: registerService.currentSessionToken
         })

@@ -28,7 +28,7 @@ export const reviewService = {
 
 
             localStorage.setItem(REVIEW_FILM_LIST, JSON.stringify([...tvMappedResult, ...movieMappedResult]))
-            
+
             localStorage.setItem(DATE, JSON.stringify(new Date().toLocaleDateString()))
         }
     },

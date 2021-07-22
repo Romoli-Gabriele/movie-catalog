@@ -2,24 +2,23 @@ import {
   createRouter,
   createWebHistory
 } from 'vue-router'
-import Home from '../views/Home.vue'
-import pageNotFound from '../views/pageNotFound.vue'
-import RegisterPage from '../views/RegisterPage.vue'
+
 
 const routes = [{
     path: '/:catchAll(.*)*',
     name: "pageNotFound",
-    component: pageNotFound
+    component: () => import( /* webpackChunkName: "pageNotFound" */ '../views/pageNotFound.vue'),
   },
   {
-    path: '/success',
+    path: '/success/:type?/:id?',
     name: "success",
-    component: RegisterPage
+
+    component: () => import( /* webpackChunkName: "RegisterPage" */ '../views/RegisterPage.vue'),
   },
   {
     path: '/',
     name: 'Home',
-    component: Home,
+    component: () => import( /* webpackChunkName: "Home" */ '../views/Home.vue'),
   },
   {
     path: '/TVSeries',
@@ -27,7 +26,7 @@ const routes = [{
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import( /* webpackChunkName: "about" */ '../views/Series.vue'),
+    component: () => import( /* webpackChunkName: "Series" */ '../views/Series.vue'),
   },
   {
     path: '/details/:id/:type',
@@ -35,21 +34,8 @@ const routes = [{
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import( /* webpackChunkName: "about" */ '../views/Details.vue'),
-    props: {
-      id: {
-        type: Number,
-        required: true,
-      },
-      type: {
-        type: String,
-        required: true,
-      },
-      language: {
-        type: String,
-        required: true,
-      }
-    }
+    component: () => import( /* webpackChunkName: "Details" */ '../views/Details.vue'),
+
   },
 
 ]

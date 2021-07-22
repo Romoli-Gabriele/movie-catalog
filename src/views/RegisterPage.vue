@@ -1,8 +1,5 @@
 <template>
-  <h1 class="titolo">Complimenti! ti sei registrato.</h1>
-  <!-- <router-link :to="{ name: 'Home' }">
-    <button type="button" class="btn btn-outline-danger first-letter-capitalize">{{ $t('return-home')}}</button>
-  </router-link> -->
+  <h1 class="mt-5">Complimenti! ti sei registrato.</h1>
 </template>
 
 <script>
@@ -12,18 +9,22 @@ export default {
   mounted() {
     registerService.saveToken(this.$route.query.request_token);
     apiService.createNewSession();
+
+    console.log(this.$route.params);
   },
 };
 </script>
 
 <style scoped>
 * {
-  color: #dc3545;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #fff;
+  text-shadow: 0 0 15px #dc3545, 0 0 35px #dc3545, 0 0 60px #dc3545,
+    0 0 210px #dc3545;
 }
-.titolo {
-  font-size: 150px;
-  font-weight: bold;
-}
+
 .first-letter-capitalize::first-letter {
   text-transform: capitalize;
 }
