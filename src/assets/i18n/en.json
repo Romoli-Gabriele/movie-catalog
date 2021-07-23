@@ -44,5 +44,9 @@
     "to-vote-you-must" : "to vote you must",
     "log-in" : "log in",
     "your-vote" : "your vote",
-    "delete-vote" : "delete vote"
+    "delete-vote" : "delete vote",
+    "log-out" : "log out",
+    "username" : "username",
+    "name" : "name",
+    "language" : "language"
 }

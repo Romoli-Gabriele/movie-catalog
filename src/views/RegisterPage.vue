@@ -19,12 +19,7 @@ export default {
             type: this.$route.params.type,
           },
         })
-      ),
-      
-      //router.push
-      //router redirect to id/type
-      console.log("2) redirect router");
-  },
+      )},
 };
 </script>
 

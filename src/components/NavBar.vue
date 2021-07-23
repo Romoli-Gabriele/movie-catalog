@@ -71,7 +71,7 @@
             :limit="5"
             :options="getMovies"
             @change="navigateTo"
-            :placeholder=" $t('search') + ctrlOrCmd()"
+            :placeholder="$t('search') + ctrlOrCmd()"
             ref="multiselect"
             class="text-start"
           >
@@ -90,6 +90,28 @@
           </button>
         </div>
       </div>
+      <div v-if="!getAvatarPath()" class="userWithoutAvatar me-3">
+        <p class="text-light mt-1">{{ getFirstLetter() }}</p>
+      </div>
+      <div v-else v-show="accountDetails" class="d-none d-lg-block">
+        <span
+          class="d-inline-block"
+          tabindex="0"
+          data-bs-toggle="popover"
+          data-bs-trigger="focus"
+          :title="currentName ? currentName : currentUsername"
+          :data-bs-content="$t('language') + ': ' + currentLanguage"
+        >
+          <img
+            :src="
+              'https://www.themoviedb.org/t/p/w50_and_h50_face/' +
+              getAvatarPath()
+            "
+            style="border-radius: 100%"
+            class="me-3"
+          />
+        </span>
+      </div>
     </nav>
 
     <br />
@@ -101,9 +123,11 @@
   </div>
 </template>
 <script>
+import Multiselect from "@vueform/multiselect";
 import { apiService } from "../services/apiService";
 import { languageService } from "../services/languageService";
-import Multiselect from "@vueform/multiselect";
+import { accountService } from "../services/accountService";
+import { Popover } from "bootstrap";
 
 export default {
   name: "NavBar",
@@ -115,12 +139,15 @@ export default {
       searchList: [],
       selectedItem: null,
       selectedSearch: null,
+      accountDetails: null,
     };
   },
+
   methods: {
-    ctrlOrCmd(){
-      if (window.navigator.userAgent.indexOf("Windows NT 10.0") != -1) return "  (ctrl + k)"
-      if (window.navigator.userAgent.indexOf("Mac") != -1) return "  (cmd + k)"
+    ctrlOrCmd() {
+      if (window.navigator.userAgent.indexOf("Windows NT 10.0") != -1)
+        return "  (ctrl + k)";
+      if (window.navigator.userAgent.indexOf("Mac") != -1) return "  (cmd + k)";
     },
     cerca() {
       apiService
@@ -128,6 +155,21 @@ export default {
         .then((data) => {
           this.searchList = data.results;
         });
+    },
+    getAvatarPath() {
+      return accountService.getUserImage() ?? "";
+    },
+    getUsername() {
+      return accountService.getAccountUsername();
+    },
+    getFirstLetter() {
+      console.log(this.currentName.charAt(0));
+      return this.currentName
+        ? this.currentName.charAt(0)
+        : this.currentUsername.charAt(0);
+    },
+    getLogoutText() {
+      return `{{$t('log-out')}}`;
     },
     navigateTo(item) {
       if (item) {
@@ -173,6 +215,9 @@ export default {
     },
   },
   mounted() {
+    apiService
+      .saveAccountDetails()
+      .then((data) => (this.accountDetails = data));
 
     if (window.navigator.userAgent.indexOf("Windows NT 10.0") != -1) {
       document.onkeydown = (e) => {
@@ -189,9 +234,43 @@ export default {
       };
     }
   },
+  watch: {
+    accountDetails: {
+      handler() {
+        this.$nextTick(() => {
+          [...document.querySelectorAll('[data-bs-toggle="popover"]')].map(
+            (el) => new Popover(el)
+          );
+        });
+      },
+      deep: true,
+    },
+  },
+  computed: {
+    currentUsername() {
+      return this.accountDetails?.username ?? "";
+    },
+    currentName() {
+      return this.accountDetails?.name ?? "";
+    },
+    currentLanguage() {
+      return this.accountDetails?.iso_639_1 ?? "";
+    },
+  },
 };
 </script>
 <style>
+.userWithoutAvatar {
+  background-color: #6c757d;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  font-size: 30px;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
 .title {
   font-family: "Yellowtail", cursive;
   margin-right: 9mm;
@@ -275,12 +354,12 @@ div.multiselect-single-label {
   background-color: #dc3545;
 }
 
-.is-pointed{
+.is-pointed {
   -webkit-box-shadow: 4px 4px 12px -1px rgba(0, 0, 0, 0.8);
   box-shadow: 4px 4px 12px -1px rgba(0, 0, 0, 0.8);
-  }
+}
 
-.select-language-button{
+.select-language-button {
   margin-top: 10px;
   padding-right: 0px;
 }

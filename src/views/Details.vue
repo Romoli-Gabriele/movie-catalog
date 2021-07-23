@@ -348,7 +348,6 @@ export default {
         this.$route.params.type,
         force
       );
-      console.log(this.currentReview);
     },
   },
   mounted() {},

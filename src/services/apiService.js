@@ -4,7 +4,13 @@ import {
 import {
     registerService
 } from "./registerService";
-import { reviewService } from "./ReviewService";
+import {
+    reviewService
+} from "./ReviewService";
+import {
+    accountService
+} from "./accountService";
+
 const baseUrl = "https://api.themoviedb.org/3/"
 const apiKey = "6f9286d54de4891ea7a5c91779e09786";
 
@@ -50,17 +56,15 @@ export const apiService = {
     },
 
     deleteRate(type, id) {
-        return apiCall(`${type}/${id}/rating`,
-        {
+        return apiCall(`${type}/${id}/rating`, {
             session_id: registerService.currentSessionToken
-        }, 
-        {  
+        }, {
             method: "DELETE",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-        }).then( () => reviewService.currentReviews(true))
+        }).then(() => reviewService.currentReviews(true))
     },
 
 
@@ -85,7 +89,6 @@ export const apiService = {
         }).then((data) => {
 
             registerService.saveSessionToken(data.session_id)
-            console.log('1) fine salvataggio informazioni session token')
         });
     },
 
@@ -94,5 +97,14 @@ export const apiService = {
         return apiCall(`account/${registerService.currentToken}/rated/${type}`, {
             session_id: registerService.currentSessionToken
         })
-    }
+    },
+
+    saveAccountDetails() {
+        return apiCall(`account`, {
+            session_id: registerService.currentSessionToken
+        }).then((data) => {
+            accountService.saveAccountData(data)
+            return data
+        })
+    },
 }

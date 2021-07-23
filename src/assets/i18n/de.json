@@ -44,5 +44,9 @@
     "to-vote-you-must" : "um abzustimmen musst du",
     "log-in" : "Einloggen",
     "your-vote" : "deine Stimme",
-    "delete-vote" : "Stimme löschen"
+    "delete-vote" : "Stimme löschen",
+    "log-out" : "Ausloggen",
+    "username" : "Nutzername",
+    "name" : "Vorname",
+    "language" : "sprache"
 }
