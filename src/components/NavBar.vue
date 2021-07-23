@@ -215,9 +215,10 @@ export default {
     },
   },
   mounted() {
-    apiService
+    this.registerService.isLogged ?
+        apiService
       .saveAccountDetails()
-      .then((data) => (this.accountDetails = data));
+      .then((data) => (this.accountDetails = data)) : "";
 
     if (window.navigator.userAgent.indexOf("Windows NT 10.0") != -1) {
       document.onkeydown = (e) => {
