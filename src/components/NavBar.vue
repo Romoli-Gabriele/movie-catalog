@@ -90,10 +90,13 @@
           </button>
         </div>
       </div>
-      <div v-if="!getAvatarPath() && registerService.isLogged" class="userWithoutAvatar me-3">
+      <div
+        v-show="accountDetails && !getAvatarPath()"
+        class="userWithoutAvatar me-3"
+      >
         <p class="text-light mt-1">{{ getFirstLetter() }}</p>
       </div>
-      <div v-else v-show="accountDetails && registerService.isLogged" class="d-none d-lg-block">
+      <div v-show="accountDetails && getAvatarPath()" class="d-none d-lg-block">
         <span
           class="d-inline-block"
           tabindex="0"
@@ -103,6 +106,7 @@
           :data-bs-content="$t('language') + ': ' + currentLanguage"
         >
           <img
+            v-show="getAvatarPath()"
             :src="
               'https://www.themoviedb.org/t/p/w50_and_h50_face/' +
               getAvatarPath()
@@ -136,6 +140,7 @@ export default {
   data() {
     const language = languageService.getCurrentLanguage() || "en";
     return {
+      registerService,
       language: language,
       searchList: [],
       selectedItem: null,
@@ -216,10 +221,10 @@ export default {
     },
   },
   mounted() {
-    registerService.isLogged ?
-        apiService
-      .saveAccountDetails()
-      .then((data) => (this.accountDetails = data)) : "";
+    if (registerService.isLogged)
+      apiService
+        .saveAccountDetails()
+        .then((data) => (this.accountDetails = data));
 
     if (window.navigator.userAgent.indexOf("Windows NT 10.0") != -1) {
       document.onkeydown = (e) => {
