@@ -127,6 +127,7 @@ import Multiselect from "@vueform/multiselect";
 import { apiService } from "../services/apiService";
 import { languageService } from "../services/languageService";
 import { accountService } from "../services/accountService";
+import { registerService } from "../services/registerService";
 import { Popover } from "bootstrap";
 
 export default {
@@ -215,7 +216,7 @@ export default {
     },
   },
   mounted() {
-    this.registerService.isLogged ?
+    registerService.isLogged ?
         apiService
       .saveAccountDetails()
       .then((data) => (this.accountDetails = data)) : "";
