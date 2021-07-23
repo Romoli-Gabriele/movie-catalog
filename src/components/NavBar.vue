@@ -90,10 +90,10 @@
           </button>
         </div>
       </div>
-      <div v-if="!getAvatarPath()" class="userWithoutAvatar me-3">
+      <div v-if="!getAvatarPath() && registerService.isLogged" class="userWithoutAvatar me-3">
         <p class="text-light mt-1">{{ getFirstLetter() }}</p>
       </div>
-      <div v-else v-show="accountDetails" class="d-none d-lg-block">
+      <div v-else v-show="accountDetails && registerService.isLogged" class="d-none d-lg-block">
         <span
           class="d-inline-block"
           tabindex="0"
