@@ -21,6 +21,7 @@ export default {
       required: true,
     },
   },
+  //
   methods: {
     convertGenres(p) {
       return genreService.getGenre(this.type, p)?.name;
